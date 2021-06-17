@@ -10,6 +10,7 @@ GRANT ALL ON Nosedive.* TO 'nosedive'@'localhost';
 CREATE TABLE Utente ( 
 	id_utente INT NOT NULL AUTO_INCREMENT,
 	email VARCHAR(25) NOT NULL,
+	nome VARCHAR(25) NOT NULL,
     pwd VARCHAR(255) NOT NULL,
     sup BOOL NOT NULL DEFAULT FALSE,
 
@@ -19,12 +20,12 @@ CREATE TABLE Utente (
 CREATE TABLE Informazione (
 	id_utente INT NOT NULL AUTO_INCREMENT,
 	compleanno DATE NOT NULL,
-    punteggio INT NOT NULL, -- Da modificare con il valore di default
+    punteggio INT NOT NULL DEFAULT '1000', 
 	id_relazione INT NOT NULL,
 	id_lavoro INT NULL,
-	propic BLOB, -- Vedere meglio per le immagini
-    sesso BOOL NOT NULL DEFAULT FALSE, -- Definire cos è false
-	deceduto BOOL NOT NULL DEFAULT FALSE,
+	propic MEDIUMBLOB, 
+    sesso BOOL NOT NULL DEFAULT FALSE, -- false = maschio
+	deceduto BOOL NOT NULL DEFAULT FALSE, -- false = utente in vita
 
 	FOREIGN KEY(id_utente) REFERENCES Utente(id_utente)
 );
@@ -66,7 +67,7 @@ CREATE TABLE Post (
 	id_post INT NOT NULL,
     id_utente INT NOT NULL,
     datapubb DATETIME NOT NULL,
-    postpic BLOB, -- modificare con tipo di dato adeguato
+    postpic MEDIUMBLOB,
     testo VARCHAR(255) NOT NULL,
 
     PRIMARY KEY(id_post, id_utente),
