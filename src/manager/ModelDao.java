@@ -2,25 +2,26 @@ package manager;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import model.Bean;
-import model.UserBean;
+import model.UtenteBean;
 
-public interface DaoModel {
+public interface ModelDao {
 
-    public static UserBean doRetrieveByEmail(String email) throws SQLException {
+    static UtenteBean doRetrieveByEmail(String email) throws SQLException {
         return null;
     }
 
     /*public void doSavePar(Bean bean) throws SQLException;*/
 
-    public void doSave(Bean bean) throws SQLException;
+    default void doSave(UtenteBean bean) throws SQLException {
 
-    public void doUpdate(Bean bean) throws SQLException;
+    }
 
-    public void doDelete(UserBean bean) throws SQLException;
+    void doUpdate(UtenteBean bean) throws SQLException;
 
-    public Bean doRetrieveByKey(List<String> keys) throws SQLException;
+    void doDelete(UtenteBean bean) throws SQLException;
 
-    public List<Bean> doRetrieveAll() throws SQLException;
+    Bean doRetrieveByKey(List<String> keys) throws SQLException;
+
+    List<Bean> doRetrieveAll() throws SQLException;
 }

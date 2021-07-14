@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class UserBean extends Bean implements Serializable, Cloneable {
+public class UtenteBean extends Bean implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,16 +16,16 @@ public class UserBean extends Bean implements Serializable, Cloneable {
     private String email;
     private String nome;
     private String password;
-    private Boolean sup; //se un utente è anche supervisore
+    private Boolean sup; //se un utente ï¿½ anche supervisore
 
-    public UserBean(int id_utente, String email, String nome, Boolean sup) {
+    public UtenteBean(int id_utente, String email, String nome, Boolean sup) {
         this.id_utente = id_utente;
         this.email = email;
         this.nome = nome;
         this.sup = sup; //false = utente normale
     }
 
-    public UserBean() {
+    public UtenteBean() {
         id_utente = -1;
         nome = email = password = "";
         sup = false;
@@ -59,9 +59,9 @@ public class UserBean extends Bean implements Serializable, Cloneable {
         return this.password;
     }
 
-    //ritorna true se l'utente è un admin, false altrimenti
+    //ritorna true se l'utente ï¿½ un admin, false altrimenti
     public Boolean isSupervisor() {
-        return auth;
+        return sup;
     }
     
     public void setPasswordhash(String passwordNew) {
@@ -77,15 +77,15 @@ public class UserBean extends Bean implements Serializable, Cloneable {
 
     public void setPassword(String password){this.password= password;}
 
-    public void setSupervisor(Boolean sup) {
+    public void setSupervisor(boolean sup) {
         this.sup = sup;
     }
 
     @Override
-    public UserBean clone() {
-        UserBean bean = null;
+    public UtenteBean clone() {
+        UtenteBean bean = null;
         try {
-            bean = (UserBean) super.clone();
+            bean = (UtenteBean) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class UserBean extends Bean implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return "UserBean{" +
+        return "UtenteBean{" +
                 "id_utente=" + id_utente +
                 ", email='" + email + '\'' +
                 ", nome='" + nome + '\'' +
@@ -106,7 +106,7 @@ public class UserBean extends Bean implements Serializable, Cloneable {
     public boolean equals(Object otherObj) {
         if (otherObj == null || otherObj.getClass() != getClass())
             return false;
-        UserBean other = (UserBean) otherObj;
+        UtenteBean other = (UtenteBean) otherObj;
         return other.id_utente == id_utente;
     }
 
@@ -121,7 +121,7 @@ public class UserBean extends Bean implements Serializable, Cloneable {
     public int compareKey(Bean otherBean) {
         if (this.getClass() != otherBean.getClass())
             return 1;
-        UserBean other = (UserBean) otherBean;
+        UtenteBean other = (UtenteBean) otherBean;
         return email.compareTo(other.email);
     }
 

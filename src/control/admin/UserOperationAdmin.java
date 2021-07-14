@@ -1,6 +1,18 @@
+package control.admin;
 
+import manager.UtenteDao;
+import model.UtenteBean;
 
-public class UserOperationAdmin extends HttpServlet {
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class UserOperationAdmin<action> extends HttpServlet {
     private static final long serialVersionUID = 1L;
     static UtenteDao model = new UtenteDao();
 
@@ -13,52 +25,55 @@ public class UserOperationAdmin extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action != null && action.equals("insertUser")) {
-        	String id_utente = request.getParameter("id_utente");
+        	int id_utente = Integer.parseInt(request.getParameter("id_utente"));
             String email = request.getParameter("email");
             String nome = request.getParameter("nome");
-            int sup = Integer.parseInt(request.getParameter("sup"));
+            boolean sup = Boolean.parseBoolean(request.getParameter("sup"));
 
             UtenteBean bean = new UtenteBean();
             bean.setId_utente(id_utente);
             bean.setEmail(email);
             bean.setNome(nome);
            
-            bean.setAuth(sup);
-        }
+            bean.setSupervisor(sup);
 
             try {
                 model.doSave(bean);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
-
         }
 
-        if (action != null && action.equals("deleteUser")) {
+
+
+        response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
+
+        if(action != null && action.equals("deleteUser")){
             //Elimina utente
         }
 
         if (action != null && action.equals("modifyUser")) {
-        	String id_utente = request.getParameter("id_utente");
+        	int id_utente = Integer.parseInt(request.getParameter("id_utente"));
             String email = request.getParameter("email");
             String nome = request.getParameter("nome");
-            int sup = Integer.parseInt(request.getParameter("sup"));
+            boolean sup = Boolean.parseBoolean(request.getParameter("sup"));
 
             UtenteBean bean = new  UtenteBean();
             bean.setId_utente(id_utente);
             bean.setEmail(email);
             bean.setNome(nome);
-        }
+            bean.setSupervisor(sup);
 
             try {
                 model.doUpdate(bean);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
 
+            response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
         }
+
+
 
         if (action != null && action.equals("retrieveAll")) {
             try {

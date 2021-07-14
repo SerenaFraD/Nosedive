@@ -1,3 +1,5 @@
+package model;
+
 import java.io.Serializable;
 import java.lang.String;
 import java.time.LocalDateTime;

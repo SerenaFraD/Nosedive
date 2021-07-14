@@ -8,22 +8,22 @@ import control.servlet.DriverManagerConnectionPool;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
+
 import java.util.List;
 
-import manager.DaoModel;
+
 import model.UtenteBean;
 import model.Bean;
 
-public class UtenteDao implements DaoModel {
+public class UtenteDao implements ModelDao {
     private static final String TABLE_NAME = "Utente";
-    private static DriverManagerConnectionPool pool = null;
+    private static final DriverManagerConnectionPool pool = null;
 
-    public static synchronized UserBean doRetrieveByEmail(String email) throws SQLException {
+    public static synchronized UtenteBean doRetrieveByEmail(String email) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs = null;
-        UserBean bean = null;
+        UtenteBean bean = null;
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE email=? ";
 
         try {
@@ -35,12 +35,12 @@ public class UtenteDao implements DaoModel {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                bean = new UserBean();
+                bean = new UtenteBean();
                 bean.setId_utente(rs.getInt("id_utente"));
                 bean.setEmail(rs.getString("email"));
                 bean.setNome(rs.getString("nome"));
                 bean.setPassword(rs.getString("pwd"));
-                bean.setAuth(rs.getBoolean("sup"));
+                bean.setSupervisor(rs.getBoolean("sup"));
             }
         } finally {
             try {
@@ -63,12 +63,12 @@ public class UtenteDao implements DaoModel {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
-            UserBean userBean = (UserBean) bean;
+            UtenteBean utenteBean = (UtenteBean) bean;
 
-            ps.setString(1, userBean.getEmail());
-            ps.setString(2, userBean.getNome());
-            ps.setString(3, userBean.getPassword());
-            ps.setBoolean(5, userBean.isAdmin());
+            ps.setString(1, utenteBean.getEmail());
+            ps.setString(2, utenteBean.getNome());
+            ps.setString(3, utenteBean.getPassword());
+            ps.setBoolean(4,utenteBean.isSupervisor());
 
             int result = ps.executeUpdate();
 
@@ -85,7 +85,7 @@ public class UtenteDao implements DaoModel {
     }
 
     @Override
-    public synchronized void doSave(Bean bean) throws SQLException {
+    public synchronized void doSave(UtenteBean bean) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
 
@@ -94,12 +94,12 @@ public class UtenteDao implements DaoModel {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
-            UserBean userBean = (UserBean) bean;
+            UtenteBean utenteBean = (UtenteBean) bean;
 
-            ps.setString(1, userBean.getEmail());
-            ps.setString(2, userBean.getNome());
-            ps.setString(3, userBean.getPassword());
-            ps.setBoolean(4, userBean.isSupervisor());
+            ps.setString(1, utenteBean.getEmail());
+            ps.setString(2, utenteBean.getNome());
+            ps.setString(3, utenteBean.getPassword());
+            ps.setBoolean(4,utenteBean.isSupervisor());
 
             int result = ps.executeUpdate();
 
@@ -116,7 +116,7 @@ public class UtenteDao implements DaoModel {
     }
 
     @Override
-    public synchronized void doUpdate(Bean bean) throws SQLException {
+    public synchronized void doUpdate(UtenteBean bean) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
 
@@ -125,12 +125,12 @@ public class UtenteDao implements DaoModel {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
-            UserBean userBean = (UserBean) bean;
+            UtenteBean utenteBean = (UtenteBean) bean;
 
-            ps.setString(1, userBean.getEmail());
-            ps.setString(2, userBean.getNome());
-            ps.setString(3, userBean.getPassword());
-            ps.setBoolean(4, userBean.isSupervisor());
+            ps.setString(1, utenteBean.getEmail());
+            ps.setString(2, utenteBean.getNome());
+            ps.setString(3, utenteBean.getPassword());
+            ps.setBoolean(4,utenteBean.isSupervisor());
 
             int result = ps.executeUpdate();
 
@@ -148,9 +148,9 @@ public class UtenteDao implements DaoModel {
     }
 
     @Override
-    public synchronized void doDelete(UserBean bean) throws SQLException {
+    public synchronized void doDelete(UtenteBean bean) throws SQLException {
 
-        int id_utente = bean.getId_utente();
+        int id_utente = bean.getId();
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE id_utente=?";
 
         try (Connection con = DriverManagerConnectionPool.getConnection()) {
@@ -168,11 +168,11 @@ public class UtenteDao implements DaoModel {
     }
 
     @Override
-    public synchronized UserBean doRetrieveByKey(List<String> keys) throws SQLException {
+    public synchronized UtenteBean doRetrieveByKey(List<String> keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs = null;
-        UserBean bean = null;
+        UtenteBean bean = null;
         String selectQuery = (keys.size() == 2) ? "SELECT * FROM " + TABLE_NAME + " WHERE email=? and password=SHA1(?)" : "SELECT * FROM " + TABLE_NAME + " WHERE id_utente=?";
 
         try {
@@ -186,7 +186,7 @@ public class UtenteDao implements DaoModel {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                bean = new UserBean();
+                bean = new UtenteBean();
                 bean.setId_utente(rs.getInt("id_utente"));
                 bean.setEmail(rs.getString("email"));
                 bean.setNome(rs.getString("nome"));
@@ -205,11 +205,11 @@ public class UtenteDao implements DaoModel {
         return bean;
     }
 
-    public synchronized UserBean doRetrieveByName(String name) throws SQLException {
+    public synchronized UtenteBean doRetrieveByName(String name) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs = null;
-        UserBean bean = null;
+        UtenteBean bean = null;
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE username=? ";
 
         try {
@@ -221,7 +221,7 @@ public class UtenteDao implements DaoModel {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                bean = new UserBean();
+                bean = new UtenteBean();
                 bean.setId_utente(rs.getInt("id_utente"));
                 bean.setEmail(rs.getString("email"));
                 bean.setNome(rs.getString("nome"));
@@ -244,9 +244,9 @@ public class UtenteDao implements DaoModel {
     public synchronized List<Bean> doRetrieveAll() throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
-        ResultSet rs = null;
+        ResultSet rs;
         List<Bean> list = new ArrayList<Bean>();
-        UserBean bean = null;
+        UtenteBean bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         try {
@@ -256,7 +256,7 @@ public class UtenteDao implements DaoModel {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                bean = new UserBean();
+                bean = new UtenteBean();
                 bean.setId_utente(rs.getInt("id_utente"));
                 bean.setEmail(rs.getString("email"));
                 bean.setNome(rs.getString("nome"));
@@ -279,7 +279,7 @@ public class UtenteDao implements DaoModel {
     public synchronized long getNumbersOfUsers() throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
-        ResultSet rs = null;
+        ResultSet rs;
         long number = 0;
         String selectQuery = "SELECT count(*) FROM " + TABLE_NAME + " WHERE sup='false'";
 
