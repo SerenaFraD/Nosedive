@@ -121,14 +121,10 @@ INSERT INTO Utente(email,nome,pwd,sup) VALUES ('paolo@gmail.com','Paolo',sha1("p
 INSERT INTO Utente(email,nome,pwd,sup) VALUES ('riccardo@gmail.com','Riccardo',sha1("prova"),1);
 INSERT INTO Utente(email,nome,pwd,sup) VALUES ('Vincenzo@gmail.com','Vincenzo',sha1("prova"),0);
 
-select * from utente;
-
 -- Inserimento relazioni
 INSERT INTO Relazione(nome, punteggio) VALUES ('sposato', 150);
 INSERT INTO Relazione(nome, punteggio) VALUES ('fidanzato', 100);
 INSERT INTO Relazione(nome, punteggio) VALUES ('single', 10);
-
-select * from Relazione;
 
 -- Inserimento lavori   
 INSERT INTO Lavoro(nome, punteggio) VALUES ('Docente', 200);
@@ -136,16 +132,12 @@ INSERT INTO Lavoro(nome, punteggio) VALUES ('Disoccupato', 10);
 INSERT INTO Lavoro(nome, punteggio) VALUES ('Studente', 100);
 INSERT INTO Lavoro(nome, punteggio) VALUES ('Impiegato', 150);
 
-select * from Lavoro;
-
 -- Inserimento informazioni
 INSERT INTO Informazione(id_utente,compleanno,punteggio,id_relazione,id_lavoro,propic,sesso,deceduto) VALUES (1,NULL, 2000, 1, 1, NULL, 0, 0);
 INSERT INTO Informazione(id_utente,compleanno,punteggio,id_relazione,id_lavoro,propic,sesso,deceduto) VALUES (2,NULL, 2000, 2, 3, NULL, 1, 0);
 INSERT INTO Informazione(id_utente,compleanno,punteggio,id_relazione,id_lavoro,propic,sesso,deceduto) VALUES (3,NULL, 2000, 3, 3, NULL, 0, 0);
 INSERT INTO Informazione(id_utente,compleanno,punteggio,id_relazione,id_lavoro,propic,sesso,deceduto) VALUES (4,NULL, 2000, 2, 4, NULL, 0, 0);
 INSERT INTO Informazione(id_utente,compleanno,punteggio,id_relazione,id_lavoro,propic,sesso,deceduto) VALUES (5,NULL, 2000, 1, 2, NULL, 0, 0);
-
-select * from Informazione;
 
 -- Inserimento Azioni
 INSERT INTO Azione(nome, punteggio) VALUES ('Acquisto casa', 200);
@@ -155,8 +147,6 @@ INSERT INTO Azione(nome, punteggio) VALUES ('Gioco d/azzardo', -150);
 INSERT INTO Azione(nome, punteggio) VALUES ('Volonatariato', 50);
 INSERT INTO Azione(nome, punteggio) VALUES ('Aiuto bisognosi', 150);
 INSERT INTO Azione(nome, punteggio) VALUES ('Lasciato una buona recensione', 10);
-
-select * from Azione;
 
 -- Inserimento utente  Azione
 INSERT INTO UtenteAzione(id_utente, id_azione) VALUES (1, 1);
@@ -170,8 +160,6 @@ INSERT INTO UtenteAzione(id_utente, id_azione) VALUES (4, 3);
 INSERT INTO UtenteAzione(id_utente, id_azione) VALUES (4, 3);
 INSERT INTO UtenteAzione(id_utente, id_azione) VALUES (4, 3);
 
-select * from UtenteAzione;
-
 -- Inserimento Post
 INSERT INTO Post(id_utente, timestamp, postpic, testo) VALUES (1, '2021-07-20 16:04:56', NULL, '30L a questo progetto');
 INSERT INTO Post(id_utente, timestamp, postpic, testo) VALUES (1, '2019-12-28 19:00:25', NULL, 'Questo progetto è fantastico');
@@ -180,15 +168,11 @@ INSERT INTO Post(id_utente, timestamp, postpic, testo) VALUES (2, '2021-07-20 11
 INSERT INTO Post(id_utente, timestamp, postpic, testo) VALUES (3, '2021-07-19 01:26', NULL, 'Non riesco a dormire.');
 INSERT INTO Post(id_utente, timestamp, postpic, testo) VALUES (4, '2021-07-19 01:26', NULL, 'Odio Nosedive.');
 
-select * from Post;
-
 -- Inserimento Commenti
 INSERT INTO Commento(id_commentatore, id_post, id_utente, timestamp, testo) VALUES (2, 1, 1, '2021-07-19 09:30', 'Grazie Prof.');
 INSERT INTO Commento(id_commentatore, id_post, id_utente, timestamp, testo) VALUES (3, 1, 1, '2021-07-19 09:31', 'Per fortuna');
 INSERT INTO Commento(id_commentatore, id_post, id_utente, timestamp, testo) VALUES (4, 2, 4, '2021-07-19 11:59', 'Ulisse mi graffia sempre.');
 INSERT INTO Commento(id_commentatore, id_post, id_utente, timestamp, testo) VALUES (4, 1, 1, '2021-07-19 09:30', 'Assolutamente!');
-
-select * from Commento;
 
 -- Inserimento UtenteSeguito
 INSERT INTO UtenteSeguito(id_utente, id_seguito) VALUES (1, 2);
@@ -197,6 +181,3 @@ INSERT INTO UtenteSeguito(id_utente, id_seguito) VALUES (3, 4);
 INSERT INTO UtenteSeguito(id_utente, id_seguito) VALUES (2, 1);
 INSERT INTO UtenteSeguito(id_utente, id_seguito) VALUES (3, 1);
 INSERT INTO UtenteSeguito(id_utente, id_seguito) VALUES (4, 3);
-
-select * from UtenteSeguito;
-
