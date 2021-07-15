@@ -26,7 +26,7 @@ Riccardo Amaro | 051210
 
 ***
 
-## 1.  Obiettivo del progetto
+## Obiettivo del progetto
 
 La piattaforma ‘Nosedive” è un social network rivolto a tutta la popolazione maggiorenne, con lo scopo di monitorare il punteggio relativo ad ogni individuo, basandosi sulle azioni intraprese e lo stile di vita che conduce. Gli utenti presenti iscritti su Nosedive inseriscono le informazioni personali, le azioni intraprese quotidianamente e assegnare votazioni ad altri utenti e il sistema si occuperà di aggiornare il punteggio e di assegnare le penalità, se necessario.
 Ogni singolo individuo, in base al punteggio correntemente collegato al suo profilo, deve essere inserito in una categoria della società. 
@@ -34,7 +34,7 @@ In base alla categoria alla quale l’individuo è stato assegnato saranno propo
 
 ***
 
-## 2. Analisi di siti esistenti
+## Analisi di siti esistenti
 Il sito ‘**Nosedive**’ non fa riferimento a nessun sito esistente, ma alla puntata ‘Nosedive’
 (episodio 1, stagione 3) della serie Tv ‘Black Mirror’: durante tutto il corso della puntata si possono notare particolari sul funzionamento del sito. 
 
@@ -48,7 +48,7 @@ Al momento della scrittura di questa proposta di progetto esiste un’app per ip
 
 ***
 
-## 3. Funzionalità del sito	
+## Funzionalità del sito	
 Il sito Nosedive deve supportare:
 - Gestione degli utenti;
 - Modifica dei dati personali;
@@ -59,7 +59,7 @@ Il sito Nosedive deve supportare:
 
 ***
 
-## 4. Utenti del sito	
+## Utenti del sito	
 Gli utenti a cui è rivolto il sito sono:
 - **Utente base**: può avere un profilo, caricare post e lasciare votazioni;
 - **Utente supervisore (amministratore)**: può visualizzare le statistiche degli utenti e decidere azioni sugli utenti base; La modifica e l’eliminazione degli utenti registrati sul sito. L’admin del sito non necessita di conoscenze di programmazione informatica, in quanto potrà avvalersi di questa interfaccia per gestire gli utenti;
@@ -67,15 +67,15 @@ Gli utenti a cui è rivolto il sito sono:
 
 ***
 
-## 5. Diagramma navigazionale	
+## Diagramma navigazionale	
 
 ***
 
-## 6. Mappa dei contenuti	
+## Mappa dei contenuti	
 
 ***
 
-## 7. La base di dati	
+## La base di dati	
 Il sito Nosedive ha al suo interno alcuni dati che devono essere mantenuti, affinché il suo funzionamento sia valido. 
 La persistenza di questi, è stata scelta di dargliela, memorizzando essi in un database relazionale nel quale i dati persistenti vengono rappresentati attraverso delle tabelle, ognuna delle quali è composta da righe (gli elementi, le istanze di ogni dato) e le colonne (attributi, descrizioni di ogni istanza di dato). 
 I dati vengono gestiti attraverso MySQL che è un DBMS (Data Base Management System) che permette di manipolare le informazioni che si vogliono controllare sulla base di dati.
@@ -120,21 +120,21 @@ All'interno del nostro Data Base, inoltre, sono state salvate anche tutte le imm
 
 ***
 
-## 8. Layout
+## Layout
 
 ***
 
-## 9. Tema
+## Tema
 ![Image text](/Documentazione/ScreenShoot/tema.jpg)
 
 ***
 
-## 10. Scelta dei colori
+## Scelta dei colori
 ![Image text](/Documentazione/ScreenShoot/colori.jpg)
 
 ***
 
-## 11. Diagramma navigazionale con le Servlet	
+## Diagramma navigazionale con le Servlet	
 
 ***
 
