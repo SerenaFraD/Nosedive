@@ -12,17 +12,17 @@ Riccardo Amaro | 051210
 ***
 
 ## Indice
-1. [Obiettivo del progetto](#obiettivo-del-progetto)
-2. [Analisi di siti esistenti](#analisi-di-siti-esistenti)
-3. [Funzionalità del sito](#funzionalità-del-sito)
-4. [Utenti del sito](#utenti-del-sito)
-5. [Diagramma navigazionale](#diagramma-navigazionale)
-6. [Mappa dei contenuti](#mappa-dei-contenuti)
-7. [La base di dati](#la-base-di-dati)
-8. [Layout](#layout)
-9. [Tema](#tema)
-10. [Scelta dei colori](#scelta-dei-colori)
-11. [Diagramma navigazionale con le Servlet](#diagramma-navigazionale-con-Servlet)
+1. [Obiettivo del progetto](#Obiettivo-del-progetto)
+2. [Analisi di siti esistenti](#Analisi-di-siti-esistenti)
+3. [Funzionalità del sito](#Funzionalità-del-sito)
+4. [Utenti del sito](#Utenti-del-sito)
+5. [Diagramma navigazionale](#Diagramma-navigazionale)
+6. [Mappa dei contenuti](#Mappa-dei-contenuti)
+7. [La base di dati](#La-base-di-dati)
+8. [Layout](#Layout)
+9. [Tema](#Tema)
+10. [Scelta dei colori](#Scelta-dei-colori)
+11. [Diagramma navigazionale con le Servlet](#Diagramma-navigazionale-con-Servlet)
 
 ***
 
