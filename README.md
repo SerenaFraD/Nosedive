@@ -36,8 +36,14 @@ In base alla categoria alla quale l’individuo è stato assegnato saranno propo
 
 ## 2. Analisi di siti esistenti
 Il sito ‘**Nosedive**’ non fa riferimento a nessun sito esistente, ma alla puntata ‘Nosedive’
-(episodio 1, stagione 3) della serie Tv ‘Black Mirror’: durante tutto il corso della puntata si possono notare particolari sul funzionamento del sito. Ogni utente ha un profilo nel quale è presente la foto profilo, il nome utente e il punteggio corrente. L’utente può caricare foto e creare post sul suo profilo ai quali può essere lasciato un punteggio da una a cinque stelle. Ogni utente può anche lasciare un punteggio ad un utente, indipendentemente da un post o un’immagine. In base al punteggio corrente, l’utente può rientrare in una determinata categoria e relativamente a questo verranno mostrati utenti appartenenti alla stessa categoria. Nella serie tv, il punteggio viene utilizzato anche per discriminare la fruizione di servizi da parte dell’utente (aspetto che non verrà implementato).
+(episodio 1, stagione 3) della serie Tv ‘Black Mirror’: durante tutto il corso della puntata si possono notare particolari sul funzionamento del sito. 
+
+Ogni utente ha un profilo nel quale è presente la foto profilo, il nome utente e il punteggio corrente. L’utente può caricare foto e creare post sul suo profilo ai quali può essere lasciato un punteggio da una a cinque stelle. Ogni utente può anche lasciare un punteggio ad un utente, indipendentemente da un post o un’immagine. In base al punteggio corrente, l’utente può rientrare in una determinata categoria e relativamente a questo verranno mostrati utenti appartenenti alla stessa categoria. 
+
+Nella serie tv, il punteggio viene utilizzato anche per discriminare la fruizione di servizi da parte dell’utente (aspetto che non verrà implementato).
+
 Il punteggio corrente è calcolato in base al peso relativo ad ogni stella: con un punteggio di una o due stelle vengono sottratti punti, mentre con un punteggio della tre stelle alle cinque vengono aggiunti punti.
+
 Al momento della scrittura di questa proposta di progetto esiste un’app per iphone che implementa la proposta di progetto qui presentata (https://nosediveapp.com/).
 
 ***
