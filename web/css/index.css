@@ -1,21 +1,4 @@
-:root {
-    --primale1: #753750;
-    --primale2: #b36d89;
-    --primale3: #e4d7b7;
-    --secondario1: #6e585d;
-    --secondario2: #9b889b;
-    --secondario3: #c7c0d1;
-    --informativo1: #b0665b;
-    --informativo2: #ffe5dd;
-    --errore1: #214a80;
-    --errore2: #00c9bd;
-    --successo1: #ffcfcb;
-    --successo2: #566077;
-    --titolo: 'Open Sans', sans-serif;
-    --testo: 'Montserrat', sans-serif;
-    --titolo-size: 40px;
-    --testo-size: 20px;
-}
+@import "general.css";
 
 body.index {
     background-image: url("img/backgroundDefault.jpg");

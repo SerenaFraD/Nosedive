@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="Nosedive">
+    <output-path>$PROJECT_DIR$/out/artifacts/Nosedive</output-path>
+    <root id="archive" name="Nosedive.war" />
+  </artifact>
+</component>
