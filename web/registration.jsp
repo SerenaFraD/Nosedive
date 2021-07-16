@@ -7,12 +7,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Pagina di registrazione di YourBook">
-    <meta name="author" content="Serena D">
+    <meta name="author" content="Serena D'Urso">
 
-    <title>Registrazione|YourBook</title>
+    <title>Registrazione</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="CSS/registration.css" rel="stylesheet">
+    <link href="css/registratione.css" rel="stylesheet">
 
 </head>
 <body>
@@ -48,36 +48,9 @@
                     </tr>
 
                     <tr>
-                        <td><label for="nazionalita">Nazionalità</label></td>
-                        <td><select id="nazionalita" name="nazionalita">
-                            <option value="Italia">Italia</option>
-                            <option value="America">America</option>
-                            <option value="Inghilterra">Inghilterra</option>
-                            <option value="Arabia Saudita">Arabia Saudita</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Germania">Germania</option>
-                            <option value="Burundi">Burundi</option>
-                            <option value="Giappone">Giappone</option>
-                            <option value="Indonesia">Indonesia</option>
-                            <option value="Australia">Australia</option>
-                        </select>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td><label for="eta">Anno di nascita</label></td>
-                        <td><select id="eta" name="eta">
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="27">27</option>
-                            <option value="26">26</option>
-                        </select></td>
+                        <td><!-- Modificare data di nascita -->
+                        </td>
                     </tr>
 
                 </table>
@@ -89,11 +62,11 @@
         </div>
         <div class="logoCol">
             <h1>Registrati a YourBook adesso!</h1>
-            <img src="Immagini/logoYourBook.png" alt="Logo YourBook"/>
+            <img src="Immagini/logoNosedive.png" alt="Logo YourBook"/> <!--Modificare-->
         </div>
     </div>
 </div>
-<%@ include file="footer.jsp" %>
+
 <script src="${pageContext.servletContext.contextPath}/JS/validate.js"></script>
 </body>
 </html>

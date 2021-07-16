@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login | YourBook</title>
-    <link rel="stylesheet" href="CSS/Login.css">
+    <title>Login | Nosedive</title>
+    <link rel="stylesheet" href="css/Login.css">
 </head>
 <body>
 <%@ include file="navBar.jsp" %>
@@ -65,13 +65,6 @@
 </div>
 
 <%@ include file="footer.jsp" %>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<!-- Bootstrap core JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Third party plugin JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
 
 <!-- Core theme JS-->
 <script src="JS/HomePage.js"></script>

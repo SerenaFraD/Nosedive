@@ -4,10 +4,10 @@ Salerno**.
 
 ***
 
-Studente 			 | Matricola
+Studente | Matricola
 ---------------|-----------
 Serena D'Urso  | 0512105709
-Riccardo Amaro | 051210
+Riccardo Amaro | 0512105841
 
 ***
 
