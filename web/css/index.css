@@ -1,7 +1,7 @@
 @import "general.css";
 
 body.index {
-    background-image: url("img/backgroundDefault.jpg");
+    background-image: var(--defaultBG);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
