@@ -13,6 +13,6 @@ function disappear() {
       clearInterval(timer);
     }
     element.style.opacity = elOpacity;
-    elOpacity += elOpacity * 0.2;
-  }, 30);
+    elOpacity += elOpacity * 0.1;
+  }, 50);
 }

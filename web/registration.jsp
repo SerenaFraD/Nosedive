@@ -17,11 +17,13 @@
 <body>
     <!-- <%@ include file="navBar.jsp" %> -->
     <section id="registration">
+
         <div id="invite">
             <p>Ready to join</p>
             <h2>NOSEDIVE?</h2>
             <button type="button" onclick="disappear()">click to register</button>
         </div>
+
         <div id="register">
             <form action="register" method="POST" name="registration">
                 <table class="register">
@@ -54,21 +56,32 @@
                     <tr>
                         <td><label for="eta">Anno di nascita</label></td>
                         <td>
-                            Modificare data di nascita
+                            <input class="center" type="date">
                         </td>
                     </tr>
 
+                    <tr>
+                        <td><label for="sesso">Sesso</label></td>
+                        <td>
+                            <input type="radio" id="f" name="sex" value="female">
+                            <label for="f">Donna</label><br>
+                            <input type="radio" id="m" name="sex" value="male">
+                            <label for="m">Uomo</label><br>
+                        </td>
+                    </tr>
                 </table>
+
                 <output name="result" for="result">
                 </output>
 
-                <button type="submit" id="register" disabled>Registrati!</button>
+                <button type="submit" disabled>Invio</button>  
             </form>
+
+            
         </div>
 
 
     </section>
-
     <script src="${pageContext.servletContext.contextPath}/JS/validate.js"></script>
     <script src="animation.js"></script>
     
