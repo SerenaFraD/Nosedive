@@ -13,7 +13,7 @@
 
                     <p>
                         <strong> Bisogno di Aiuto?</strong><br>
-                        Se hai bisogno di aiuto contattaci a assistenza@yourbook.com
+                        Se hai bisogno di aiuto contattaci a assistenza@nosedive.com
                     </p>
                 </div>
                 <!--Grid column-->
@@ -41,8 +41,8 @@
 
         <!-- Copyright -->
         <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-dark" href="">YourBook.it</a>
+            © 2021 Copyright:
+            <a class="text-dark" href="">Nosedive.it</a>
         </div>
         <!-- Copyright -->
     </div>

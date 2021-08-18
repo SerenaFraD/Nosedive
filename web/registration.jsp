@@ -11,11 +11,11 @@
 
     <title>Registrazione</title>
 
-    <link href="registration.css" rel="stylesheet">
+    <link href="${pageContext.servletContext.contextPath}/css/registration.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- <%@ include file="navBar.jsp" %> -->
+    <!-- include file="navBar.jsp" %> -->
     <section id="registration">
 
         <div id="invite">
@@ -25,7 +25,7 @@
         </div>
 
         <div id="register">
-            <form action="register" method="POST" name="registration">
+            <form action="${pageContext.servletContext.contextPath}/register" method="POST" name="registration">
                 <table class="register">
                     <tr>
                         <td><label for="nome">Nome</label></td>
@@ -56,14 +56,14 @@
                     <tr>
                         <td><label for="eta">Anno di nascita</label></td>
                         <td>
-                            <input class="center" type="date">
+                            <input id="eta" class="center" type="date">
                         </td>
                     </tr>
 
                     <tr>
                         <td><label for="sesso">Sesso</label></td>
                         <td>
-                            <input type="radio" id="f" name="sex" value="female">
+                            <input id="sesso" type="radio" id="f" name="sex" value="female">
                             <label for="f">Donna</label><br>
                             <input type="radio" id="m" name="sex" value="male">
                             <label for="m">Uomo</label><br>
@@ -74,7 +74,7 @@
                 <output name="result" for="result">
                 </output>
 
-                <button type="submit" disabled>Invio</button>  
+                <button type="submit" >Invio</button>
             </form>
 
             
@@ -82,8 +82,8 @@
 
 
     </section>
-    <script src="${pageContext.servletContext.contextPath}/JS/validate.js"></script>
-    <script src="animation.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/validate.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/animation.js"></script>
     
 </body>
 

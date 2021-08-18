@@ -13,8 +13,8 @@ public class DriverManagerConnectionPool {
     static {
         freeDbConnections = new LinkedList<Connection>();
         try {
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("DB driver not found:" + e.getMessage());
         }
@@ -24,13 +24,12 @@ public class DriverManagerConnectionPool {
         Connection newConnection = null;
         String ip = "localhost";
         String port = "3306";
-        String db = "YourBook";
+        String db = "Nosedive";
         String username = "root";
         String password = "Admin";
 
-        System.out.println(DriverManager.getConnection("jdbc:mysql://localhost:3306/YourBook?serverTimezone=UTC", username, password));
         newConnection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" +
-                port + "/" + db + "?serverTimezone=UTC", username, password);
+                port + "/" + db + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", username, password);
 
         System.out.println("Create a new DB connection"); //set Transaction
         newConnection.setAutoCommit(false);

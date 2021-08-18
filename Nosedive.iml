@@ -46,5 +46,16 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
+    <orderEntry type="module-library" exported="" scope="PROVIDED">
+      <library name="mysql:mysql-connector-java:8.0.25" type="repository">
+        <properties maven-id="mysql:mysql-connector-java:8.0.25" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.25.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/protobuf-java-3.11.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

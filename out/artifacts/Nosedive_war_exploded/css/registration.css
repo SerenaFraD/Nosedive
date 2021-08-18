@@ -1,0 +1,67 @@
+@import "general.css";
+
+body {
+    background: radial-gradient(circle, rgba(255,169,115,1) 10%, rgba(255,225,249,1) 100%);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--primale3);
+}
+
+section#registration {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 200px;
+    padding: 55px;
+    width: fit-content;
+    filter: none;
+}
+
+/*Div che scompare*/
+
+#invite {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--primale3);
+}
+
+#invite > p {
+    text-align: center;
+}
+
+#invite button {
+    margin-top: 20px;
+    font-size: 11px;
+}
+
+#invite button:hover {
+    box-shadow: var(--secondario2) 0px 5px 10px;
+}
+
+/*Form registrazione*/
+
+#register {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0.1;
+}
+
+input.center {
+    width: 91%;
+}
+
+#register button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 200px;
+}
+

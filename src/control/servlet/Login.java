@@ -97,6 +97,8 @@ public class Login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+        /*
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         UtenteBean utenteBean = null;
@@ -118,5 +120,7 @@ public class Login extends HttpServlet {
         } else {
             System.out.println();
         }
+
+         */
     }
 }

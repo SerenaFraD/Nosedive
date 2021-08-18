@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registrato! | YourBook</title>
+    <title>Registrato! | Nosedive</title>
     <link rel="stylesheet" href="CSS/message.css">
 </head>
 <body>
-<%@ include file="navBar.jsp" %>
+<%@ include file="navigation.jsp" %>
 
 <div class="cont">
     <p id="message"><%=request.getAttribute("message")%></p>

@@ -17,7 +17,7 @@
     --testo: 'Montserrat', sans-serif;
     --titolo-size: 40px;
     --testo-size: 20px;
-    --defaultBG: url("../img/backgroundDefault.jpg");
+    --defaultBG: url("img/backgroundDefault.jpg");
 }
 
 body {
@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-p {
+p, label {
     font-family: var(--testo);  
 }
 
@@ -48,4 +48,28 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+button {
+    margin: 0 auto;
+    width: fit-content; 
+}
+
+input, select,
+textarea, button {
+    padding: 5px 7px;
+    outline: none;
+    border-radius: 8px;
+    border: 1px solid var(--secondario1); 
+    outline: none;
+    background-color: var(--informativo2);
+    font-family: var(--testo);
+    color: var(--primale1);
+}
+
+
+output {
+    font-family: var(--testo);
+    font-size: x-small;
+    color: var(--errore2);
 }

@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <h1>Riccardo Amaro</h1>
             <h2>4.63</h2>
-            <a class="btn btn-default" href="#" style="inline">Attualmente studente universitario presso Unisa</a>
+            <a class="btn btn-default" href="#" style="inline:">Attualmente studente universitario presso Unisa</a>
         </div>
 
         <!--Top right column-->

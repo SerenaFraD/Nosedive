@@ -40,8 +40,10 @@ public class Register extends HttpServlet {
         }
 
         String password = request.getParameter("pwd");
-        if (!(password != null && password.length() >= 8 && !password.toUpperCase().equals(password)
-                && !password.toLowerCase().equals(password))) {
+        if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")) //Minimum eight characters, at least one letter and one number
+                // || !password.toUpperCase().equals(password)  Significato?
+        // || !password.toLowerCase().equals(password)))  Significato?
+        {
             throw new IllegalArgumentException("Password non valida.");
         }
         else {
