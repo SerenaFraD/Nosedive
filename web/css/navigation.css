@@ -1,6 +1,6 @@
-@import "general.css";
+/* @import "general.css"; */
 
-nav {
+/* nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -12,7 +12,12 @@ nav {
     height: 50px;
     background-color: var(--successo1);
 }
+*/
+.navbar-custom{
+    background-color: #6e585d;
 
+}
+/*
 ul.navBar li {
     margin: 0px 10px;
 }
@@ -31,4 +36,4 @@ ul.navBar li {
 
 img.navBar {
     height: 20px;
-}
+} */
