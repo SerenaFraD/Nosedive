@@ -2,3 +2,4 @@
 .idea/sqldialects.xml
 web/Nosedive.iml
 pom.xml
+/out/
