@@ -26,18 +26,20 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    margin: 0;
     font-family: var(--titolo);
     color: var(--primale2);
-    margin: 0;
 }
 
 p, label {
-    font-family: var(--testo);  
+    margin: 0;
+    font-family: var(--testo);
+    word-wrap: normal;
 }
 
 section {
-    padding: 20px;
     margin-top: 150px;
+    padding: 20px;
     background-color: var(--secondario1);
 }
 
@@ -50,6 +52,13 @@ a {
     text-decoration: none;
 }
 
+a:hover{
+    color:hsla(0,0%,100%,.9);
+    text-shadow:rgba(0,0,0,.2) 0 0 10px;
+    text-decoration: none;
+    transition: color .5s,text-shadow .5s;
+}
+
 button {
     margin: 0 auto;
     width: fit-content; 
@@ -57,19 +66,43 @@ button {
 
 input, select,
 textarea, button {
-    padding: 5px 7px;
-    outline: none;
     border-radius: 8px;
-    border: 1px solid var(--secondario1); 
-    outline: none;
+    border: 1px solid var(--secondario1);
+    padding: 5px 7px;
     background-color: var(--informativo2);
     font-family: var(--testo);
+    font-size: x-small;
     color: var(--primale1);
+    outline: none;
 }
-
 
 output {
     font-family: var(--testo);
     font-size: x-small;
     color: var(--errore2);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+hr {
+    display: block;
+    border-color: #5d3571;
 }

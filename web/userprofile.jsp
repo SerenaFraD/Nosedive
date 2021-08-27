@@ -1,98 +1,113 @@
-<div class="container">
-    <!-- Profile image, use a square image for best performance -->
-    <div class="row">
-        <div class="col-md-2">
-            <!-- INSERT IMAGE HERE -->
-            <img src="https://raw.githubusercontent.com/danilosierrac/nosedive/gh-pages/oval.gif" class="profile">
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Profilo utente">
+    <meta name="author" content="Serena D'Urso">
+
+    <title>Profilo</title>
+
+    <link href="../css/profile.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="profile">
+        <img id="propic" src="../img/userIcon.png">
+        <div class="information">
+            <p class="nome">Nome Utente</h1>
+            <p class="categoria">Categoria utente</h4>
+            <p class="bloccato">Deceduto/Bloccato</h6>
         </div>
-        <!-- Name, tagline, score -->
-        <div class="col-md-8">
-            <h1>Riccardo Amaro</h1>
-            <h2>4.63</h2>
-            <a class="btn btn-default" href="#" style="inline:">Attualmente studente universitario presso Unisa</a>
-        </div>
-
-        <!--Top right column-->
-        <div class="col-md-2">
-            <h4>Riccardo è su Nosedive</h4>
-            <p>Nosedive è il social network definitivo, valuta tutto e vinci ricompense. Unisciti ora!</p>
-        </div>
-    </div>
-    <!-- /.row -->
-    <div class="row">
-        <div class="col-md-10">
-            <hr>
-        </div>
-    </div>
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-6">
-            <!-- Latest image, you can add here a Snapwidget to put your actual instagram feed -->
-            <img src="capuccino.jpg" width="100%">
-
-            <!--Content, you could put this as a CV sort of thing -->
-            <h3><a>Pronto per la festa di stasera!</a></h3>
-            <h6>3 min. ago - 56 People rated this 5 stars</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-
-            <h3><a>Grazie per gli auguri</a></h3>
-            <h6>3 min. ago - 56 People rated this 5 stars</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-
-            <h3><a>Oggi mare!</a></h3>
-            <h6>3 min. ago - 56 People rated this 5 stars</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+        <hr>
+        <div id="publish">
+            <form action="publish" method="POST" name="publish">
+                <textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
+                <input type="file" id="image" name="files[]"
+                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" />
+                <label for="image">Select file</label>
+                <input class="publish" type="submit" disabled>
+            </form>
         </div>
 
-        <div class="col-md-4">
-            <h4><a>Recent Comments(6)</a></h4>
-            <p>★<i class="fa fa-star" aria-hidden="true"> 23 people liked your picture</i></p>
-            <h5><a>Serena D'Urso</a></h5>
-            <p>★★★★★</p>
-            <p>"Dobbiamo fare il progetto di TSW!"</p>
-            <br>
-            <h5><a>Mario Rossi</a></h5>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit." ★★★★★</p>
-            <br>
-            <h5><a>Giuseppe Bianchi</a></h5>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit." ★★★★★</p>
-            <br>
-            <h5><a>Carlo Verdi</a></h5>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit." ★★★★★</p>
-            <br>
-            <h5><a>Sara Ferrari</a></h5>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit." ★★★★★</p>
+        <hr>
 
-            <!-- Right column -->
+        <div id="post">
+            <img src="img/userIcon.png">
+            <div>
+                <p class="nome">Nome Utente</h1>
+                <p class="categoria">Categoria utente</h4>
+                <p class="bloccato">Deceduto/Bloccato</h6>
+            </div>
+
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis tellus sit amet elit
+                tincidunt bibendum. Donec id scelerisque libero. Sed nec ornare est, id ullamcorper sem. Aliquam
+                elementum feugiat sagittis. Aliquam ac lorem sed libero fringilla gravida. Nunc egestas porta vulputate.
+                Donec eu dapibus nibh, eget facilisis diam. Fusce lobortis diam eu velit placerat luctus. Pellentesque
+                sodales ullamcorper arcu, a convallis massa blandit in. Interdum et malesuada fames ac ante ipsum primis
+                in faucibus.
+            </p>
+
+            <div class="stars">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+            </div>
+
+            <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta </button>
+
+            <div id="commento" class="showCommentDiv">
+                <form action="publish" method="POST" name="commento">
+                    <textarea id="commento" placeholder="Commento" oninput="abilitateButtonComment()"></textarea>
+                    <input class="publishComment" type="submit" disabled>
+                </form>
+            </div>
         </div>
-        <div class="col-md-2">
 
-            <H4> Highest Rated Posts </h4>
-            <hr>
-            <h5><a>Serena D'Urso</a></h5>
-            <p class="comment">"Lorem ipsum dolor sit amet, consectetur ad
-                ipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat."</p>
-            <h6>56 People rated this 5 stars</h6>
 
-            <hr>
-            <h5><a></a></h5>
-            <p class="comment">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat."</p>
-            <h6>56 People rated this 5 stars</h6>
+        <div id="post">
+            <img src="img/userIcon.png">
+            <div>
+                <p class="nome">Nome Utente</h1>
+                <p class="categoria">Categoria utente</h4>
+                <p class="bloccato">Deceduto/Bloccato</h6>
+            </div>
 
-            <hr>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis tellus sit amet elit
+                tincidunt bibendum. Donec id scelerisque libero. Sed nec ornare est, id ullamcorper sem. Aliquam
+                elementum feugiat sagittis. Aliquam ac lorem sed libero fringilla gravida. Nunc egestas porta vulputate.
+                Donec eu dapibus nibh, eget facilisis diam. Fusce lobortis diam eu velit placerat luctus. Pellentesque
+                sodales ullamcorper arcu, a convallis massa blandit in. Interdum et malesuada fames ac ante ipsum primis
+                in faucibus.
+            </p>
 
-            <h5><a>Antonio Russo</a></h5>
-            <p class="comment">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat."</p>
-            <h6>56 People rated this 5 stars</h6>
+            <div class="stars">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+                <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+            </div>
 
-            <hr>
-            <h4><a>Home</a></h4>
-            <h4><a>Find Friends</a></h4>
-            <h4><a>Privacy</a></h4>
-            <hr>
+            <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta </button>
+
+            <div id="commento" class="showCommentDiv">
+                <form action="publish" method="POST" name="commento">
+                    <textarea id="commento" placeholder="Commento" oninput="abilitateButtonComment()"></textarea>
+                    <input class="publishComment" type="submit" disabled>
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- /.row -->
-    <!-- /.row -->
-</div>
+    </section>
+
+    <script src="../js/showCommentArea.js"></script>
+    <script src="../js/starAnimation.js"></script>
+    <script src="../js/abilitateButton.js"></script>
+</body>
+
+</html>
