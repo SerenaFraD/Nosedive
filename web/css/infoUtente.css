@@ -1,0 +1,42 @@
+@import url(general.css);
+
+table {
+    margin: 40px auto;
+    font-family: var(--testo);
+    border-collapse: separate;
+    border-spacing: 25px 15px;
+    color: var(--primale3);
+}
+
+td {
+    width: 33%;
+    
+}
+
+td:first-child {
+    font-family: var(--titolo);
+    text-transform: uppercase;
+}
+
+td:nth-child(2) {
+    text-align: center;
+}
+
+label {
+    display: block;
+    width: inherit;
+}
+
+label, select {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    text-align-last: center;
+}
+
+p {
+    text-align: center;
+    font-size: var(--titolo-size);
+    font-family: var(--titolo);
+    color: var(--primale3);
+}

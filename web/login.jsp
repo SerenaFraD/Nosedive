@@ -21,13 +21,13 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="email" class="form-control input_user" value="" placeholder="email">
+                        <input type="text" name="email" class="form-control input_user" value="" placeholder="email" oninput="validaEmailLogin()">
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="pwd" class="form-control input_pass" value="" placeholder="password">
+                        <input type="password" name="pwd" class="form-control input_pass" value="" placeholder="password" oninput="validaPasswordLogin()">
                     </div>
 
                     <div class="form-group">
@@ -36,6 +36,8 @@
                             <label class="custom-control-label" for="customControlInline"><b>Ricordami</b></label>
                         </div>
                     </div>
+                    <output name="result" for="result">
+                    </output>
                     <div class="d-flex justify-content-center mt-3 login_container">
                         <button type="submit" name="button" class="btn login_btn">Login</button>
                     </div>

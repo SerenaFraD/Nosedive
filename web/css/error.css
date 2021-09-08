@@ -1,0 +1,12 @@
+@import url(general.css);
+
+p {
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin: 0
+     auto;
+    margin-top: 30px;
+}

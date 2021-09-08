@@ -2,24 +2,6 @@
 
 body {
     padding-top: 70px;
-    background: linear-gradient(135deg,#f4e9e9,#ebc8bf);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    opacity: 75%;
-    line-height: 1.2em;
-    
-}
-
-section#profile {
-    display: block;
-    margin: 0 auto;
-    margin-top: 150px;
-    border-radius: 7px;
-    padding: 30px;
-    background-color: var(--primale2);
-    width: 60%;
 }
 
 img#propic {
@@ -83,25 +65,13 @@ p.bloccato {
     resize: none;
 }
 
-#publish input[type=file] {
-    display: none;
-}
-
 #publish label {
     display: inline-block;
     position: relative;
     top: -0.08em;
-    border: 3px solid var(--primale1);
     border-top-width: 0px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 5px 7px;
-    outline: none;
-    width: fit-content;
-    background-color: var(--informativo2);
-    font-family: var(--testo);
-    font-size: x-small;
-    color: var(--primale1); 
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 
 #publish input[type=submit] {
@@ -165,19 +135,6 @@ div#post p.text {
     text-align: justify;
 }
 
-div#post div.stars {
-    display: inline-block;
-    margin: 0px;
-    padding: 0;
-    vertical-align: middle;
-}
-
-div#post div.stars img {
-    width: 30px;
-    height: 30px;
-    float: left
-}
-
 div#post button {
     margin: 0;
     float: right;
@@ -213,6 +170,21 @@ div#post button {
     border-top-right-radius: 0px;
     height: 36px;
 }
+
+/* Stelle */
+div#post div.stars {
+    display: inline-block;
+    margin: 0px;
+    padding: 0;
+    vertical-align: middle;
+}
+
+div#post div.stars img {
+    width: 30px;
+    height: 30px;
+    float: left
+}
+
 
 /*
 @media(min-width:768px) {
