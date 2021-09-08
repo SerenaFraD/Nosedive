@@ -10,7 +10,7 @@ public class PostBean implements Serializable {
     Integer id_post;
     Integer id_utente;
     String timestamp;
-    Blob postpic; // conviene usare tipo String per le foto, in modo da salvare url e caricarlo lato frontend https://source.unsplash.com/random/
+    String postpic; // conviene usare tipo String per le foto, in modo da salvare url e caricarlo lato frontend https://source.unsplash.com/random/
     String testo;
 
     public PostBean() {
@@ -44,11 +44,11 @@ public class PostBean implements Serializable {
 		this.timestamp = timestamp;
 	}
 
-	public Blob getPostpic() {
+	public String getPostpic() {
 		return postpic;
 	}
 
-	public void setPostpic(Blob postpic) {
+	public void setPostpic(String postpic) {
 		this.postpic = postpic;
 	}
 
