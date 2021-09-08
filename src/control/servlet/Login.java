@@ -85,7 +85,7 @@ public class Login extends HttpServlet {
                 }
             }
 
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index.jsp"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Homepage"));
 
         } else if (action.equals("logout")) {
             if (utenteBean != null) {
