@@ -1,38 +1,66 @@
-<html>
+<%@ page import="model.UtenteBean" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
+<%
+    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+%>
+
+<html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/navigation.css"/>
 </head>
 
 <body>
+<nav>
+    <ul class="navBar">
+        <li>
+            <a href="index.jsp"><img class="navBar" src="img/logoSmall.png" alt="logo piccolo"></a>
+        </li>
+        <li>
+            <a href="index.jsp">
+                <h3>Home</h3>
+            </a>
+        </li>
+    </ul>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <!-- Navigation Bar-->
-   <!--
-    <nav>
+    <%if (utente != null) { %>
         <ul class="navBar">
             <li>
-                <a href="index.jsp"><img class="navBar" src="img/logoSmall.png"></a>
+                <form action="SearchServlet" method="get">
+                    <input type="search" placeholder="Search" aria-label="Search" name="chiave">
+                    <button type="submit">Search</button>
+                </form>
             </li>
-            <li>
-                <a href="index.jsp">
-                    <h3>Home</h3>
-                </a>
-            </li>
-        </ul>
-        <ul class="navBar">
-            <li><img class="navBar" src="img/starIcon.svg"></li>
+            <li><img class="navBar" src="img/starIcon.svg" alt="stella"></li>
             <li>
                 <h3>#</h3>
             </li>
-            <li><img class="navBar" src="img/userIcon.png"></li>
+            <li><img class="navBar" src="img/userIcon.png" alt="utente"></li>
             <li><a href="#">
-                    <h3>Profilo</h3>
-                </a></li>
+                <h3>Profilo</h3>
+            </a></li>
         </ul>
 
-    </nav> -->
+
+        <% if (utente.isSupervisor()) {%>
+        <ul class="navBar">
+            <li>
+                <a href="${pageContext.request.contextPath}/Admin/adminManagement.jsp">Dashboard</a>
+            </li>
+        </ul>
+        <%} //parentesi if admin
+    } else {%>
+        <ul class="navBar">
+            <li>
+                <a href="${pageContext.request.contextPath}/login.jsp">
+                    <h3>Accedi</h3>
+                </a>
+            </li>
+        </ul>
+    <%}%>
+</nav>
+
+<!--
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -55,6 +83,7 @@
         </div>
     </div>
 </nav>
+-->
 </body>
 
 </html>

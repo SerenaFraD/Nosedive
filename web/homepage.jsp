@@ -8,17 +8,19 @@
     <meta name="author" content="Serena D'Urso">
 
     <title>Profilo</title>
-
-    <link href="../css/profile.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
+    <link href="css/profile.css" rel="stylesheet">
 </head>
 
 <body>
-<section id="profile">
+<%@ include file="navigation.jsp" %>
+
+<section id="standard">
     <div id="publish">
         <form action="publish" method="POST" name="publish">
             <textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
             <input type="file" id="image" name="files[]"
-                   accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" />
+                   accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>
             <input class="publish" type="submit" disabled>
         </form>
@@ -29,9 +31,9 @@
     <div id="post">
         <img src="img/userIcon.png">
         <div>
-            <p class="nome">Nome Utente</h1>
-            <p class="categoria">Categoria utente</h4>
-            <p class="bloccato">Deceduto/Bloccato</h6>
+            <p class="nome">Nome Utente</p>
+            <p class="categoria">Categoria utente</p>
+            <p class="bloccato">Deceduto/Bloccato</p>
         </div>
 
         <p class="text">
@@ -44,63 +46,28 @@
         </p>
 
         <div class="stars">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
+            <img src="img/starIcon.svg" onclick="starAnimation(event.target)">
+            <img src="img/starIcon.svg" onclick="starAnimation(event.target)">
+            <img src="img/starIcon.svg" onclick="starAnimation(event.target)">
+            <img src="img/starIcon.svg" onclick="starAnimation(event.target)">
+            <img src="img/starIcon.svg" onclick="starAnimation(event.target)">
         </div>
 
-        <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta </button>
+        <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta</button>
 
         <div id="commento" class="showCommentDiv">
             <form action="publish" method="POST" name="commento">
-                <textarea id="commento" placeholder="Commento" oninput="abilitateButtonComment()"></textarea>
-                <input class="publishComment" type="submit" disabled>
-            </form>
-        </div>
-    </div>
-
-
-    <div id="post">
-        <img src="img/userIcon.png">
-        <div>
-            <p class="nome">Nome Utente</h1>
-            <p class="categoria">Categoria utente</h4>
-            <p class="bloccato">Deceduto/Bloccato</h6>
-        </div>
-
-        <p class="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis tellus sit amet elit
-            tincidunt bibendum. Donec id scelerisque libero. Sed nec ornare est, id ullamcorper sem. Aliquam
-            elementum feugiat sagittis. Aliquam ac lorem sed libero fringilla gravida. Nunc egestas porta vulputate.
-            Donec eu dapibus nibh, eget facilisis diam. Fusce lobortis diam eu velit placerat luctus. Pellentesque
-            sodales ullamcorper arcu, a convallis massa blandit in. Interdum et malesuada fames ac ante ipsum primis
-            in faucibus.
-        </p>
-
-        <div class="stars">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-            <img src="../img/starIcon.svg" onclick="starAnimation(event.target)">
-        </div>
-
-        <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta </button>
-
-        <div id="commento" class="showCommentDiv">
-            <form action="publish" method="POST" name="commento">
-                <textarea id="commento" placeholder="Commento" oninput="abilitateButtonComment()"></textarea>
+                <textarea id="commentot" placeholder="Commento" oninput="abilitateButtonComment()"></textarea>
                 <input class="publishComment" type="submit" disabled>
             </form>
         </div>
     </div>
 </section>
 
-<script src="../js/showCommentArea.js"></script>
-<script src="../js/starAnimation.js"></script>
-<script src="../js/abilitateButton.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/showCommentArea.js"></script>
+<script src="${pageContext.servletContext.contextPath}//starAnimation.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/abilitateButton.js"></script>
+
 </body>
 
 </html>

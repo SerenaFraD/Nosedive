@@ -1,62 +1,34 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Login | Nosedive</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
 </head>
 <body>
 <%@ include file="navigation.jsp" %>
 
-<div class="container h-100">
-    <div class="d-flex justify-content-center h-100">
-        <div class="user_card">
-            <div class="d-flex justify-content-center">
-                <div class="brand_logo_container">
-                    <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png" class="brand_logo" alt="Logo">
-                </div>
-            </div>
-            <div class="d-flex justify-content-center form_container">
-                <form action="login?action=login" method="POST">
-                    <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        </div>
-                        <input type="text" name="email" class="form-control input_user" value="" placeholder="email" oninput="validaEmailLogin()">
-                    </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                        </div>
-                        <input type="password" name="pwd" class="form-control input_pass" value="" placeholder="password" oninput="validaPasswordLogin()">
-                    </div>
+<section id="login">
+    <img src="img/logoSmall.png" alt="Logo small Nosedive">
 
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                            <label class="custom-control-label" for="customControlInline"><b>Ricordami</b></label>
-                        </div>
-                    </div>
-                    <output name="result" for="result">
-                    </output>
-                    <div class="d-flex justify-content-center mt-3 login_container">
-                        <button type="submit" name="button" class="btn login_btn">Login</button>
-                    </div>
-
-                </form>
-            </div>
-
-            <div class="mt-4">
-                <div class="d-flex justify-content-center links"><b>
-                    Non hai un account? </b> <a href="#" class="ml-2">Registrati</a>
-                </div>
-                <div class="d-flex justify-content-center links">
-                    <a href="#">Password dimenticata?</a>
-                </div>
-            </div>
-        </div>
+    <div class="form">
+        <form action="login?action=login" method="POST">
+            <input type="w3-text" name="email" value="" placeholder="Email" oninput="validaEmailLogin()" autofocus>
+            <input type="password" name="pwd" value="" placeholder="Password" oninput="validaPasswordLogin()">
+            <output name="result" for="result"></output>
+            <button type="submit" name="button">Login</button>
+        </form>
     </div>
-</div>
 
-<script src="js/HomePage.js"></script>
+    <div>
+        <div>
+            <b>Non hai un account?</b>
+            <a href="${pageContext.servletContext.contextPath}/registration.jsp">Registrati</a>
+        </div>
+        <a class="other" href="#">Password dimenticata?</a>
+    </div>
+
+</section>
+<script src="${pageContext.servletContext.contextPath}/js/validate.js"></script>
 </body>
 </html>

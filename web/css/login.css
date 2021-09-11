@@ -1,69 +1,57 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #753750 !important;
-}
-.user_card {
-    height: 400px;
-    width: 350px;
-    margin-top: auto;
-    margin-bottom: auto;
-    background: #b36d89;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
+@import url('general.css');
 
+section#login {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 25px 0;
+    padding: 55px;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 200px;
+    border: var(--borders);
+    border-radius: 8px;
+    color: var(--primale3);
 }
-.brand_logo_container {
-    position: absolute;
-    height: 170px;
-    width: 170px;
-    top: -75px;
+
+section#login img {
     border-radius: 50%;
-    background: #753750;
-    padding: 10px;
-    text-align: center;
-}
-.brand_logo {
-    height: 150px;
     width: 150px;
-    border-radius: 50%;
-    border: 2px solid white;
+    height: 150px;
+    margin-top: -112px;
 }
-.form_container {
-    margin-top: 100px;
+
+section#login div.form {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+    align-content: center;
+    height: fit-content;
+    width: 400px;
 }
-.login_btn {
-    width: 100%;
-    background: #753750 !important;
-    color: white !important;
+
+div.form input {
+    margin-bottom: 15px;
 }
-.login_btn:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
+
+div.form input, div.form button {
+    display: block;
 }
-.login_container {
-    padding: 0 2rem;
+
+section#login a {
+    color: var(--successo1);
 }
-.input-group-text {
-    background: #753750 !important;
-    color: white !important;
-    border: 0 !important;
-    border-radius: 0.25rem 0 0 0.25rem !important;
+
+section#login a:hover {
+    color: var(--primale2);
 }
-.input_user,
-.input_pass:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
-}
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #753750 !important;
+
+a.other {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 }

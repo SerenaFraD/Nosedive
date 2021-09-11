@@ -1,5 +1,5 @@
 <%@ page import="model.UtenteBean" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
 <head>
@@ -8,11 +8,8 @@
     <meta name="description" content="Nosedive, website"/>
     <meta name="author" content="Serena D'Urso"/>
     <title>Nosedive</title>
+
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
-
-    <title>HomePage</title>
-
-    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/general.css">
 </head>
 <body class="index">

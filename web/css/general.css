@@ -17,13 +17,15 @@
     --testo: 'Montserrat', sans-serif;
     --titolo-size: 40px;
     --testo-size: 20px;
-    --defaultBG: url("img/backgroundDefault.jpg");
+    --defaultBG: url("../img/backgroundDefault.jpg");
+    --gradientBG: linear-gradient(135deg,#f4e9e9,#ebc8bf);
+    --borders: 3px solid var(--primale1);
 }
 
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg,#f4e9e9,#ebc8bf);
+    background: var(--gradientBG);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -77,7 +79,7 @@ a {
 
 a:hover{
     color:hsla(0,0%,100%,.9);
-    text-shadow:rgba(0,0,0,.2) 0 0 10px;
+    text-shadow: rgba(0,0,0,.2) 0 0 10px;
     text-decoration: none;
     transition: color .5s,text-shadow .5s;
 }
@@ -90,7 +92,7 @@ button {
 input, select,
 textarea, button {
     border-radius: 8px;
-    border: 3px solid var(--primale1);
+    border: var(--borders);
     padding: 5px 7px;
     background-color: var(--informativo2);
     font-family: var(--testo);
