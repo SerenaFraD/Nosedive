@@ -127,6 +127,6 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
 
     @Override
     public String getBeanName() {
-        return nome;
+        return "UtenteBean";
     }
 }

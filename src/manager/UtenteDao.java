@@ -2,16 +2,12 @@ package manager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import control.servlet.DriverManagerConnectionPool;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.List;
-
-
 import model.UtenteBean;
 import model.Bean;
 
@@ -68,7 +64,7 @@ public class UtenteDao implements ModelDao {
             ps.setString(1, utenteBean.getEmail());
             ps.setString(2, utenteBean.getNome());
             ps.setString(3, utenteBean.getPassword());
-            ps.setBoolean(4,utenteBean.isSupervisor());
+            ps.setBoolean(4, utenteBean.isSupervisor());
 
             int result = ps.executeUpdate();
 
@@ -99,7 +95,7 @@ public class UtenteDao implements ModelDao {
             ps.setString(1, utenteBean.getEmail());
             ps.setString(2, utenteBean.getNome());
             ps.setString(3, utenteBean.getPassword());
-            ps.setBoolean(4,utenteBean.isSupervisor());
+            ps.setBoolean(4, utenteBean.isSupervisor());
 
             int result = ps.executeUpdate();
 
@@ -130,7 +126,7 @@ public class UtenteDao implements ModelDao {
             ps.setString(1, utenteBean.getEmail());
             ps.setString(2, utenteBean.getNome());
             ps.setString(3, utenteBean.getPassword());
-            ps.setBoolean(4,utenteBean.isSupervisor());
+            ps.setBoolean(4, utenteBean.isSupervisor());
 
             int result = ps.executeUpdate();
 

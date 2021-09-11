@@ -3,7 +3,6 @@ package control.servlet;
 import model.UtenteBean;
 import manager.UtenteDao;
 import exception.IllegalArgumentException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/register")
-
 public class Register extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteDao utenteDAO = new UtenteDao();

@@ -66,7 +66,7 @@ public class UsersOperation extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            request.setAttribute("message", "Prodotto " + user.getNome() + " eliminato");
+            request.setAttribute("message", "Utente " + user.getNome() + " eliminato");
             response.sendRedirect(request.getContextPath() + "/utenti.jsp");
         } else {
             System.out.println();

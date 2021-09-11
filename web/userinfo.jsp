@@ -49,7 +49,7 @@
             <td>Foto profilo</td>
             <td>foto</td>
             <td>
-                <input type="file" id="image" name="files[]"
+                <input type="file" id="image" name="file"
                        accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onchange="validaFoto()"/>
                 <label for="image">Select file</label>
             </td>
@@ -71,7 +71,7 @@
             <td>Relazione</td>
             <td>relazione</td>
             <td>
-                <select name="realzione" id="relazione">
+                <select name="relazione" id="relazione">
                     <option value="">Relazione</option>
                     <option value="sposato">Sposato</option>
                     <option value="fidanzato">Fidanzato</option>

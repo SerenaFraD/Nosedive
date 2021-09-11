@@ -10,7 +10,7 @@
     <title>Nosedive</title>
 
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
-    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body class="index">
     <%@ include file="navigation.jsp" %>
