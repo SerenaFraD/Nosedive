@@ -1,5 +1,6 @@
 package control.servlet;
 
+import manager.UtenteDao;
 import model.InfoUtenteBean;
 import model.UtenteBean;
 import model.Azione;
@@ -61,7 +62,7 @@ public class ModifyUserInfo {
 
 
         try {
-            utenteDAO.doSavePar(utente);
+            UtenteDao.doSavePar(utente);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

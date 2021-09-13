@@ -50,4 +50,28 @@ public class PostDao {
 
         return listapost;
     }
+
+    public static synchronized int CondividiPost(PostBean bean) throws SQLException {
+        PreparedStatement ps = null;
+        Connection con = null;
+        ResultSet rs = null;
+        String selectQuery = "INSERT INTO " + TABLE_NAME + "(id_utente,id_post,timestamp,testo) VALUES " + "(" + bean.getId_utente() + "," + bean.getId_post() + "," + bean.getTimestamp() + "," + bean.getTesto() + ")";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(selectQuery);
+
+            rs = ps.executeQuery();
+            return 0;
+
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+                return 1;
+            }
+        }
+    }
 }
