@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class InfoUtenteBean extends Bean implements Serializable, Cloneable {
@@ -13,7 +13,7 @@ public class InfoUtenteBean extends Bean implements Serializable, Cloneable {
     private int punteggio;
     private int id_relazione;
     private int id_lavoro;
-    private BufferedImage propic;
+    private Blob propic;
     private boolean sesso;
     private boolean deceduto;
 
@@ -57,11 +57,11 @@ public class InfoUtenteBean extends Bean implements Serializable, Cloneable {
         this.id_lavoro = id_lavoro;
     }
 
-    public BufferedImage getPropic() {
+    public Blob getPropic() {
         return propic;
     }
 
-    public void setPropic(BufferedImage propic) {
+    public void setPropic(Blob propic) {
         this.propic = propic;
     }
 

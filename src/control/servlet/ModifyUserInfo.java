@@ -57,8 +57,6 @@ public class ModifyUserInfo {
             }
         }
 
-
-
         InfoUtenteBean info = new InfoUtenteBean();
 
 

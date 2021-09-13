@@ -11,7 +11,7 @@ import java.util.List;
 import model.UtenteBean;
 import model.Bean;
 
-public class UtenteDao implements ModelDao {
+public class UtenteDao implements ModelDao<UtenteBean, String> {
     private static final String TABLE_NAME = "Utente";
     private static final DriverManagerConnectionPool pool = null;
 
@@ -160,7 +160,6 @@ public class UtenteDao implements ModelDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -237,11 +236,11 @@ public class UtenteDao implements ModelDao {
     }
 
     @Override
-    public synchronized List<Bean> doRetrieveAll() throws SQLException {
+    public synchronized List<UtenteBean> doRetrieveAll() throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        List<Bean> list = new ArrayList<Bean>();
+        List<UtenteBean> list = new ArrayList<UtenteBean>();
         UtenteBean bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 

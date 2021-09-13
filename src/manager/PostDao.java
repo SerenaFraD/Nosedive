@@ -50,5 +50,4 @@ public class PostDao {
 
         return listapost;
     }
-
 }

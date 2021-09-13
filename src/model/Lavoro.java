@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lavoro extends Bean implements Serializable {
+public class Lavoro {
 
     private int id_lavoro;
     private String nome;
@@ -32,22 +32,5 @@ public class Lavoro extends Bean implements Serializable {
 
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
-    }
-
-    @Override
-    public List<String> getKey() {
-        ArrayList<String> keys = new ArrayList<String>();
-        keys.add(nome);
-        return keys;
-    }
-
-    @Override
-    public int compareKey(Bean otherBean) {
-        return 0;
-    }
-
-    @Override
-    public String getBeanName() {
-        return null;
     }
 }
