@@ -2,7 +2,7 @@ package manager;
 
 import java.sql.SQLException;
 import java.util.List;
-import model.Bean;
+
 import model.UtenteBean;
 
 public interface ModelDao<T, S> {
@@ -21,7 +21,7 @@ public interface ModelDao<T, S> {
 
     void doDelete(T bean) throws SQLException;
 
-    T doRetrieveByKey(List<S> keys) throws SQLException;
+    T doRetrieveByKey(S keys) throws SQLException;
 
     List<T> doRetrieveAll() throws SQLException;
 }

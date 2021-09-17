@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    String message = (String) request.getAttribute("messaggio");
+%>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -12,7 +16,7 @@
 </head>
 <body>
 <section id="small">
-    <p>Messaggio di errore</p>
+    <p><%=message%></p>
     <button><a href="#">Torna alla home page</a></button>
 </section>
 </body>

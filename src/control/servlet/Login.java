@@ -1,5 +1,7 @@
 package control.servlet;
 
+import manager.InformazioniUtenteDao;
+import model.InformazioniUtenteBean;
 import model.UtenteBean;
 import manager.UtenteDao;
 
@@ -27,10 +29,12 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         UtenteBean utenteBean = null;
+        InformazioniUtenteBean utenteInformazioni;
+        InformazioniUtenteDao model = null;
 
-        try{
+        try {
             utenteBean = (UtenteBean) session.getAttribute("utente");
-        }catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
@@ -39,16 +43,16 @@ public class Login extends HttpServlet {
                 String email = request.getParameter("email");
                 String password = request.getParameter("pwd");
 
-                UtenteBean userRequested = null; //creo un nuovo utenteBean
+                UtenteBean utenteLoggin = null; //creo un nuovo utenteBean
 
                 try {
-                    userRequested = UtenteDao.doRetrieveByEmail(email);
+                    utenteLoggin = UtenteDao.doRetrieveByEmail(email);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
 
                 //assegno al nuovo bean tutti i campi
-                if (userRequested != null) {
+                if (utenteLoggin != null) {
                     MessageDigest digest = null;
 
                     try {
@@ -61,26 +65,34 @@ public class Login extends HttpServlet {
                     digest.update(password.getBytes(StandardCharsets.UTF_8));
                     String passHash = String.format("%040x", new BigInteger(1, digest.digest()));
 
-                    if (userRequested.getPassword().equals(passHash)) {
+                    if (utenteLoggin.getPassword().equals(passHash)) {
                         utenteBean = new UtenteBean();
-                        utenteBean.setSupervisor(userRequested.isSupervisor());
-                        utenteBean.setNome(userRequested.getNome());
-                        utenteBean.setId_utente(userRequested.getId());
-                        utenteBean.setEmail(userRequested.getEmail());
-                        utenteBean.setPasswordhash(userRequested.getPassword());
+                        utenteBean.setSupervisor(utenteLoggin.isSupervisor());
+                        utenteBean.setNome(utenteLoggin.getNome());
+                        utenteBean.setId_utente(utenteLoggin.getId());
+                        utenteBean.setEmail(utenteLoggin.getEmail());
+                        utenteBean.setPasswordhash(utenteLoggin.getPassword());
 
-                        //assegno l'user alla sessione
+                        utenteInformazioni = new InformazioniUtenteBean();
+                        try {
+                            utenteInformazioni = model.doRetrieveByKey(utenteBean.getId());
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+
+                        //assegno l'utente e le sue informazioni alla sessione
                         session.setAttribute("utente", utenteBean);
+                        session.setAttribute("informazioniUtente", utenteInformazioni);
 
                     } else { //passw sbagliata
                         RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/login.jsp");
-                        request.setAttribute("error", "password");
+                        request.setAttribute("error", "Password errata");
                         requestDispatcher.forward(request, response);
                     }
 
                 } else { // utente non esiste
                     RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/login.jsp");
-                    request.setAttribute("error", "notfound");
+                    request.setAttribute("error", "Utente non trovato");
                     requestDispatcher.forward(request, response);
                 }
             }
@@ -90,37 +102,13 @@ public class Login extends HttpServlet {
         } else if (action.equals("logout")) {
             if (utenteBean != null) {
                 session.removeAttribute("utente");
+                session.removeAttribute("informazioni");
             }
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index.jsp"));
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-        /*
-        HttpSession session = request.getSession();
-        String action = request.getParameter("action");
-        UtenteBean utenteBean = null;
-
-        try{
-            utenteBean = (UtenteBean) session.getAttribute("utente");
-        }catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-
-
-        if (action.equals("logout")) {
-
-            if (utenteBean != null) {
-                session.removeAttribute("utente");
-            }
-
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index.jsp"));
-        } else {
-            System.out.println();
-        }
-
-         */
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class InfoUtenteBean extends Bean implements Serializable, Cloneable {
+public class InformazioniUtenteBean extends Bean implements Serializable, Cloneable {
 
     private int id_utente;
     private Date compleanno;
@@ -98,8 +98,8 @@ public class InfoUtenteBean extends Bean implements Serializable, Cloneable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof InfoUtenteBean)) return false;
-        InfoUtenteBean that = (InfoUtenteBean) o;
+        if (!(o instanceof InformazioniUtenteBean)) return false;
+        InformazioniUtenteBean that = (InformazioniUtenteBean) o;
         return getId_utente() == that.getId_utente() && getPunteggio() == that.getPunteggio() && getId_relazione() == that.getId_relazione() && getId_lavoro() == that.getId_lavoro() && isSesso() == that.isSesso() && isDeceduto() == that.isDeceduto() && getCompleanno().equals(that.getCompleanno()) && getPropic().equals(that.getPropic());
     }
 
@@ -115,7 +115,7 @@ public class InfoUtenteBean extends Bean implements Serializable, Cloneable {
     public int compareKey(Bean otherBean) {
         if (this.getClass() != otherBean.getClass())
             return 1;
-        InfoUtenteBean other = (InfoUtenteBean) otherBean;
+        InformazioniUtenteBean other = (InformazioniUtenteBean) otherBean;
         return Boolean.hashCode(id_utente == other.getId_utente());
     }
 

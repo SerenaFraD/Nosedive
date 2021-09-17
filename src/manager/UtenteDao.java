@@ -163,7 +163,7 @@ public class UtenteDao implements ModelDao<UtenteBean, String> {
     }
 
     @Override
-    public synchronized UtenteBean doRetrieveByKey(List<String> keys) throws SQLException {
+    public synchronized UtenteBean doRetrieveByKey(String keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs = null;

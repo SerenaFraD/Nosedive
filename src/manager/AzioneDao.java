@@ -25,11 +25,9 @@ public class AzioneDao implements ModelDao<Azione, String> {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
-            Azione utenteBean = (Azione) bean;
 
-            ps.setString(1, utenteBean.getNome());
-            ps.setInt(2, utenteBean.getPunteggio());
-
+            ps.setString(1, bean.getNome());
+            ps.setInt(2, bean.getPunteggio());
 
             int result = ps.executeUpdate();
 
@@ -54,10 +52,9 @@ public class AzioneDao implements ModelDao<Azione, String> {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
-            Azione utenteBean = (Azione) bean;
 
-            ps.setString(1, utenteBean.getNome());
-            ps.setInt(2, utenteBean.getPunteggio());
+            ps.setString(1, bean.getNome());
+            ps.setInt(2, bean.getPunteggio());
 
             int result = ps.executeUpdate();
 
@@ -76,14 +73,13 @@ public class AzioneDao implements ModelDao<Azione, String> {
     @Override
     public void doDelete(Azione bean) throws SQLException {
         Connection con;
-        PreparedStatement ps = null;
-        String nomeAzione = bean.getNome();
+        PreparedStatement ps;
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(deleteQuery);
-            ps.setString(1, nomeAzione);
+            ps.setString(1, bean.getNome());
 
             ps.executeUpdate();
             con.commit();
@@ -94,10 +90,10 @@ public class AzioneDao implements ModelDao<Azione, String> {
     }
 
     @Override
-    public Azione doRetrieveByKey(List<String> keys) throws SQLException {
+    public Azione doRetrieveByKey(String keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
-        ResultSet rs = null;
+        ResultSet rs;
         Azione bean = null;
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=?";
 
@@ -130,8 +126,8 @@ public class AzioneDao implements ModelDao<Azione, String> {
     public List<Azione> doRetrieveAll() throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
-        ResultSet rs = null;
-        Azione bean = null;
+        ResultSet rs;
+        Azione bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
         ArrayList<Azione> listaAzioni = new ArrayList<Azione>();
 

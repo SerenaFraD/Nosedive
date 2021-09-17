@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 
 import manager.UtenteDao;
@@ -59,7 +60,7 @@ public class UsersOperation extends HttpServlet {
             UtenteBean user = null;
 
             try {
-                user = model.doRetrieveByKey(Collections.singletonList(idUtente));
+                user = model.doRetrieveByKey(idUtente);
                 model.doDelete(user);
                 throw new SQLException();
 

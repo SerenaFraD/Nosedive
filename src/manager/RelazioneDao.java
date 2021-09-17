@@ -25,10 +25,9 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
-            Relazione utenteBean = (Relazione) bean;
 
-            ps.setString(1, utenteBean.getNome());
-            ps.setInt(2, utenteBean.getPunteggio());
+            ps.setString(1, bean.getNome());
+            ps.setInt(2, bean.getPunteggio());
 
 
             int result = ps.executeUpdate();
@@ -54,10 +53,9 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
-            Relazione utenteBean = (Relazione) bean;
 
-            ps.setString(1, utenteBean.getNome());
-            ps.setInt(2, utenteBean.getPunteggio());
+            ps.setString(1, bean.getNome());
+            ps.setInt(2, bean.getPunteggio());
 
             int result = ps.executeUpdate();
 
@@ -76,7 +74,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
     @Override
     public void doDelete(Relazione bean) throws SQLException {
         Connection con;
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         String nomeRelazione = bean.getNome();
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE nome=?";
 
@@ -94,7 +92,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
     }
 
     @Override
-    public Relazione doRetrieveByKey(List<String> keys) throws SQLException {
+    public Relazione doRetrieveByKey(String keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
@@ -104,7 +102,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
-            ps.setString(1, keys.get(0));
+            ps.setString(1, keys);
 
             rs = ps.executeQuery();
 
@@ -130,17 +128,15 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
     public List<Relazione> doRetrieveAll() throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
-        ResultSet rs = null;
-        Relazione bean = null;
+        ResultSet rs;
+        Relazione bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
         ArrayList<Relazione> listaAzioni = new ArrayList<Relazione>();
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
-
             rs = ps.executeQuery();
-
 
             while (rs.next()) {
                 bean = new Relazione();

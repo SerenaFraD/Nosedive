@@ -115,11 +115,11 @@ CREATE TABLE UtenteSeguito (
 );
     
 -- Inserimento Utenti
-INSERT INTO Utente(email,nome,pwd,sup) VALUES ('risi@gmail.com','Prof. Michele Risi',sha1("prova"),0);
-INSERT INTO Utente(email,nome,pwd,sup) VALUES ('serena@gmail.com','Serena',sha1("prova"),1);
-INSERT INTO Utente(email,nome,pwd,sup) VALUES ('paolo@gmail.com','Paolo',sha1("prova"),0);
-INSERT INTO Utente(email,nome,pwd,sup) VALUES ('riccardo@gmail.com','Riccardo',sha1("prova"),1);
-INSERT INTO Utente(email,nome,pwd,sup) VALUES ('Vincenzo@gmail.com','Vincenzo',sha1("prova"),0);
+INSERT INTO Utente(email,nome,pwd,sup) VALUES ('risi@gmail.com','Prof. Michele Risi',sha1('prova'),0);
+INSERT INTO Utente(email,nome,pwd,sup) VALUES ('serena@gmail.com','Serena',sha1('prova'),1);
+INSERT INTO Utente(email,nome,pwd,sup) VALUES ('paolo@gmail.com','Paolo',sha1('prova'),0);
+INSERT INTO Utente(email,nome,pwd,sup) VALUES ('riccardo@gmail.com','Riccardo',sha1('prova'),1);
+INSERT INTO Utente(email,nome,pwd,sup) VALUES ('Vincenzo@gmail.com','Vincenzo',sha1('prova'),0);
 
 -- Inserimento relazioni
 INSERT INTO Relazione(nome, punteggio) VALUES ('sposato', 150);

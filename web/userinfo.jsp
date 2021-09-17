@@ -1,4 +1,5 @@
 <%@ page import="model.UtenteBean" %>
+<%@ page import="model.InformazioniUtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -13,17 +14,15 @@
     <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
-    <% UtenteBean ricercato = (UtenteBean) request.getSession().getAttribute("ricercato");
+<% UtenteBean ricercato = (UtenteBean) request.getSession().getAttribute("ricercato");
 
     if (ricercato == null) {
         response.sendRedirect(response.encodeRedirectURL("index.jsp"));
     } else {
         request.getSession().removeAttribute("ricercato");
     }
-
 %>
 
-<body>
 <section id="standard">
     <p>Informazioni utente</p>
     <table>
