@@ -13,13 +13,16 @@ import java.util.ArrayList;
 
 @WebServlet(name = "Homepage", value = "/Homepage")
 public class Homepage extends HttpServlet {
+
+    PostDao model = new PostDao();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
         ArrayList<PostBean> listapost = new ArrayList<PostBean>();
         try {
-            listapost = PostDao.doRetrieveAll();
+            listapost = model.doRetrieveAll();
             listapost.forEach(postBean -> System.out.println(postBean));
             request.getSession().setAttribute("listapost", listapost);
             response.sendRedirect(response.encodeRedirectURL("homepage.jsp"));
@@ -39,7 +42,7 @@ public class Homepage extends HttpServlet {
             pb.setTesto(textarea);
             pb.setId_utente(((UtenteBean)request.getSession().getAttribute("utente")).getId());
             try {
-                PostDao.CondividiPost(pb);
+                model.CondividiPost(pb);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
