@@ -1,5 +1,6 @@
 <%@ page import="model.UtenteBean" %>
 <%@ page import="model.InformazioniUtenteBean" %>
+<%@ page import="model.Lavoro" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -14,12 +15,19 @@
     <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
-<% UtenteBean ricercato = (UtenteBean) request.getSession().getAttribute("ricercato");
+<% InformazioniUtenteBean info = (InformazioniUtenteBean) request.getSession().getAttribute("informazioni");
+String lavoro = (String) request.getSession().getAttribute("lavoro");
+    String relazione = (String) request.getSession().getAttribute("relazione");
+UtenteBean utente;
 
-    if (ricercato == null) {
-        response.sendRedirect(response.encodeRedirectURL("index.jsp"));
+    if (info == null) {
+        response.sendRedirect(response.encodeRedirectURL("message.jsp"));
+    }
+
+    if(request.getSession().getAttribute("altroProfilo") == null) {
+        utente = (UtenteBean) request.getSession().getAttribute("altroProfilo");
     } else {
-        request.getSession().removeAttribute("ricercato");
+        utente = (UtenteBean) request.getSession().getAttribute("myProfilo");
     }
 %>
 
@@ -28,25 +36,25 @@
     <table>
         <tr>
             <td>Nome</td>
-            <td><%=ricercato.getNome()%>
+            <td><%=utente.getNome()%>
             </td>
         </tr>
         <tr>
             <td>Punteggio</td>
-            <td>punteggio</td>
+            <td><%=info.getPunteggio()%></td>
         </tr>
         <tr>
             <td>E-mail</td>
-            <td><%=ricercato.getEmail()%>
+            <td><%=utente.getEmail()%>
             </td>
         </tr>
         <tr>
             <td>Data di nascita</td>
-            <td>dd/mm/yyyy</td>
+            <td><%=info.getCompleanno()%></td>
         </tr>
         <tr>
             <td>Foto profilo</td>
-            <td>foto</td>
+            <td><%=info.getPropic()%></td>
             <td>
                 <input type="file" id="image" name="file"
                        accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onchange="validaFoto()"/>
@@ -55,7 +63,7 @@
         </tr>
         <tr>
             <td>Lavoro</td>
-            <td>lavoro</td>
+            <td><%=info.getId_lavoro()%></td>
             <td>
                 <select name="lavoro" id="lavoro">
                     <option value=" ">Lavoro</option>
@@ -68,7 +76,7 @@
         </tr>
         <tr>
             <td>Relazione</td>
-            <td>relazione</td>
+            <td><%=info.getId_relazione()%></td>
             <td>
                 <select name="relazione" id="relazione">
                     <option value="">Relazione</option>
@@ -79,9 +87,7 @@
             </td>
         </tr>
     </table>
-
 </section>
-
 </body>
 </html>
 

@@ -34,7 +34,7 @@ public class InformazioniUtente extends HttpServlet {
 
         try {
             if (action != null) {
-                if(action.equals("updateUtente") && otherProfile == null) {
+                if(action.equals("updateInfoUtente") && otherProfile == null) {
                     String lavoro = request.getParameter("lavoro");
                     String relazione = request.getParameter("relazione");
                     Blob image = (Blob) request.getSession().getAttribute("image");
@@ -47,10 +47,10 @@ public class InformazioniUtente extends HttpServlet {
 
                     model.doUpdateUtente(bean);
                     request.setAttribute("message", "Informazioni di " + myProfile.getNome() + " aggiornate");
-                } else if (action.equals("updateUtente") && otherProfile == null && myProfile.isSupervisor()) {
+
+                } else if (action.equals("updateInfoUtente") && otherProfile == null && myProfile.isSupervisor()) {
                     Boolean sesso = Boolean.valueOf(request.getParameter("sesso"));
                     Boolean deceduto = Boolean.valueOf(request.getParameter("deceduto"));
-
 
                     bean = new InformazioniUtenteBean();
                     bean.setId_utente(myProfile.getId());
@@ -59,6 +59,14 @@ public class InformazioniUtente extends HttpServlet {
 
                     model.doUpdateAdmin(bean);
                     request.setAttribute("message", "Informazioni di " + myProfile.getNome() + " aggiornate");
+                } else if(action.equals("retriveInfoUtente")) {
+                    Blob image = (Blob) request.getSession().getAttribute("image");
+
+                    bean = new InformazioniUtenteBean();
+                    bean = model.doRetrieveByKey(myProfile.getId());
+
+                    request.setAttribute("lavoro", lavoroModel.doRetrieveByKey(bean.getId_lavoro()));
+                    request.setAttribute("relazione", relazioneModel.doRetrieveByKey(bean.getId_relazione()));
                 }
             }
         } catch (SQLException | NumberFormatException e) {
@@ -68,7 +76,7 @@ public class InformazioniUtente extends HttpServlet {
 
         request.setAttribute("informazioni", bean);
 
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/ProductView.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/userinfo.jsp");
         dispatcher.forward(request, response);
     }
 

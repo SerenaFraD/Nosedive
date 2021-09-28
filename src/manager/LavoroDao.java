@@ -122,6 +122,38 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
         return bean;
     }
 
+    public Lavoro doRetrieveByKey(Integer keys) throws SQLException {
+        PreparedStatement ps = null;
+        Connection con = null;
+        ResultSet rs;
+        Lavoro bean = null;
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_lavoro=?";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(selectQuery);
+            ps.setString(1, String.valueOf(keys));
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                bean = new Lavoro();
+                bean.setId_lavoro(rs.getInt("id_lavoro"));
+                bean.setPunteggio(rs.getInt("punteggio"));
+                bean.setNome(rs.getString("nome"));
+            }
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+
+        return bean;
+    }
+
     @Override
     public List<Lavoro> doRetrieveAll() throws SQLException {
         PreparedStatement ps = null;
