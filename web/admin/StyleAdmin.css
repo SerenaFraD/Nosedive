@@ -1,0 +1,22 @@
+
+.container{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#pneumatici{
+    display: none;
+}
+
+#meccanica{
+    display: none;
+}
+
+fieldset{
+    padding: 20px;
+}
+
+#login{
+    color: #ce6e31;
+}
+

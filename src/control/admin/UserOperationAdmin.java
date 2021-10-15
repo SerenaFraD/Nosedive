@@ -25,7 +25,7 @@ public class UserOperationAdmin<action> extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action != null && action.equals("insertUser")) {
-        	int id_utente = Integer.parseInt(request.getParameter("id_utente"));
+            int id_utente = Integer.parseInt(request.getParameter("id_utente"));
             String email = request.getParameter("email");
             String nome = request.getParameter("nome");
             boolean sup = Boolean.parseBoolean(request.getParameter("sup"));
@@ -34,7 +34,7 @@ public class UserOperationAdmin<action> extends HttpServlet {
             bean.setId_utente(id_utente);
             bean.setEmail(email);
             bean.setNome(nome);
-           
+
             bean.setSupervisor(sup);
 
             try {
@@ -45,20 +45,19 @@ public class UserOperationAdmin<action> extends HttpServlet {
         }
 
 
-
         response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
 
-        if(action != null && action.equals("deleteUser")){
+        if (action != null && action.equals("deleteUser")) {
             //Elimina utente
         }
 
         if (action != null && action.equals("modifyUser")) {
-        	int id_utente = Integer.parseInt(request.getParameter("id_utente"));
+            int id_utente = Integer.parseInt(request.getParameter("id_utente"));
             String email = request.getParameter("email");
             String nome = request.getParameter("nome");
             boolean sup = Boolean.parseBoolean(request.getParameter("sup"));
 
-            UtenteBean bean = new  UtenteBean();
+            UtenteBean bean = new UtenteBean();
             bean.setId_utente(id_utente);
             bean.setEmail(email);
             bean.setNome(nome);
@@ -72,7 +71,6 @@ public class UserOperationAdmin<action> extends HttpServlet {
 
             response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
         }
-
 
 
         if (action != null && action.equals("retrieveAll")) {

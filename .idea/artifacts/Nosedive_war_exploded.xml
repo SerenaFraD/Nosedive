@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="Nosedive:war exploded">
+  <artifact type="exploded-war" name="Nosedive:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/Nosedive_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
@@ -7,7 +7,6 @@
           <element id="module-output" name="Nosedive" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="Nosedive/web/Web" />
     </root>
   </artifact>
 </component>

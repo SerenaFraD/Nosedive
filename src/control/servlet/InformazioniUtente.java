@@ -34,7 +34,7 @@ public class InformazioniUtente extends HttpServlet {
 
         try {
             if (action != null) {
-                if(action.equals("updateInfoUtente") && otherProfile == null) {
+                if (action.equals("updateInfoUtente") && otherProfile == null) {
                     String lavoro = request.getParameter("lavoro");
                     String relazione = request.getParameter("relazione");
                     Blob image = (Blob) request.getSession().getAttribute("image");
@@ -59,7 +59,7 @@ public class InformazioniUtente extends HttpServlet {
 
                     model.doUpdateAdmin(bean);
                     request.setAttribute("message", "Informazioni di " + myProfile.getNome() + " aggiornate");
-                } else if(action.equals("retriveInfoUtente")) {
+                } else if (action.equals("retriveInfoUtente")) {
                     Blob image = (Blob) request.getSession().getAttribute("image");
 
                     bean = new InformazioniUtenteBean();

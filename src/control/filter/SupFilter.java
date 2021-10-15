@@ -46,5 +46,6 @@ public class SupFilter implements Filter {
         } else response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp");
     }
 
-    public void init(FilterConfig config) throws ServletException {}
+    public void init(FilterConfig config) throws ServletException {
+    }
 }
