@@ -1,6 +1,6 @@
 package manager;
 
-import model.ProductBean;
+import model.ProdottoBean;
 
 import java.sql.SQLException;
 import java.util.Collection;
@@ -13,11 +13,11 @@ public interface ProductModel<T> {
 
     public Collection<T> doRetriveOfferte(String order) throws SQLException;
 
-    public Collection<ProductBean> doRetrivePneumatici(String order) throws SQLException;
+    public Collection<ProdottoBean> doRetrivePneumatici(String order) throws SQLException;
 
-    public Collection<ProductBean> doRetriveCarrozzeria(String order) throws SQLException;
+    public Collection<ProdottoBean> doRetriveCarrozzeria(String order) throws SQLException;
 
-    public Collection<ProductBean> doRetriveMeccanica(String order) throws SQLException;
+    public Collection<ProdottoBean> doRetriveMeccanica(String order) throws SQLException;
 
     public void doSave(T product) throws SQLException;
 

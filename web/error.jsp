@@ -10,7 +10,7 @@
     <meta name="description" content="Profilo utente">
     <meta name="author" content="Serena D'Urso">
 
-    <title>Errore</title>
+    <title>Errore | Nosedive</title>
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
     <link href="css/error.css" rel="stylesheet">
 </head>

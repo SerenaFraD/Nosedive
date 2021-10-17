@@ -44,7 +44,6 @@ public class UserOperationAdmin<action> extends HttpServlet {
             }
         }
 
-
         response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
 
         if (action != null && action.equals("deleteUser")) {
@@ -69,7 +68,7 @@ public class UserOperationAdmin<action> extends HttpServlet {
                 throwables.printStackTrace();
             }
 
-            response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp");
+            response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp"); //todo moficare
         }
 
 

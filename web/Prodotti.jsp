@@ -1,68 +1,59 @@
 <%@ page import="java.util.Collection" %>
-<%@ page import="it.unisa.model.ProductBean" %>
-<%@ page import="java.util.Iterator" %><%--
-  Created by IntelliJ IDEA.
-  User: pavil
-  Date: 29/06/2020
-  Time: 19:14
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.ProdottoBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Collection<?> products = (Collection<?>) request.getAttribute("products");
 
-    ProductBean product = (ProductBean) request.getAttribute("Prodotto");
+    ProdottoBean product = (ProdottoBean) request.getAttribute("Prodotto");
 
-    String categoria= request.getParameter("categoria");
+    String categoria = request.getParameter("categoria");
 %>
 
-<%@ include file= "_header.jsp" %>
 <head>
-<title>Prodotti</title>
+    <title>Negozio | Nosedive</title>
+    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
+    <script type="text/javascript" src="js/mostraProdotti.js"></script>
+    <link rel="stylesheet" href="css/prodotti.css">
 
-<link rel="stylesheet" href="Style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Negozio">
+    <meta name="author" content="Serena D'Urso">
 </head>
-    <h1 align="center" style="color: orangered">Prodotti</h1>
 
-    <script type="text/javascript" src="prodotti.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="Style.css">
-    <link href="./ProductStyle.css" rel="stylesheet" type="text/css">
+<body>
+<%@ include file="navigation.jsp" %>
 
-<%if(categoria == null){%>
-    <body onload="showProd('tutti', '${pageContext.request.contextPath}')">
-<%}
+<h1>Negozio</h1>
+    <%if(categoria == null){%>
+<body onload="mostraProdotti('tutti', '${pageContext.request.contextPath}')">
+    <%}
 
 else { %>
-    <body onload="showProd('<%=categoria%>', '${pageContext.request.contextPath}')">
-<% } %>
+<body onload="mostraProdotti('<%=categoria%>', '${pageContext.request.contextPath}')">
+    <% } %>
 
-<body onload="showProd()">
+<body onload="mostraProdotti()">
 <form id="formProd" action="">
-    <select name="categoria" onchange="showProd(this.value,'${pageContext.request.contextPath}')">
-        <!--ho dovuto inserire un altra voce perché l'evento é onchange-->
+    <select name="categoria" onchange="mostraProdotti(this.value,'${pageContext.request.contextPath}')">
         <option value="#">Seleziona una categoria:</option>
         <option value="tutti">Tutti</option>
-        <option value="carrozzeria">Carrozzeria</option>
-        <option value="pneumatici">Pneumatici</option>
-        <option value="meccanica">Meccanica</option>
+        <option value="internet">Internet</option>
+        <option value="affitti">Affitti</option>
+        <option value="educazione">Educazione</option>
     </select>
 </form>
 
 
-<div id="showProd">
+<div id="mostraProdotti">
     <script>
 
     </script>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
 </body>
 
-<%@ include file= "_footer.jsp" %>
+
 
 
 

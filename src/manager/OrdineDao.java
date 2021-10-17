@@ -1,7 +1,7 @@
 package manager;
 
 import control.servlet.DriverManagerConnectionPool;
-import model.Ordine;
+import model.OrdineBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ public class OrdineDao {
     private static final String TABLE_NAME = "Ordine";
     private static DriverManagerConnectionPool pool = null;
 
-    public synchronized void doSave(Ordine ordine) throws SQLException {
+    public synchronized void doSave(OrdineBean ordine) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
 
@@ -23,7 +23,7 @@ public class OrdineDao {
 
         con = pool.getConnection();
         ps = con.prepareStatement(insertQuery);
-        Ordine ordineDao = (Ordine) ordine;
+        OrdineBean ordineDao = (OrdineBean) ordine;
 
         ps.setString(1, ordineDao.getDataOrd());
         ps.setInt(2, ordineDao.getnPezzi());
@@ -37,11 +37,11 @@ public class OrdineDao {
         pool.releaseConnection(con);
     }
 
-    public Collection<Ordine> doRetriveAll() throws SQLException {
+    public Collection<OrdineBean> doRetriveAll() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Collection<Ordine> ordini = new LinkedList<>();
+        Collection<OrdineBean> ordini = new LinkedList<>();
 
         String selectSQL = "SELECT * FROM Ordine";
 
@@ -52,7 +52,7 @@ public class OrdineDao {
         ResultSet rs = preparedStatement.executeQuery();
 
         while (rs.next()) {
-            Ordine ordine = new Ordine();
+            OrdineBean ordine = new OrdineBean();
 
             ordine.setDataOrd(rs.getString("dataOrd"));
             ordine.setnPezzi(rs.getInt("nPezzi"));

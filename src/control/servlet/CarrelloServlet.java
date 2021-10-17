@@ -1,9 +1,8 @@
 package control.servlet;
 
-
-import model.Cart;
-import model.ProductBean;
-import model.ProductModelDM;
+import model.CarrelloBean;
+import model.ProdottoBean;
+import manager.ProdottoModelDM;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +14,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/CartServlet")
-public class CartServlet extends HttpServlet {
+public class CarrelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static ProductModelDM model = new ProductModelDM();
+    static ProdottoModelDM model = new ProdottoModelDM();
 
 
-    public CartServlet() {
+    public CarrelloServlet() {
         super();
     }
 
@@ -33,9 +32,9 @@ public class CartServlet extends HttpServlet {
 
         @SuppressWarnings("unchecked")
         HttpSession session = request.getSession();
-        Cart cart = (Cart) request.getSession().getAttribute("carrello");
+        CarrelloBean cart = (CarrelloBean) request.getSession().getAttribute("carrello");
         if (cart == null) {
-            cart = new Cart();
+            cart = new CarrelloBean();
             request.getSession().setAttribute("carrello", cart);
         }
 
@@ -46,25 +45,20 @@ public class CartServlet extends HttpServlet {
         try {
             if (action != null) {
                 if (action.equals("addCart")) {
+                    //Maybe errors here
                     String id = request.getParameter("id");
-                    ProductBean bean = model.doRetrieveByKey(id);
-                    if (bean != null && !bean.isEmpty()) {
-                        if (cart.alReadyIn(bean)) {
-                            cart.incrementItem(bean);
-                        } else
-                            cart.addItem(bean);
-                        request.setAttribute("message", "Product " + bean.getNome() + " added to cart");
-                    }
+                    ProdottoBean bean = model.doRetrieveByKey(id);
+                    cart.addItem(bean);
+                    request.setAttribute("message", "Product " + bean.getNome() + " added to cart");
                 } else if (action.equals("clearCart")) {
-                    cart.deleteItems();
+                    cart.deleteAllItems();
                     request.setAttribute("message", "Cart cleaned");
                 } else if (action.equals("deleteCart")) {
+                    //Maybe errors here
                     String id = request.getParameter("id");
-                    ProductBean bean = model.doRetrieveByKey(id);
-                    if (bean != null && !bean.isEmpty()) {
-                        cart.deleteItem(bean);
-                        request.setAttribute("message", "Product " + bean.getNome() + " deleted from cart");
-                    }
+                    ProdottoBean bean = model.doRetrieveByKey(id);
+                    cart.deleteItem(bean);
+                    request.setAttribute("message", "Product " + bean.getNome() + " deleted from cart");
                 }
             }
         } catch (NumberFormatException | SQLException e) {
@@ -74,10 +68,8 @@ public class CartServlet extends HttpServlet {
 
         session.setAttribute("cart", cart);
 
-
         /*RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cart.jsp");
         requestDispatcher.forward(request, response);*/
         response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Cart.jsp"));
-
     }
 }

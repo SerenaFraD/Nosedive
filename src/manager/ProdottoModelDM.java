@@ -1,6 +1,7 @@
-package model;
+package manager;
 
 import control.servlet.DriverManagerConnectionPool;
+import model.ProdottoBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class ProductModelDM implements ProductModel<ProductBean> {
+public class ProdottoModelDM implements ProdottoModel<ProdottoBean> {
 
     @Override
-    public ProductBean doRetrieveByKey(String codiceProd) throws SQLException {
+    public ProdottoBean doRetrieveByKey(String codiceProd) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        ProductBean bean = new ProductBean();
+        ProdottoBean bean = new ProdottoBean();
 
         String selectSQL = "SELECT * FROM Prodotto WHERE codiceProd= ?";
 
@@ -54,11 +55,11 @@ public class ProductModelDM implements ProductModel<ProductBean> {
     }
 
     @Override
-    public Collection<ProductBean> doRetriveAll(String order) {
+    public Collection<ProdottoBean> doRetriveAll(String order) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Collection<ProductBean> products = new ArrayList<>();
+        Collection<ProdottoBean> products = new ArrayList<>();
 
         String selectSQL = "SELECT * FROM Prodotto";
 
@@ -74,7 +75,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ProductBean bean = new ProductBean();
+                ProdottoBean bean = new ProdottoBean();
 
                 bean.setCodiceProd(rs.getString("codiceProd"));
                 bean.setNome(rs.getString("nome"));
@@ -103,11 +104,11 @@ public class ProductModelDM implements ProductModel<ProductBean> {
 
 
     @Override
-    public Collection<ProductBean> doRetriveOfferte(String order) throws SQLException {
+    public Collection<ProdottoBean> doRetriveOfferte(String order) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Collection<ProductBean> offerte = new LinkedList<>();
+        Collection<ProdottoBean> offerte = new LinkedList<>();
 
 
         String selectSQL = "select *\n" +
@@ -126,7 +127,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ProductBean bean = new ProductBean();
+                ProdottoBean bean = new ProdottoBean();
 
                 bean.setCodiceProd(rs.getString("codiceProd"));
                 bean.setNome(rs.getString("nome"));
@@ -152,11 +153,11 @@ public class ProductModelDM implements ProductModel<ProductBean> {
     }
 
     @Override
-    public Collection<ProductBean> doRetrivePneumatici(String order) {
+    public Collection<ProdottoBean> doRetrivePneumatici(String order) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Collection<ProductBean> pneumatici = new ArrayList<>();
+        Collection<ProdottoBean> pneumatici = new ArrayList<>();
 
         String selectSQL = "SELECT *\n" +
                 "FROM Pneumatici as PN, Prodotto as P\n" +
@@ -174,7 +175,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ProductBean bean = new ProductBean();
+                ProdottoBean bean = new ProdottoBean();
 
                 bean.setCodiceProd(rs.getString("codiceProd"));
                 bean.setNome(rs.getString("nome"));
@@ -202,11 +203,11 @@ public class ProductModelDM implements ProductModel<ProductBean> {
     }
 
     @Override
-    public Collection<ProductBean> doRetriveCarrozzeria(String order) {
+    public Collection<ProdottoBean> doRetriveCarrozzeria(String order) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Collection<ProductBean> carrozzerie = new ArrayList<>();
+        Collection<ProdottoBean> carrozzerie = new ArrayList<>();
 
 
         String selectSQL = "select *\n" +
@@ -225,7 +226,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ProductBean bean = new ProductBean();
+                ProdottoBean bean = new ProdottoBean();
 
                 bean.setCodiceProd(rs.getString("codiceProd"));
                 bean.setNome(rs.getString("nome"));
@@ -254,11 +255,11 @@ public class ProductModelDM implements ProductModel<ProductBean> {
     }
 
     @Override
-    public Collection<ProductBean> doRetriveMeccanica(String order) {
+    public Collection<ProdottoBean> doRetriveMeccanica(String order) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        Collection<ProductBean> meccanica = new ArrayList<>();
+        Collection<ProdottoBean> meccanica = new ArrayList<>();
 
         String selectSQL = "SELECT *\n" +
                 "FROM meccanica as M, Prodotto as P\n" +
@@ -276,7 +277,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ProductBean bean = new ProductBean();
+                ProdottoBean bean = new ProdottoBean();
 
                 bean.setCodiceProd(rs.getString("codiceProd"));
                 bean.setNome(rs.getString("nome"));
@@ -306,7 +307,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
 
 
     @Override
-    public void doSave(ProductBean product) throws SQLException {
+    public void doSave(ProdottoBean product) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -320,7 +321,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
             preparedStatement.setString(1, product.getCodiceProd());
             preparedStatement.setString(2, product.getNome());
             preparedStatement.setString(3, product.getDescrizione());
-            preparedStatement.setString(4, product.getImg());
+            preparedStatement.setBlob(4, product.getImg());
             preparedStatement.setDouble(5, product.getPrezzo());
             preparedStatement.setString(6, product.getMarca());
             preparedStatement.setString(7, product.getDisponibilita());
@@ -342,7 +343,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
         }
     }
 
-    public void doSaveCarr(ProductBean product) throws SQLException {
+    public void doSaveCarr(ProdottoBean product) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -371,7 +372,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
         }
     }
 
-    public void doSavePneu(ProductBean product) throws SQLException {
+    public void doSavePneu(ProdottoBean product) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -401,7 +402,7 @@ public class ProductModelDM implements ProductModel<ProductBean> {
         }
     }
 
-    public void doSaveMecc(ProductBean product) throws SQLException {
+    public void doSaveMecc(ProdottoBean product) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -433,13 +434,13 @@ public class ProductModelDM implements ProductModel<ProductBean> {
 
 
     @Override
-    public void doUpdate(ProductBean product) throws SQLException {
+    public void doUpdate(ProdottoBean product) throws SQLException {
 
 
     }
 
     @Override
-    public void doDelete(ProductBean product, String table) throws SQLException {
+    public void doDelete(ProdottoBean product, String table) throws SQLException {
         String codiceProd = product.getCodiceProd();
         try (Connection con = DriverManagerConnectionPool.getConnection()) {
             String sql = "DELETE FROM " + table + " WHERE codiceProd=?";

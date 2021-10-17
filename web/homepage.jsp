@@ -2,14 +2,14 @@
 <html lang="it">
 
 <head>
+    <title>Profilo</title>
+    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
+    <link href="css/profile.css" rel="stylesheet">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Profilo utente">
     <meta name="author" content="Serena D'Urso">
-
-    <title>Profilo</title>
-    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
-    <link href="css/profile.css" rel="stylesheet">
 </head>
 
 <body>
