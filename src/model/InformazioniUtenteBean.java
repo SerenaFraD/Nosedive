@@ -110,7 +110,7 @@ public class InformazioniUtenteBean extends Bean implements Serializable, Clonea
         return keys;
     }
 
-    //TODO: Bho da rivedere
+    //TODO: Bho da rivedere L
     @Override
     public int compareKey(Bean otherBean) {
         if (this.getClass() != otherBean.getClass())

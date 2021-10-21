@@ -2,7 +2,7 @@ package control.servlet;
 
 
 
-import manager.ProdottoModelDM;
+import manager.ProdottoDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ public class Prodotti extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    static ProdottoModelDM model = new ProdottoModelDM();
+    static ProdottoDao model = new ProdottoDao();
 
     public Prodotti() {
         super();

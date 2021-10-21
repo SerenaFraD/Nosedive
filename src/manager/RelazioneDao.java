@@ -30,7 +30,6 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
             ps.setString(1, bean.getNome());
             ps.setInt(2, bean.getPunteggio());
 
-
             int result = ps.executeUpdate();
 
             if (result != 0)
@@ -49,14 +48,14 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
     public void doUpdate(Relazione bean) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        String updateQuery = "UPDATE" + TABLE_NAME + "SET nome=?, punteggio=? WHERE nome=?";
+        String updateQuery = "UPDATE" + TABLE_NAME + "SET punteggio=? WHERE nome=?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
-            ps.setString(1, bean.getNome());
-            ps.setInt(2, bean.getPunteggio());
+            ps.setInt(1, bean.getPunteggio());
+            ps.setString(2, bean.getNome());
 
             int result = ps.executeUpdate();
 
@@ -76,13 +75,12 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
     public void doDelete(Relazione bean) throws SQLException {
         Connection con;
         PreparedStatement ps;
-        String nomeRelazione = bean.getNome();
-        String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE nome=?";
+        String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE id_relazione=?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(deleteQuery);
-            ps.setString(1, nomeRelazione);
+            ps.setInt(1, bean.getId_relazione());
 
             ps.executeUpdate();
             con.commit();
@@ -135,7 +133,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
-            ps.setString(1, String.valueOf(keys));
+            ps.setInt(1, keys);
 
             rs = ps.executeQuery();
 

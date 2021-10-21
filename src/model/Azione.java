@@ -40,13 +40,13 @@ public class Azione extends Bean implements Serializable {
         return keys;
     }
 
-    //tODO
+    //TODO L
     @Override
     public int compareKey(Bean otherBean) {
         return 0;
     }
 
-    //TODO
+    //TODO L
     @Override
     public String getBeanName() {
         return null;

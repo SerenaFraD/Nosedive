@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @WebServlet(name = "Homepage", value = "/Homepage")
 public class Homepage extends HttpServlet {
 
-    PostDao model = new PostDao();
+    private PostDao model = new PostDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +40,7 @@ public class Homepage extends HttpServlet {
             String textarea=request.getParameter("textarea");
             PostBean pb= new PostBean();
             pb.setTesto(textarea);
-            pb.setId_utente(((UtenteBean)request.getSession().getAttribute("utente")).getId());
+            pb.setId_utente(((UtenteBean)request.getSession().getAttribute("utente")).getId_utente());
             try {
                 model.CondividiPost(pb);
             } catch (SQLException throwables) {

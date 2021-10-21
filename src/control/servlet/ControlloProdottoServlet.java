@@ -2,7 +2,7 @@ package control.servlet;
 
 import model.CarrelloBean;
 import model.ProdottoBean;
-import manager.ProdottoModelDM;
+import manager.ProdottoDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class ControlloProdottoServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    static ProdottoModelDM model = new ProdottoModelDM();
+    static ProdottoDao model = new ProdottoDao();
 
 
     public ControlloProdottoServlet() {
@@ -45,11 +45,11 @@ public class ControlloProdottoServlet extends HttpServlet {
         try {
             if (action != null) {
                 if (action.equals("dettagli")) {
-                    String id = request.getParameter("id");
+                    int id = Integer.parseInt(request.getParameter("id"));
                     request.removeAttribute("prodotto");
                     request.setAttribute("prodotto", model.doRetrieveByKey(id));
                 } else if (action.equals("aggiungiCarrello")) {
-                    String id = request.getParameter("id");
+                    int id = Integer.parseInt(request.getParameter("id"));
                     ProdottoBean bean = model.doRetrieveByKey(id);
 
                     cart.addItem(bean);
@@ -60,7 +60,7 @@ public class ControlloProdottoServlet extends HttpServlet {
                     request.setAttribute("message", "Carrello svuotato");
 
                 } else if (action.equals("eliminaCarrello")) {
-                    String id = request.getParameter("id");
+                    int id = Integer.parseInt(request.getParameter("id"));
                     ProdottoBean bean = model.doRetrieveByKey(id);
 
                     cart.deleteItem(bean);
@@ -79,10 +79,10 @@ public class ControlloProdottoServlet extends HttpServlet {
                     model.doSave(bean);
                     request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto");
                 } else if (action.equals("elimina")) {
-                    String id = request.getParameter("id");
+                    int id = Integer.parseInt(request.getParameter("id"));
                     ProdottoBean bean = model.doRetrieveByKey(id);
                     if (bean != null) {
-                        model.doDelete(bean, "prodotto");
+                        model.doDelete(bean);
                         request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato");
                     }
                 } else if (action.equals("aggiorna")) {

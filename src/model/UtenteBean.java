@@ -31,7 +31,7 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
         sup = false;
     }
 
-    public int getId() {
+    public int getId_utente() {
     	return id_utente;
     }
     

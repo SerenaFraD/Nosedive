@@ -26,8 +26,6 @@ public class SearchServlet extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
     }
 
     @Override

@@ -40,13 +40,13 @@ public class Relazione extends Bean implements Serializable {
     }
 
 
-    //TODO
+    //TODO L
     @Override
     public int compareKey(Bean otherBean) {
         return 0;
     }
 
-    //TODO
+    //TODO L
     @Override
     public String getBeanName() {
         return null;

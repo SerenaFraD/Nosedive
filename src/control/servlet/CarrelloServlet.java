@@ -2,7 +2,7 @@ package control.servlet;
 
 import model.CarrelloBean;
 import model.ProdottoBean;
-import manager.ProdottoModelDM;
+import manager.ProdottoDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class CarrelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static ProdottoModelDM model = new ProdottoModelDM();
+    static ProdottoDao model = new ProdottoDao();
 
 
     public CarrelloServlet() {
@@ -32,10 +32,10 @@ public class CarrelloServlet extends HttpServlet {
 
         @SuppressWarnings("unchecked")
         HttpSession session = request.getSession();
-        CarrelloBean cart = (CarrelloBean) request.getSession().getAttribute("carrello");
-        if (cart == null) {
-            cart = new CarrelloBean();
-            request.getSession().setAttribute("carrello", cart);
+        CarrelloBean carrello = (CarrelloBean) request.getSession().getAttribute("carrello");
+        if (carrello == null) {
+            carrello = new CarrelloBean();
+            request.getSession().setAttribute("carrello", carrello);
         }
 
         String sort = request.getParameter("sort");
@@ -45,20 +45,20 @@ public class CarrelloServlet extends HttpServlet {
         try {
             if (action != null) {
                 if (action.equals("addCart")) {
-                    //Maybe errors here
-                    String id = request.getParameter("id");
+                    //Maybe errors here ----> 3 day later, I was right
+                    int id = Integer.parseInt(request.getParameter("id"));
                     ProdottoBean bean = model.doRetrieveByKey(id);
-                    cart.addItem(bean);
-                    request.setAttribute("message", "Product " + bean.getNome() + " added to cart");
+                    carrello.addItem(bean);
+                    request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto al carrello");
                 } else if (action.equals("clearCart")) {
-                    cart.deleteAllItems();
+                    carrello.deleteAllItems();
                     request.setAttribute("message", "Cart cleaned");
                 } else if (action.equals("deleteCart")) {
-                    //Maybe errors here
-                    String id = request.getParameter("id");
+                    //Maybe errors here ----> 3 day later, I was right
+                    int id = Integer.parseInt(request.getParameter("id"));
                     ProdottoBean bean = model.doRetrieveByKey(id);
-                    cart.deleteItem(bean);
-                    request.setAttribute("message", "Product " + bean.getNome() + " deleted from cart");
+                    carrello.deleteItem(bean);
+                    request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato dal carrello");
                 }
             }
         } catch (NumberFormatException | SQLException e) {
@@ -66,7 +66,7 @@ public class CarrelloServlet extends HttpServlet {
             request.setAttribute("error", e.getMessage());
         }
 
-        session.setAttribute("cart", cart);
+        session.setAttribute("cart", carrello);
 
         /*RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cart.jsp");
         requestDispatcher.forward(request, response);*/

@@ -40,7 +40,7 @@ public class InformazioniUtente extends HttpServlet {
                     Blob image = (Blob) request.getSession().getAttribute("image");
 
                     bean = new InformazioniUtenteBean();
-                    bean.setId_utente(myProfile.getId());
+                    bean.setId_utente(myProfile.getId_utente());
                     bean.setId_relazione(relazioneModel.doRetrieveByKey(relazione).getId_relazione());
                     bean.setId_lavoro(lavoroModel.doRetrieveByKey(lavoro).getId_lavoro());
                     bean.setPropic(image);
@@ -53,7 +53,7 @@ public class InformazioniUtente extends HttpServlet {
                     Boolean deceduto = Boolean.valueOf(request.getParameter("deceduto"));
 
                     bean = new InformazioniUtenteBean();
-                    bean.setId_utente(myProfile.getId());
+                    bean.setId_utente(myProfile.getId_utente());
                     bean.setSesso(sesso);
                     bean.setDeceduto(deceduto);
 
@@ -63,7 +63,7 @@ public class InformazioniUtente extends HttpServlet {
                     Blob image = (Blob) request.getSession().getAttribute("image");
 
                     bean = new InformazioniUtenteBean();
-                    bean = model.doRetrieveByKey(myProfile.getId());
+                    bean = model.doRetrieveByKey(myProfile.getId_utente());
 
                     request.setAttribute("lavoro", lavoroModel.doRetrieveByKey(bean.getId_lavoro()));
                     request.setAttribute("relazione", relazioneModel.doRetrieveByKey(bean.getId_relazione()));

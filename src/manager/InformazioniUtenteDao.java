@@ -49,7 +49,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
     public void doUpdate(InformazioniUtenteBean bean) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        String updateQuery = "UPDATE" + TABLE_NAME + "SET compleanno=? punteggio=? id_relazione=? id_lavoro=? propic=? sesso=? deceduto=? WHERE id_utente=?";
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET compleanno=?, punteggio=?, id_relazione=?, id_lavoro=?, propic=?, sesso=?, deceduto=? WHERE id_utente=?";
 
         try {
             con = pool.getConnection();
@@ -62,6 +62,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
             ps.setBlob(5, bean.getPropic());
             ps.setBoolean(6, bean.isSesso());
             ps.setBoolean(7, bean.isDeceduto());
+            ps.setInt(8, bean.getId_utente());
 
             int result = ps.executeUpdate();
 
@@ -80,15 +81,16 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
     public void doUpdateUtente(InformazioniUtenteBean bean) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        String updateQuery = "UPDATE" + TABLE_NAME + "SET id_relazione=? id_lavoro=? propic=? WHERE id_utente=?";
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET id_relazione=?, id_lavoro=?, propic=? WHERE id_utente=?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
-            ps.setInt(3, bean.getId_relazione());
-            ps.setInt(4, bean.getId_lavoro());
-            ps.setBlob(5, bean.getPropic());
+            ps.setInt(1, bean.getId_relazione());
+            ps.setInt(2, bean.getId_lavoro());
+            ps.setBlob(3, bean.getPropic());
+            ps.setInt(4, bean.getId_utente());
 
             int result = ps.executeUpdate();
 
@@ -107,7 +109,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
     public void doUpdateAdmin(InformazioniUtenteBean bean) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        String updateQuery = "UPDATE" + TABLE_NAME + "SET sesso=? deceduto=? WHERE id_utente=?";
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET sesso=?, deceduto=? WHERE id_utente=?";
 
         try {
             con = pool.getConnection();
@@ -115,6 +117,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
 
             ps.setBoolean(1, bean.isSesso());
             ps.setBoolean(2, bean.isDeceduto());
+            ps.setInt(3, bean.getId_utente());
 
             int result = ps.executeUpdate();
 
@@ -161,7 +164,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
-            ps.setString(1, String.valueOf(keys.intValue()));
+            ps.setInt(1, keys);
 
             rs = ps.executeQuery();
 

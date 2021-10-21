@@ -1,19 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pavil
-  Date: 23/07/2020
-  Time: 18:53
-  To change this template use File | Settings | File Templates.
---%>
+//todo H - porcodue - diventerà pagina gestione utenti
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Admin</title>
-    <link rel="stylesheet" href="./StyleAdmin.css">
+    <link rel="stylesheet" href="../css/StyleAdmin.css">
 </head>
 
 <body>
-<%@ include file= "../_header.jsp" %>
+<%@ include file= "../navigation.jsp" %>
 
 <div class="container">
     <div class="row">
@@ -91,7 +85,7 @@
     </div>
 </div>
 </div>
-<%@ include file= "../_footer.jsp" %>
+
 </body>
 </html>
 

@@ -63,7 +63,6 @@ public class UsersOperation extends HttpServlet {
                 user = model.doRetrieveByKey(idUtente);
                 model.doDelete(user);
                 throw new SQLException();
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }

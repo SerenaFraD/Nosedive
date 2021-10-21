@@ -7,7 +7,7 @@ public class OrdineBean {
 
     int id_ordine;
     int id_carrello;
-    LocalDateTime data;
+    String data;
 
     public OrdineBean() {
         id_ordine = 0;
@@ -31,11 +31,11 @@ public class OrdineBean {
         this.id_carrello = id_carrello;
     }
 
-    public LocalDateTime getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(String data) {
         this.data = data;
     }
 

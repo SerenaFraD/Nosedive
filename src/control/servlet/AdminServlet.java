@@ -1,7 +1,7 @@
 package control.servlet;
 
 import model.ProdottoBean;
-import manager.ProdottoModelDM;
+import manager.ProdottoDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    static ProdottoModelDM model = new ProdottoModelDM();
+    static ProdottoDao model = new ProdottoDao();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -25,7 +25,6 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
-        //System.out.println("Dentro AdminServlet");
 
         if (action != null && action.equals("insert")) {
             String name = request.getParameter("name");
@@ -49,15 +48,16 @@ public class AdminServlet extends HttpServlet {
         }
 
         if (action != null && action.equals("Delete")) {
-            String codProd = request.getParameter("codProdEl");
+            int id_prodotto = Integer.parseInt(request.getParameter("id_prodotto"));
             ProdottoBean product = null;
             try {
-                product = model.doRetrieveByKey(codProd);
-                //todo delete product, wtf man
+                product = model.doRetrieveByKey(id_prodotto);
+                model.doDelete(product);
+                throw new SQLException();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            request.setAttribute("message", "Prodotto " + product.getNome() + " Eliminato");
+            request.setAttribute("message", "Prodotto " + product.getNome() + " eliminato");
             response.sendRedirect(request.getContextPath() + "/prodotti");
         }
     }

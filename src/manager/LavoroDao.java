@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LavoroDao implements ModelDao<Lavoro, String> {
-
     private static final String TABLE_NAME = "Lavoro";
     private static final DriverManagerConnectionPool pool = null;
 
@@ -46,14 +45,14 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
     public void doUpdate(Lavoro bean) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        String updateQuery = "UPDATE" + TABLE_NAME + "SET nome=?, punteggio=? WHERE nome=?";
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET punteggio=? WHERE nome=?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
-            ps.setString(1, bean.getNome());
-            ps.setInt(2, bean.getPunteggio());
+            ps.setInt(1, bean.getPunteggio());
+            ps.setString(2, bean.getNome());
 
             int result = ps.executeUpdate();
 

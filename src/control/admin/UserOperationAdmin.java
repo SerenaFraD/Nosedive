@@ -68,7 +68,7 @@ public class UserOperationAdmin<action> extends HttpServlet {
                 throwables.printStackTrace();
             }
 
-            response.sendRedirect(request.getContextPath() + "/Admin/userManagement.jsp"); //todo moficare
+            response.sendRedirect(request.getContextPath() + "/Admin/useteAdmin.jsp");
         }
 
 

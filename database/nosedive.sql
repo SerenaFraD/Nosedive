@@ -78,7 +78,7 @@ CREATE TABLE Post
 (
     id_post   INT          NOT NULL AUTO_INCREMENT,
     id_utente INT          NOT NULL,
-    timestamp datetime     not null,
+    timestamp VARCHAR(16)     NOT NULL,
     postpic   MEDIUMBLOB,
     testo     VARCHAR(255) NOT NULL,
 
@@ -94,7 +94,7 @@ CREATE TABLE Commento
     id_commentatore INT          NOT NULL,
     id_post         INT          NOT NULL,
     id_utente       INT          NOT NULL,
-    timestamp       datetime     not null,
+    timestamp       VARCHAR(16)     NOT NULL,
     testo           VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (id_commento),

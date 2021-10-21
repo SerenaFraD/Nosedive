@@ -18,11 +18,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private UtenteDao modelUtente = new UtenteDao();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -30,7 +32,7 @@ public class Login extends HttpServlet {
         String action = request.getParameter("action");
         UtenteBean utenteBean = null;
         InformazioniUtenteBean utenteInformazioni;
-        InformazioniUtenteDao model = null;
+        InformazioniUtenteDao model = new InformazioniUtenteDao();
 
         try {
             utenteBean = (UtenteBean) session.getAttribute("utente");
@@ -40,13 +42,19 @@ public class Login extends HttpServlet {
 
         if (action.equals("login")) {
             if (utenteBean == null) { // non c'é nessun utente loggato
-                String email = request.getParameter("email");
                 String password = request.getParameter("pwd");
+                String[] keys = null;
+                keys[0] = (request.getParameter("email"));
+                keys[1] = (password);
 
                 UtenteBean utenteLoggin = null; //creo un nuovo utenteBean
 
                 try {
-                    utenteLoggin = UtenteDao.doRetrieveByEmail(email);
+                    //Here on 2021/10/21 I said a blasfemy caused by shitty a programmer (not me)
+                    //I felt sad and hopeless for the rest of the day. -S
+                    //(https://www.youtube.com/watch?v=PgK-dIPMIp4) --> mood
+
+                    utenteLoggin = modelUtente.doRetrieveByKey(keys);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -69,18 +77,18 @@ public class Login extends HttpServlet {
                         utenteBean = new UtenteBean();
                         utenteBean.setSupervisor(utenteLoggin.isSupervisor());
                         utenteBean.setNome(utenteLoggin.getNome());
-                        utenteBean.setId_utente(utenteLoggin.getId());
+                        utenteBean.setId_utente(utenteLoggin.getId_utente());
                         utenteBean.setEmail(utenteLoggin.getEmail());
                         utenteBean.setPasswordhash(utenteLoggin.getPassword());
 
                         utenteInformazioni = new InformazioniUtenteBean();
+
                         try {
-                            utenteInformazioni = model.doRetrieveByKey(utenteBean.getId());
-                        } catch (SQLException throwables) {
-                            throwables.printStackTrace();
+                            utenteInformazioni = model.doRetrieveByKey(utenteBean.getId_utente());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
 
-                        //assegno l'utente e le sue informazioni alla sessione
                         session.setAttribute("utente", utenteBean);
                         session.setAttribute("informazioniUtente", utenteInformazioni);
 
@@ -97,7 +105,7 @@ public class Login extends HttpServlet {
                 }
             }
 
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Homepage"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/homepage.jsp"));
 
         } else if (action.equals("logout")) {
             if (utenteBean != null) {
