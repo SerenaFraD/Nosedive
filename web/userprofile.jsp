@@ -1,6 +1,11 @@
+<%@ page import="model.InformazioniUtenteBean" %>
+<%@ page import="model.UtenteBean" %>
 <!DOCTYPE html>
 <html lang="it">
-
+<%
+    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+    InformazioniUtenteBean info = (InformazioniUtenteBean) session.getAttribute("info");
+%>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,22 +17,27 @@
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
     <link href="css/profile.css" rel="stylesheet">
 </head>
-
 <body>
 <%@ include file="navigation.jsp" %>
 <section id="standard">
     <img id="propic" src="img/userIcon.png">
     <div class="information">
-        <p class="nome">Nome Utente</p>
+        <p class="nome"><%utente.getNome()%></p>
         <p class="categoria">Categoria utente</p>
-        <p class="bloccato">Deceduto/Bloccato</p>
+        <p class="bloccato">
+            <%if(info.isDeceduto())%>
+            Deceduto
+            <% if(info.isBloccato())%>
+            Bloccato
+        </p>
     </div>
+
     <hr>
     <div id="publish">
         <form action="publish" method="POST" name="publish">
             <textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
             <input type="file" id="image" name="files[]"
-                   accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" />
+                   accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>
             <input class="publish" type="submit" disabled>
         </form>
@@ -36,7 +46,6 @@
     <hr>
 
     <div id="post">
-        <img src="img/userIcon.png">
         <div>
             <p class="nome">Nome Utente</p>
             <p class="categoria">Categoria utente</p>
@@ -60,7 +69,7 @@
             <img src="img/starIcon.svg" onclick="starAnimation(event.target)">
         </div>
 
-        <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta </button>
+        <button onclick="showCommentArea(event.target)" class="showCommentButton"> Commenta</button>
 
         <div id="commento" class="showCommentDiv">
             <form action="publish" method="POST" name="commento">

@@ -23,7 +23,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
             con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
-            ps.setDate(1, (Date) bean.getCompleanno());
+            ps.setString(1, bean.getCompleanno());
             ps.setInt(2, bean.getPunteggio());
             ps.setInt(3, bean.getId_relazione());
             ps.setInt(4, bean.getId_lavoro());
@@ -55,7 +55,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
             con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
-            ps.setDate(1, (Date) bean.getCompleanno());
+            ps.setString(1, bean.getCompleanno());
             ps.setInt(2, bean.getPunteggio());
             ps.setInt(3, bean.getId_relazione());
             ps.setInt(4, bean.getId_lavoro());
@@ -172,7 +172,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
                 bean = new InformazioniUtenteBean();
 
                 bean.setId_utente(rs.getInt("id_utente"));
-                bean.setCompleanno(rs.getDate("compleanno"));
+                bean.setCompleanno(rs.getString("compleanno"));
                 bean.setPunteggio(rs.getInt("punteggio"));
                 bean.setId_relazione(rs.getInt("id_relazione"));
                 bean.setId_lavoro(rs.getInt("id_lavoro"));
@@ -211,7 +211,7 @@ public class InformazioniUtenteDao implements ModelDao<InformazioniUtenteBean, I
                 bean = new InformazioniUtenteBean();
 
                 bean.setId_utente(rs.getInt("id_utente"));
-                bean.setCompleanno(rs.getDate("compleanno"));
+                bean.setCompleanno(rs.getString("compleanno"));
                 bean.setPunteggio(rs.getInt("punteggio"));
                 bean.setId_relazione(rs.getInt("id_relazione"));
                 bean.setId_lavoro(rs.getInt("id_lavoro"));

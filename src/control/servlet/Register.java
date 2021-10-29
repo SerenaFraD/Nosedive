@@ -1,83 +1,87 @@
 package control.servlet;
 
+import manager.InformazioniUtenteDao;
+import model.InformazioniUtenteBean;
 import model.UtenteBean;
 import manager.UtenteDao;
 import exception.IllegalArgumentException;
+import utils.Validator;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private final UtenteDao utenteDAO = new UtenteDao();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
+        HttpSession session = request.getSession();
+        UtenteDao utenteDao = new UtenteDao();
+        UtenteBean utente;
+        InformazioniUtenteDao infoDao = new InformazioniUtenteDao();
+        InformazioniUtenteBean info;
+        String message;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            if (request.getSession().getAttribute("utente") != null)
-                throw new IllegalArgumentException("Utente loggato.");
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        if (session.getAttribute("utente") != null) {
+            //non dovrei mai trovarmi in questa situazione
+            request.setAttribute("messaggio", "Sei già autenticato. Per creare un nuovo account devi prima fare logout.");
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/message.jsp"));
+        } else {
+            String nome = request.getParameter("nome");
+            String email = request.getParameter("email");
+            String pwd = request.getParameter("pwd");
+            String pwdConf = request.getParameter("pwdConf");
+            String bd = request.getParameter("eta");
 
-        String nome = request.getParameter("nome");
-        if (!(nome != null && nome.length() >= 3 && nome.matches("^[ a-zA-Z\\u00C0-\\u00ff]+$"))) {
-            throw new IllegalArgumentException("Nome non valido.");
-        }
-        else {
-            System.out.println();
-        }
+            Validator validator = new Validator(email, nome, pwd, pwdConf);
+            if (validator.wrongInput()) {
+                message = validator.nameMSG + validator.emailMSG + validator.pwdMSG + validator.matchMSG;
+                request.setAttribute("messaggio", message);
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/error.jsp"));
+            } else {
+                try {
+                    if (utenteDao.doRetrieveByEmail(email) != null) {
+                        request.setAttribute("messaggio", "Email già presente, provare una nuova mail");
+                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/error.jsp"));
+                    }
 
-        String password = request.getParameter("pwd");
-        if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")) //Minimum eight characters, at least one letter and one number
-        {
-            throw new IllegalArgumentException("Password non valida.");
-        }
-        else {
-            System.out.println();
-        }
+                    utente = new UtenteBean();
+                    utente.setEmail(email);
+                    utente.setNome(nome);
+                    utente.setSupervisor(false);
+                    utente.setPassword(pwd);
 
-        String passwordConferma = request.getParameter("pwdConf");
-        if (!password.equals(passwordConferma)) {
-            throw new IllegalArgumentException("Password e conferma differenti.");
+                    utenteDao.doSave(utente);
+
+                    info = new InformazioniUtenteBean();
+                    info.setId_utente(utenteDao.doRetrieveByEmail(email).getId_utente());
+                    info.setCompleanno(bd);
+
+                    request.getSession().setAttribute("utente", utente);
+                    request.getSession().setAttribute("info", info);
+                    request.setAttribute("messaggio", "Registrazione effettuata con successo.");
+                    //response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/message.jsp"));
+
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+                    requestDispatcher.forward(request, response);
+                } catch (SQLException e) {
+                    System.out.println("Errore nella query");
+                }
+            }
         }
-        else {
-            System.out.println();
-        }
-
-        String email = request.getParameter("email");
-        if (!(email != null && email.matches("^\\w+([.-]?\\w+)@\\w+([.-]?\\w+)(\\.\\w+)+$"))) {
-            throw new IllegalArgumentException("Email non valida.");
-        }
-        else {
-            System.out.println();
-        }
-
-        UtenteBean utente = new UtenteBean();
-        utente.setPassword(password);
-        utente.setNome(nome);
-        utente.setEmail(email);
-
-        try {
-            utenteDAO.doSavePar(utente);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        request.getSession().setAttribute("utente", utente);
-
-        request.setAttribute("message", "Registrazione effettuata con successo.");
-
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
-        requestDispatcher.forward(request, response);
     }
 }
+
+
+/*
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+        requestDispatcher.forward(request, response);
+
+ */

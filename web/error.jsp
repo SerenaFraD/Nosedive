@@ -15,6 +15,7 @@
     <link href="css/error.css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="navigation.jsp" %>
 <section id="small">
     <p><%=message%></p>
     <button><a href="#">Torna alla home page</a></button>

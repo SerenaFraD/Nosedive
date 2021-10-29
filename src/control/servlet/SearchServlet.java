@@ -11,11 +11,13 @@ import java.sql.SQLException;
 
 @WebServlet(name = "SearchServlet", value = "/SearchServlet")
 public class SearchServlet extends HttpServlet {
+    UtenteDao modelUtente = new UtenteDao();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String chiave = request.getParameter("chiave");
         try {
-            UtenteBean utente = UtenteDao.doRetrieveByEmail(chiave);
+            UtenteBean utente = modelUtente.doRetrieveByEmail(chiave);
             if (utente != null) {
                 request.getSession().setAttribute("ricercato", utente);
                 response.sendRedirect(response.encodeRedirectURL("userinfo.jsp?email=" + utente.getEmail()));

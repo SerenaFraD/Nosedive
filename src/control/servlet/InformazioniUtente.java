@@ -16,14 +16,13 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-@WebServlet("/informazioni")
+@WebServlet("/Informazioni")
 public class InformazioniUtente extends HttpServlet {
-    private final InformazioniUtenteDao model = new InformazioniUtenteDao();
-    private final RelazioneDao relazioneModel = new RelazioneDao();
-    private final LavoroDao lavoroModel = new LavoroDao();
-    private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final InformazioniUtenteDao model = new InformazioniUtenteDao();
+        final RelazioneDao relazioneModel = new RelazioneDao();
+        final LavoroDao lavoroModel = new LavoroDao();
 
         @SuppressWarnings("unchecked")
         UtenteBean myProfile = (UtenteBean) request.getSession().getAttribute("mioProfilo");
@@ -70,7 +69,6 @@ public class InformazioniUtente extends HttpServlet {
                 }
             }
         } catch (SQLException | NumberFormatException e) {
-            System.out.println("Error: " + e.getMessage());
             request.setAttribute("error", e.getMessage());
         }
 
@@ -78,9 +76,5 @@ public class InformazioniUtente extends HttpServlet {
 
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/userinfo.jsp");
         dispatcher.forward(request, response);
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }

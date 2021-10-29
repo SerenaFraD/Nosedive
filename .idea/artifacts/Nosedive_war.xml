@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="Nosedive:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/Nosedive_war</output-path>
+    <root id="archive" name="Nosedive_war.war">
+      <element id="artifact" artifact-name="Nosedive:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -3,9 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Collection<?> products = (Collection<?>) request.getAttribute("products");
-
     ProdottoBean product = (ProdottoBean) request.getAttribute("Prodotto");
-
     String categoria = request.getParameter("categoria");
 %>
 

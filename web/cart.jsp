@@ -2,12 +2,13 @@
 <%@ page import="model.ProdottoBean" %>
 <%@ page import="control.servlet.CarrelloServlet" %>
 <%@ page import="java.util.List" %>
+<%@ page import="model.CarrelloBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
     String error = (String) request.getAttribute("error");
 
-    CarrelloServlet carrello = (CarrelloServlet) session.getAttribute("carrello");
+    CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
     UtenteBean utenteBean = (UtenteBean) session.getAttribute("user");
 
     if (carrello == null) {
@@ -27,6 +28,7 @@
     <link rel="stylesheet" href="css/carrello.css"/>
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
     <script type="text/javascript" src="js/carrello.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.js"></script>
 </head>
 
 <body>
@@ -34,7 +36,7 @@
 <h2>Carrello</h2>
 
 <%
-    List<ProdottoBean> prodCarrello = carrello.getItems(); //todo fix, wtf I just ctrl+c this and doesn't work
+    List<ProdottoBean> prodCarrello = carrello.getItems();
 %>
 
 <table class="table">

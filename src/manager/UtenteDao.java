@@ -11,7 +11,7 @@ import java.util.List;
 import model.UtenteBean;
 import model.Bean;
 
-public class UtenteDao implements ModelDao<UtenteBean, String[]> {
+public class UtenteDao implements ModelDao<UtenteBean, Integer> {
     private static final String TABLE_NAME = "Utente";
     private static final DriverManagerConnectionPool pool = null;
 
@@ -20,15 +20,15 @@ public class UtenteDao implements ModelDao<UtenteBean, String[]> {
         PreparedStatement ps = null;
         Connection con = null;
 
-        String insertQuery = "INSERT INTO " + TABLE_NAME + " (email, nome, pwd, auth) VALUES (?, ?, SHA1(?), ?)";
+        String insertQuery = "INSERT INTO " + TABLE_NAME + " (email, nome, pwd, sup) VALUES (?, ?, ?, ?)";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, bean.getEmail());
-            ps.setString(2, bean.getPassword());
-            ps.setString(3, bean.getNome());
+            ps.setString(2, bean.getNome());
+            ps.setString(3, bean.getPassword());
             ps.setBoolean(4, bean.isSupervisor());
 
             int result = ps.executeUpdate();
@@ -124,23 +124,18 @@ public class UtenteDao implements ModelDao<UtenteBean, String[]> {
     }
 
     @Override
-    public synchronized UtenteBean doRetrieveByKey(String[] keys) throws SQLException {
+    public synchronized UtenteBean doRetrieveByKey(Integer keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
         UtenteBean bean = null;
-        String selectQuery = (keys.length == 2) ? "SELECT * FROM " + TABLE_NAME + " WHERE email=? and password=SHA1(?)" : "SELECT * FROM " + TABLE_NAME + " WHERE id_utente=?";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_utente=?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
-            if(keys.length == 2) {
-                ps.setInt(1, Integer.parseInt(keys[0]));
-            } else {
-                ps.setString(1, keys[0]);
-                ps.setString(2, keys[1]);
-            }
+            ps.setInt(1, keys);
 
             rs = ps.executeQuery();
 
@@ -164,7 +159,6 @@ public class UtenteDao implements ModelDao<UtenteBean, String[]> {
         return bean;
     }
 
-    // Si, ma anche no. The fuck wrote this? Guess I have to keep it
     public synchronized UtenteBean doRetrieveByName(String nome) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
@@ -198,7 +192,7 @@ public class UtenteDao implements ModelDao<UtenteBean, String[]> {
         return bean;
     }
 
-    public static synchronized UtenteBean doRetrieveByEmail(String email) throws SQLException {
+    public synchronized UtenteBean doRetrieveByEmail(String email) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;

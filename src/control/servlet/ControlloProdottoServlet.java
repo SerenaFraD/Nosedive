@@ -108,7 +108,7 @@ public class ControlloProdottoServlet extends HttpServlet {
 
         request.setAttribute("carrello", cart);
 
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Prodotti.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/prodotti.jsp");
         dispatcher.forward(request, response);
     }
 }

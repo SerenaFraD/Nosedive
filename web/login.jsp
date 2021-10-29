@@ -16,7 +16,7 @@
     <img src="img/logoSmall.png" alt="Logo small Nosedive">
 
     <div class="form">
-        <form action="login?action=login" method="POST">
+        <form action="${pageContext.servletContext.contextPath}/login" method="POST">
             <input type="w3-text" name="email" value="" placeholder="Email" oninput="validaEmailLogin()" autofocus>
             <input type="password" name="pwd" value="" placeholder="Password" oninput="validaPasswordLogin()">
             <output name="result" for="result"></output>

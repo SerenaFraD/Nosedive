@@ -19,7 +19,6 @@ public class CarrelloServlet extends HttpServlet {
 
     static ProdottoDao model = new ProdottoDao();
 
-
     public CarrelloServlet() {
         super();
     }

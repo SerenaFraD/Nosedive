@@ -4,7 +4,7 @@ CREATE DATABASE Nosedive;
 USE Nosedive;
 
 DROP USER IF EXISTS 'nosedive'@'localhost';
-CREATE USER 'nosedive'@'localhost' IDENTIFIED BY 'Admin';
+CREATE USER 'nosedive'@'localhost' IDENTIFIED BY 'root';
 GRANT ALL ON Nosedive.* TO 'nosedive'@'localhost';
 
 CREATE TABLE Utente
@@ -41,11 +41,12 @@ CREATE TABLE Informazione
     id_utente    INT  NOT NULL AUTO_INCREMENT,
     compleanno   DATE,
     punteggio    INT  NOT NULL DEFAULT '1000',
-    id_relazione INT  NOT NULL,
-    id_lavoro    INT  NULL,
+    id_relazione INT  DEFAULT NULL,
+    id_lavoro    INT  DEFAULT NULL,
     propic       MEDIUMBLOB,
     sesso        BOOL NOT NULL DEFAULT FALSE, -- false = maschio
     deceduto     BOOL NOT NULL DEFAULT FALSE, -- false = utente in vita
+    bloccato     BOOL NOT NULL DEFAULT FALSE, -- false = non bloccato
 
     FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
         ON UPDATE CASCADE

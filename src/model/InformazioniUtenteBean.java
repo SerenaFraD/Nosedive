@@ -9,13 +9,14 @@ import java.util.List;
 public class InformazioniUtenteBean extends Bean implements Serializable, Cloneable {
 
     private int id_utente;
-    private Date compleanno;
+    private String compleanno;
     private int punteggio;
     private int id_relazione;
     private int id_lavoro;
     private Blob propic;
     private boolean sesso;
     private boolean deceduto;
+    private boolean bloccato;
 
     public int getId_utente() {
         return id_utente;
@@ -25,11 +26,11 @@ public class InformazioniUtenteBean extends Bean implements Serializable, Clonea
         this.id_utente = id_utente;
     }
 
-    public Date getCompleanno() {
+    public String getCompleanno() {
         return compleanno;
     }
 
-    public void setCompleanno(Date compleanno) {
+    public void setCompleanno(String compleanno) {
         this.compleanno = compleanno;
     }
 
@@ -81,6 +82,14 @@ public class InformazioniUtenteBean extends Bean implements Serializable, Clonea
         return deceduto;
     }
 
+    public void setBloccato(boolean bloccato) {
+        this.bloccato = bloccato;
+    }
+
+    public boolean isBloccato() {
+        return bloccato;
+    }
+
     @Override
     public String toString() {
         return "InfoUtenteBean{" +
@@ -123,4 +132,6 @@ public class InformazioniUtenteBean extends Bean implements Serializable, Clonea
     public String getBeanName() {
         return "InfoUtenteBean";
     }
+
+
 }

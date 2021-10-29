@@ -33,7 +33,6 @@
         <div>
             <p class="nome">Nome Utente</p>
             <p class="categoria">Categoria utente</p>
-            <p class="bloccato">Deceduto/Bloccato</p>
         </div>
 
         <p class="text">

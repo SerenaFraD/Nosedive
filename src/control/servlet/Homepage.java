@@ -42,7 +42,7 @@ public class Homepage extends HttpServlet {
             pb.setTesto(textarea);
             pb.setId_utente(((UtenteBean)request.getSession().getAttribute("utente")).getId_utente());
             try {
-                model.CondividiPost(pb);
+                model.doSave(pb);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

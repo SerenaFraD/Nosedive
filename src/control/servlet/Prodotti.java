@@ -34,7 +34,7 @@ public class Prodotti extends HttpServlet {
         // I'll figure out something
 
 
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Prodotti.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/prodotti.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -1,0 +1,54 @@
+/*Imporare general*/
+
+.d-block{
+    height: 300px;
+}
+
+.footer-info{
+    margin: 0px;
+    width: 100%;
+    height: 100px;
+    background-color: #ce6e31;
+    color: black;
+    position: absolute;
+    text-align: center;
+}
+
+#corpo{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#login{
+    color: #ce6e31;
+}
+
+#formProd{
+    margin-left: 43%;
+}
+
+#bottoni{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.table{
+    padding-top: 50px;
+}
+#message{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#tasto{
+    margin-top: 50px;
+    margin-bottom: 150px;
+    text-align: center;
+}

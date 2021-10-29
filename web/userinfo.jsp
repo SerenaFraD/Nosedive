@@ -1,6 +1,5 @@
 <%@ page import="model.UtenteBean" %>
 <%@ page import="model.InformazioniUtenteBean" %>
-<%@ page import="model.Lavoro" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -15,20 +14,11 @@
     <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
-<% InformazioniUtenteBean info = (InformazioniUtenteBean) request.getSession().getAttribute("informazioni");
-String lavoro = (String) request.getSession().getAttribute("lavoro");
+<% InformazioniUtenteBean info = (InformazioniUtenteBean) request.getSession().getAttribute("info");
+    String lavoro = (String) request.getSession().getAttribute("lavoro");
     String relazione = (String) request.getSession().getAttribute("relazione");
-UtenteBean utente;
-
-    if (info == null) {
-        response.sendRedirect(response.encodeRedirectURL("message.jsp"));
-    }
-
-    if(request.getSession().getAttribute("altroProfilo") == null) {
-        utente = (UtenteBean) request.getSession().getAttribute("altroProfilo");
-    } else {
-        utente = (UtenteBean) request.getSession().getAttribute("myProfilo");
-    }
+    UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+    UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("altroUtente");
 %>
 
 <section id="standard">
@@ -41,7 +31,8 @@ UtenteBean utente;
         </tr>
         <tr>
             <td>Punteggio</td>
-            <td><%=info.getPunteggio()%></td>
+            <td><%=info.getPunteggio()%>
+            </td>
         </tr>
         <tr>
             <td>E-mail</td>
@@ -50,11 +41,13 @@ UtenteBean utente;
         </tr>
         <tr>
             <td>Data di nascita</td>
-            <td><%=info.getCompleanno()%></td>
+            <td><%=info.getCompleanno()%>
+            </td>
         </tr>
         <tr>
             <td>Foto profilo</td>
-            <td><%=info.getPropic()%></td>
+            <td><%=info.getPropic()%>
+            </td>
             <td>
                 <input type="file" id="image" name="file"
                        accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onchange="validaFoto()"/>
@@ -63,9 +56,13 @@ UtenteBean utente;
         </tr>
         <tr>
             <td>Lavoro</td>
-            <td><%=info.getId_lavoro()%></td>
+            <td><%=lavoro%>
+            </td>
+            <%
+                if (otherUtente == null) {
+            %>
             <td>
-                <select name="lavoro" id="lavoro">
+                <select name="lavoro" id="lavoro" onchange="modificaInformazioni()">
                     <option value=" ">Lavoro</option>
                     <option value="impiegato">Impiegato</option>
                     <option value="studente">Studente</option>
@@ -73,18 +70,24 @@ UtenteBean utente;
                     <option value="operaio">Operaio</option>
                 </select>
             </td>
+            <%}%>
         </tr>
         <tr>
             <td>Relazione</td>
-            <td><%=info.getId_relazione()%></td>
+            <td><%=relazione%>
+            </td>
+            <%
+                if (otherUtente == null) {
+            %>
             <td>
-                <select name="relazione" id="relazione">
+                <select name="relazione" id="relazione" onchange="modificaInformazioni()">
                     <option value="">Relazione</option>
                     <option value="sposato">Sposato</option>
                     <option value="fidanzato">Fidanzato</option>
                     <option value="single">Single</option>
                 </select>
             </td>
+            <%}%>
         </tr>
     </table>
 </section>
