@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import manager.UtenteDao;
 import model.UtenteBean;
 
-@WebServlet("/Utenti")
+@WebServlet("/userOperation")
 public class UsersOperation extends HttpServlet {
     private static final long serialVersionUID = 1L;
     static UtenteDao model = new UtenteDao();
@@ -21,17 +21,12 @@ public class UsersOperation extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         String action = request.getParameter("action");
-        //System.out.println("Dentro UserOperation");
 
-        if (action != null && action.equals("Insert")) {
+        if (action.equals("Insert")) {
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
             String pwd = request.getParameter("pws");
@@ -39,7 +34,7 @@ public class UsersOperation extends HttpServlet {
             UtenteBean bean = new UtenteBean();
             bean.setNome(nome);
             bean.setEmail(email);
-            bean.setPasswordhash(pwd);
+            bean.setPassword(pwd);
 
             try {
                 model.doSave(bean);
@@ -49,11 +44,7 @@ public class UsersOperation extends HttpServlet {
 
             request.setAttribute("message", "Utente " + bean.getNome() + " aggiunto");
             response.sendRedirect(request.getContextPath() + "/utente");
-        } else {
-            System.out.println();
-        }
-
-        if (action != null && action.equals("Delete")) {
+        } else if(action.equals("Delete")) {
             String idUtente = request.getParameter("id_utente");
             UtenteBean user = null;
 

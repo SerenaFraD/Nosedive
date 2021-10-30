@@ -1,10 +1,8 @@
-<%@ page import="model.InformazioniUtenteBean" %>
 <%@ page import="model.UtenteBean" %>
 <!DOCTYPE html>
 <html lang="it">
 <%
     UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-    InformazioniUtenteBean info = (InformazioniUtenteBean) session.getAttribute("info");
 %>
 <head>
     <meta charset="utf-8">
@@ -25,9 +23,9 @@
         <p class="nome"><%utente.getNome()%></p>
         <p class="categoria">Categoria utente</p>
         <p class="bloccato">
-            <%if(info.isDeceduto())%>
+            <%if(utente.isDeceduto())%>
             Deceduto
-            <% if(info.isBloccato())%>
+            <% if(utente.isBloccato())%>
             Bloccato
         </p>
     </div>
@@ -47,9 +45,7 @@
 
     <div id="post">
         <div>
-            <p class="nome">Nome Utente</p>
-            <p class="categoria">Categoria utente</p>
-            <p class="bloccato">Deceduto/Bloccato</p>
+            <p class="nome">DataPostEccheccazzo</p>
         </div>
 
         <p class="text">

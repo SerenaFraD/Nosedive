@@ -1,10 +1,7 @@
 package control.servlet;
 
-import manager.InformazioniUtenteDao;
-import model.InformazioniUtenteBean;
 import model.UtenteBean;
 import manager.UtenteDao;
-import exception.IllegalArgumentException;
 import utils.Validator;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
@@ -25,8 +21,6 @@ public class Register extends HttpServlet {
         HttpSession session = request.getSession();
         UtenteDao utenteDao = new UtenteDao();
         UtenteBean utente;
-        InformazioniUtenteDao infoDao = new InformazioniUtenteDao();
-        InformazioniUtenteBean info;
         String message;
 
         if (session.getAttribute("utente") != null) {
@@ -57,17 +51,12 @@ public class Register extends HttpServlet {
                     utente.setNome(nome);
                     utente.setSupervisor(false);
                     utente.setPassword(pwd);
+                    utente.setCompleanno(bd);
 
                     utenteDao.doSave(utente);
 
-                    info = new InformazioniUtenteBean();
-                    info.setId_utente(utenteDao.doRetrieveByEmail(email).getId_utente());
-                    info.setCompleanno(bd);
-
                     request.getSession().setAttribute("utente", utente);
-                    request.getSession().setAttribute("info", info);
                     request.setAttribute("messaggio", "Registrazione effettuata con successo.");
-                    //response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/message.jsp"));
 
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
                     requestDispatcher.forward(request, response);
@@ -78,10 +67,3 @@ public class Register extends HttpServlet {
         }
     }
 }
-
-
-/*
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
-        requestDispatcher.forward(request, response);
-
- */

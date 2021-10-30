@@ -1,5 +1,4 @@
 <%@ page import="model.UtenteBean" %>
-<%@ page import="model.InformazioniUtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -14,7 +13,7 @@
     <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
-<% InformazioniUtenteBean info = (InformazioniUtenteBean) request.getSession().getAttribute("info");
+<%
     String lavoro = (String) request.getSession().getAttribute("lavoro");
     String relazione = (String) request.getSession().getAttribute("relazione");
     UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
@@ -31,7 +30,7 @@
         </tr>
         <tr>
             <td>Punteggio</td>
-            <td><%=info.getPunteggio()%>
+            <td><%=utente.getPunteggio()%>
             </td>
         </tr>
         <tr>
@@ -41,12 +40,12 @@
         </tr>
         <tr>
             <td>Data di nascita</td>
-            <td><%=info.getCompleanno()%>
+            <td><%=utente.getCompleanno()%>
             </td>
         </tr>
         <tr>
             <td>Foto profilo</td>
-            <td><%=info.getPropic()%>
+            <td><%=utente.getPropic()%>
             </td>
             <td>
                 <input type="file" id="image" name="file"

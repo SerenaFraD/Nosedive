@@ -74,7 +74,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         Connection con = null;
         ResultSet rs;
         PostBean bean = null;
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_post=?";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE =?";
 
         try {
             con = pool.getConnection();

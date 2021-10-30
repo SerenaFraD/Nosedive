@@ -1,9 +1,8 @@
 package control.servlet;
 
-import manager.InformazioniUtenteDao;
 import manager.LavoroDao;
 import manager.RelazioneDao;
-import model.InformazioniUtenteBean;
+import manager.UtenteDao;
 import model.UtenteBean;
 
 import javax.servlet.RequestDispatcher;
@@ -20,14 +19,14 @@ import java.sql.SQLException;
 public class InformazioniUtente extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final InformazioniUtenteDao model = new InformazioniUtenteDao();
+        final UtenteDao model = new UtenteDao();
         final RelazioneDao relazioneModel = new RelazioneDao();
         final LavoroDao lavoroModel = new LavoroDao();
 
         @SuppressWarnings("unchecked")
-        UtenteBean myProfile = (UtenteBean) request.getSession().getAttribute("mioProfilo");
+        UtenteBean myProfile = (UtenteBean) request.getSession().getAttribute("utente");
         UtenteBean otherProfile = (UtenteBean) request.getSession().getAttribute("altroProfilo");
-        InformazioniUtenteBean bean = null;
+        UtenteBean bean = null;
 
         String action = request.getParameter("action");
 
@@ -38,7 +37,7 @@ public class InformazioniUtente extends HttpServlet {
                     String relazione = request.getParameter("relazione");
                     Blob image = (Blob) request.getSession().getAttribute("image");
 
-                    bean = new InformazioniUtenteBean();
+                    bean = new UtenteBean();
                     bean.setId_utente(myProfile.getId_utente());
                     bean.setId_relazione(relazioneModel.doRetrieveByKey(relazione).getId_relazione());
                     bean.setId_lavoro(lavoroModel.doRetrieveByKey(lavoro).getId_lavoro());
@@ -48,10 +47,10 @@ public class InformazioniUtente extends HttpServlet {
                     request.setAttribute("message", "Informazioni di " + myProfile.getNome() + " aggiornate");
 
                 } else if (action.equals("updateInfoUtente") && otherProfile == null && myProfile.isSupervisor()) {
-                    Boolean sesso = Boolean.valueOf(request.getParameter("sesso"));
-                    Boolean deceduto = Boolean.valueOf(request.getParameter("deceduto"));
+                    boolean sesso = Boolean.parseBoolean(request.getParameter("sesso"));
+                    boolean deceduto = Boolean.parseBoolean(request.getParameter("deceduto"));
 
-                    bean = new InformazioniUtenteBean();
+                    bean = new UtenteBean();
                     bean.setId_utente(myProfile.getId_utente());
                     bean.setSesso(sesso);
                     bean.setDeceduto(deceduto);
@@ -61,7 +60,7 @@ public class InformazioniUtente extends HttpServlet {
                 } else if (action.equals("retriveInfoUtente")) {
                     Blob image = (Blob) request.getSession().getAttribute("image");
 
-                    bean = new InformazioniUtenteBean();
+                    bean = new UtenteBean();
                     bean = model.doRetrieveByKey(myProfile.getId_utente());
 
                     request.setAttribute("lavoro", lavoroModel.doRetrieveByKey(bean.getId_lavoro()));

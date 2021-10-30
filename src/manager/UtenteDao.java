@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.List;
+
 import model.UtenteBean;
 import model.Bean;
 
@@ -20,7 +21,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         PreparedStatement ps = null;
         Connection con = null;
 
-        String insertQuery = "INSERT INTO " + TABLE_NAME + " (email, nome, pwd, sup) VALUES (?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO " + TABLE_NAME + " (email, nome, pwd, sup, compleanno, punteggio, id_relazione, id_lavoro, propic, sesso, deceduto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             con = pool.getConnection();
@@ -30,6 +31,13 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
             ps.setString(2, bean.getNome());
             ps.setString(3, bean.getPassword());
             ps.setBoolean(4, bean.isSupervisor());
+            ps.setString(5, bean.getCompleanno());
+            ps.setInt(6, bean.getPunteggio());
+            ps.setInt(7, bean.getId_relazione());
+            ps.setInt(8, bean.getId_lavoro());
+            ps.setBlob(9, bean.getPropic());
+            ps.setBoolean(10, bean.isSesso());
+            ps.setBoolean(11, bean.isDeceduto());
 
             int result = ps.executeUpdate();
 
@@ -80,7 +88,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         PreparedStatement ps = null;
         Connection con = null;
 
-        String updateQuery = "UPDATE " + TABLE_NAME + " SET email=?, nome=?, pwd=?, sup=? WHERE id_utente=?";
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET email=?, nome=?, pwd=?, sup=?, compleanno=?, punteggio=?, id_relazione=?, id_lavoro=?, propic=?, sesso=?, deceduto=? WHERE id_utente=?";
 
         try {
             con = pool.getConnection();
@@ -90,7 +98,119 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
             ps.setString(2, bean.getNome());
             ps.setString(3, bean.getPassword());
             ps.setBoolean(4, bean.isSupervisor());
-            ps.setInt(5, bean.getId_utente());
+            ps.setString(5, bean.getCompleanno());
+            ps.setInt(6, bean.getPunteggio());
+            ps.setInt(7, bean.getId_relazione());
+            ps.setInt(8, bean.getId_lavoro());
+            ps.setBlob(9, bean.getPropic());
+            ps.setBoolean(10, bean.isSesso());
+            ps.setBoolean(11, bean.isDeceduto());
+
+            int result = ps.executeUpdate();
+
+            if (result != 0)
+                con.commit();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+    }
+
+    public void doUpdateUtente(UtenteBean bean) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET id_relazione=?, id_lavoro=?, propic=? WHERE id_utente=?";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(updateQuery);
+
+            ps.setInt(1, bean.getId_relazione());
+            ps.setInt(2, bean.getId_lavoro());
+            ps.setBlob(3, bean.getPropic());
+            ps.setInt(4, bean.getId_utente());
+
+            int result = ps.executeUpdate();
+
+            if (result != 0)
+                con.commit();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+    }
+
+    public void doUpdateDeceduto(UtenteBean bean) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET deceduto=?  WHERE id_utente=?";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(updateQuery);
+
+            ps.setBoolean(1, bean.isSesso());
+            ps.setBoolean(2, bean.isDeceduto());
+
+            int result = ps.executeUpdate();
+
+            if (result != 0)
+                con.commit();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+    }
+
+    public void doUpdateBloccato(UtenteBean bean) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET bloccato=?  WHERE id_utente=?";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(updateQuery);
+
+            ps.setBoolean(1, bean.isSesso());
+            ps.setBoolean(2, bean.isBloccato());
+
+            int result = ps.executeUpdate();
+
+            if (result != 0)
+                con.commit();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+    }
+
+    public void doUpdatePunteggio(UtenteBean bean) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET punteggio=? WHERE id_utente=?";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(updateQuery);
+
+            ps.setBoolean(1, bean.isSesso());
+            ps.setInt(2, bean.getPunteggio());
 
             int result = ps.executeUpdate();
 
@@ -146,6 +266,13 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 bean.setNome(rs.getString("nome"));
                 bean.setPasswordhash(rs.getString("pwd"));
                 bean.setSupervisor(rs.getBoolean("sup"));
+                bean.setCompleanno(rs.getString("compleanno"));
+                bean.setPunteggio(rs.getInt("punteggio"));
+                bean.setId_relazione(rs.getInt("id_relazione"));
+                bean.setId_lavoro(rs.getInt("id_lavoro"));
+                bean.setPropic(rs.getBlob("propic"));
+                bean.setSesso(rs.getBoolean("sesso"));
+                bean.setDeceduto(rs.getBoolean("deceduto"));
             }
         } finally {
             try {
@@ -248,6 +375,14 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 bean.setNome(rs.getString("nome"));
                 bean.setPasswordhash(rs.getString("pwd"));
                 bean.setSupervisor(rs.getBoolean("sup"));
+                bean.setCompleanno(rs.getString("compleanno"));
+                bean.setPunteggio(rs.getInt("punteggio"));
+                bean.setId_relazione(rs.getInt("id_relazione"));
+                bean.setId_lavoro(rs.getInt("id_lavoro"));
+                bean.setPropic(rs.getBlob("propic"));
+                bean.setSesso(rs.getBoolean("sesso"));
+                bean.setDeceduto(rs.getBoolean("deceduto"));
+
                 list.add(bean);
             }
         } finally {

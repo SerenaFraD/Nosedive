@@ -1,11 +1,8 @@
-<%@ page import="model.InformazioniUtenteBean" %>
 <%@ page import="model.UtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
     UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-    InformazioniUtenteBean info = (InformazioniUtenteBean) session.getAttribute("info");
-
 %>
 <html>
 <head>
@@ -35,7 +32,7 @@
         </li>
         <li><img class="navBar" src="img/starIcon.svg" alt="stella"></li>
         <li>
-            <h3><%=info.getPunteggio()%></h3>
+            <h3><%=utente.getPunteggio()%></h3>
         </li>
         <li><img class="navBar" src="img/userIcon.png" alt="utente"></li>
         <li><a href="${pageContext.request.contextPath}/userprofile.jsp">

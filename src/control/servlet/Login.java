@@ -1,7 +1,5 @@
 package control.servlet;
 
-import manager.InformazioniUtenteDao;
-import model.InformazioniUtenteBean;
 import model.UtenteBean;
 import manager.UtenteDao;
 
@@ -39,13 +37,12 @@ public class Login extends HttpServlet {
                     request.setAttribute("messaggio", "Utente non trovato");
                     response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/message.jsp"));
                 } else {
-                    System.out.println(saved.getNome());
+
                     session.setMaxInactiveInterval(60 * 60);
                     session.setAttribute("utente", saved);
-                    InformazioniUtenteBean info = modelInfo.doRetrieveByKey(saved.getId_utente());
-                    session.setAttribute("info", info);
 
-                    System.out.println(info.getPunteggio());
+
+
 
 
                     RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/homepage.jsp");
