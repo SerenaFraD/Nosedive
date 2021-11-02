@@ -33,7 +33,7 @@
             </div>
             <div class="about">
                 <h4>Riccardo Amaro (0512105841)</h4>
-                <img src="img/riccardo.jfif" alt="Riccardo Amaro">
+                <img src="img/IMG_3260.jpg" alt="Riccardo Amaro">
             </div>
         </article>
     </section>
