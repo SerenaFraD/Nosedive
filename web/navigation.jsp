@@ -30,9 +30,9 @@
     <%if (utente != null) { %>
     <ul class="navBar">
         <li>
-            <form action="SearchServlet" method="get">
-                <input name="searchBar" type="search" placeholder="Search" aria-label="Search" name="chiave">
-                <button name="searchBar" type="submit">Search</button>
+            <form action="${pageContext.request.contextPath}/SearchServlet" method="get">
+                <input class="searchBar" type="search" placeholder="Search" aria-label="Search" name="chiave">
+                <button class="searchBar" type="submit">Search</button>
             </form>
         </li>
         <li><img class="navBar" src="img/starIcon.svg" alt="stella"></li>
@@ -43,16 +43,15 @@
         <li><a href="${pageContext.request.contextPath}/userprofile.jsp">
             <h3>Profilo</h3>
         </a></li>
-        <li><a href="${pageContext.request.contextPath}/ordini.jsp">
-            <h3>Ordine</h3>
-        </a></li>
+        <li><a href="${pageContext.request.contextPath}/cart.jsp"><h3>Carrello</h3></a></li>
+        <li><h3 onclick="logout()">Esci</h3></li>
     </ul>
 
 
     <% if (utente.isSupervisor()) {%>
     <ul class="navBar">
         <li>
-            <a href="${pageContext.request.contextPath}/Admin/adminManagement.jsp">Dashboard</a>
+            <a href="${pageContext.request.contextPath}/admin/prodottiAdmin.jsp">Add Prodotto</a>
         </li>
     </ul>
     <%
@@ -68,6 +67,7 @@
     </ul>
     <%}%>
 </nav>
-</body>
 
+<script src="${pageContext.request.contextPath}/js/logout.js"></script>
+</body>
 </html>

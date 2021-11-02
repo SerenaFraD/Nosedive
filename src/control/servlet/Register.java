@@ -18,6 +18,7 @@ import java.sql.SQLException;
 public class Register extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher;
         HttpSession session = request.getSession();
         UtenteDao utenteDao = new UtenteDao();
         UtenteBean utente;
@@ -26,7 +27,8 @@ public class Register extends HttpServlet {
         if (session.getAttribute("utente") != null) {
             //non dovrei mai trovarmi in questa situazione
             request.setAttribute("messaggio", "Sei già autenticato. Per creare un nuovo account devi prima fare logout.");
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/message.jsp"));
+            requestDispatcher = request.getRequestDispatcher(request.getContextPath() + "/message.jsp");
+            requestDispatcher.forward(request, response);
         } else {
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
@@ -38,12 +40,14 @@ public class Register extends HttpServlet {
             if (validator.wrongInput()) {
                 message = validator.nameMSG + validator.emailMSG + validator.pwdMSG + validator.matchMSG;
                 request.setAttribute("messaggio", message);
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/error.jsp"));
+                requestDispatcher = this.getServletContext().getRequestDispatcher("/error.jsp");
+                requestDispatcher.forward(request, response);
             } else {
                 try {
                     if (utenteDao.doRetrieveByEmail(email) != null) {
                         request.setAttribute("messaggio", "Email già presente, provare una nuova mail");
-                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/error.jsp"));
+                        requestDispatcher = this.getServletContext().getRequestDispatcher("/error.jsp");
+                        requestDispatcher.forward(request, response);
                     }
 
                     utente = new UtenteBean();
@@ -57,8 +61,7 @@ public class Register extends HttpServlet {
 
                     request.getSession().setAttribute("utente", utente);
                     request.setAttribute("messaggio", "Registrazione effettuata con successo.");
-
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+                    requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
                     requestDispatcher.forward(request, response);
                 } catch (SQLException e) {
                     System.out.println("Errore nella query");

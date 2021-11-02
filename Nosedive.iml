@@ -59,5 +59,6 @@
     </orderEntry>
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.25" level="project" />
     <orderEntry type="library" name="google.code.gson" level="project" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

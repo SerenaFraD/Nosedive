@@ -1,13 +1,25 @@
 <%@ page import="model.UtenteBean"%>
-
-<!DOCTYPE html>
-<html lang="it">
 <%
     UtenteBean utente = (UtenteBean) session.getAttribute("utente");
     UtenteBean otherUtente = (UtenteBean) session.getAttribute("otherUtente");
     boolean follows = (boolean) session.getAttribute("follows");
-    int userIdPost = (otherUtente != null)? utente.getId_utente() : otherUtente.getId_utente();
+    int userIdPost, punteggio = 0;
+    String filename, nome;
+
+    if(otherUtente == null) {
+        filename = utente.getPropic();
+        userIdPost = utente.getId_utente();
+        nome = utente.getNome();
+    }  else {
+        filename = otherUtente.getPropic();
+        userIdPost = otherUtente.getId_utente();
+        nome = otherUtente.getNome();
+        punteggio = otherUtente.getPunteggio();
+    }
 %>
+<%@ include file="navigation.jsp" %>
+<!DOCTYPE html>
+<html lang="it">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,20 +33,18 @@
 </head>
 
 <body onload="mostraPost('<%=userIdPost%>', false, '${pageContext.request.contextPath}')">
-<%@ include file="navigation.jsp" %>
-<section id="standard">
-    <img id="propic" src="img/userIcon.png">
-    <div class="information">
-        <p class="nome"><%if(otherUtente == null) utente.getNome(); else otherUtente.getNome();%></p>
 
-        <%if(otherUtente != null) {%>
-        <p class="categoria"><%otherUtente.getPunteggio();%></p>
-        <%}%>
+<section id="standard">
+    <img id="propic" src="img/<%=filename%>" alt="Imagine profilo">
+    <div class="information">
+        <p class="nome"><%=nome%></p>
+
+        <p class="categoria"><%=punteggio%></p>
 
         <p class="bloccato">
-            <%if(otherUtente == null) utente.isBloccato(); else otherUtente.isBloccato();%>
+            <%if(otherUtente != null && otherUtente.isDeceduto())%>
             Deceduto
-            <%if(otherUtente == null) utente.isDeceduto(); else otherUtente.isDeceduto();%>
+            <%if(otherUtente != null &&  otherUtente.isBloccato())%>
             Bloccato
         </p>
 
@@ -48,9 +58,9 @@
     </div>
 
     <hr>
-    <% if(otherUtente != null) { %>
+    <% if(otherUtente == null) { %>
     <div id="publish">
-        <form action="postPublish" method="POST" name="publish">
+        <form action="${pageContext.servletContext.contextPath}/postPublish" method="POST" name="publish">
             <textarea name="testo" id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
             <input type="file" id="image" name="files"
                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>

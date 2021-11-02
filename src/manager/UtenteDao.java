@@ -286,11 +286,12 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         return bean;
     }
 
-    public synchronized UtenteBean doRetrieveByName(String nome) throws SQLException {
+    public synchronized List<UtenteBean> doRetrieveByName(String nome) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        UtenteBean bean = null;
+        UtenteBean bean;
+        List<UtenteBean> list = null;
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=? ";
 
         try {
@@ -301,11 +302,22 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
 
             rs = ps.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 bean = new UtenteBean();
                 bean.setId_utente(rs.getInt("id_utente"));
                 bean.setEmail(rs.getString("email"));
                 bean.setNome(rs.getString("nome"));
+                bean.setPasswordhash(rs.getString("pwd"));
+                bean.setSupervisor(rs.getBoolean("sup"));
+                bean.setCompleanno(rs.getString("compleanno"));
+                bean.setPunteggio(rs.getInt("punteggio"));
+                bean.setId_relazione(rs.getInt("id_relazione"));
+                bean.setId_lavoro(rs.getInt("id_lavoro"));
+                bean.setPropic(rs.getString("propic"));
+                bean.setSesso(rs.getBoolean("sesso"));
+                bean.setDeceduto(rs.getBoolean("deceduto"));
+
+                list.add(bean);
             }
         } finally {
             try {
@@ -316,7 +328,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
             }
         }
 
-        return bean;
+        return list;
     }
 
     public synchronized UtenteBean doRetrieveByEmail(String email) throws SQLException {
@@ -358,7 +370,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        List<UtenteBean> list = new ArrayList<UtenteBean>();
+        List<UtenteBean> list = null;
         UtenteBean bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 

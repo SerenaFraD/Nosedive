@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+//todo da eliminare
 @WebServlet(name = "Homepage", value = "/Homepage")
 public class Homepage extends HttpServlet {
 

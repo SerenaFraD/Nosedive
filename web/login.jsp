@@ -17,7 +17,7 @@
 
     <div class="form">
         <form action="${pageContext.servletContext.contextPath}/login" method="POST">
-            <input type="w3-text" name="email" value="" placeholder="Email" oninput="validaEmailLogin()" autofocus>
+            <input type="text" name="email" value="" placeholder="Email" oninput="validaEmailLogin()" autofocus>
             <input type="password" name="pwd" value="" placeholder="Password" oninput="validaPasswordLogin()">
             <output name="result" for="result"></output>
             <button type="submit" name="button">Login</button>

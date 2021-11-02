@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Registrato! | Nosedive</title>
-    <link rel="stylesheet" href="CSS/message.css"/>
+    <link rel="stylesheet" href="css/error.css"/>
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
 
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <p id="message"><%=request.getAttribute("message")%></p>
 
     <div id="tasto">
-        <a class="bottone" href="login.jsp" role="button">Accedi</a>
+        <a class="bottone" href="${pageContext.request.contextPath}/login.jsp" role="button">Accedi</a>
     </div>
 </div>
 

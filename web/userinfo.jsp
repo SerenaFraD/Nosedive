@@ -1,5 +1,11 @@
 <%@ page import="model.UtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    String lavoro = (String) request.getSession().getAttribute("lavoro");
+    String relazione = (String) request.getSession().getAttribute("relazione");
+    UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+    UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("altroUtente");
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -13,13 +19,6 @@
     <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
-<%
-    String lavoro = (String) request.getSession().getAttribute("lavoro");
-    String relazione = (String) request.getSession().getAttribute("relazione");
-    UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
-    UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("altroUtente");
-%>
-
 <section id="standard">
     <p>Informazioni utente</p>
     <table>

@@ -31,14 +31,14 @@
             <table class="register">
                 <tr>
                     <td><label for="nome">Nome</label></td>
-                    <td><input type="w3-text" id="nome" name="nome" placeholder="Mario" oninput="validaNome()"
+                    <td><input type="text" id="nome" name="nome" placeholder="Mario" oninput="validaNome()"
                                autofocus>
                     </td>
                 </tr>
 
                 <tr>
                     <td><label for="email">Email</label></td>
-                    <td><input type="w3-text" id="email" name="email" placeholder="mariorossi@posta.it"
+                    <td><input type="text" id="email" name="email" placeholder="mariorossi@posta.it"
                                oninput="validaEmail()"></td>
                 </tr>
 

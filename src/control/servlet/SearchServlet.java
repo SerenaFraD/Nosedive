@@ -3,35 +3,32 @@ package control.servlet;
 import manager.UtenteDao;
 import model.UtenteBean;
 
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-@WebServlet(name = "SearchServlet", value = "/SearchServlet")
+@WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
     UtenteDao modelUtente = new UtenteDao();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String chiave = request.getParameter("chiave");
+
         try {
-            UtenteBean utente = modelUtente.doRetrieveByEmail(chiave);
+            List<UtenteBean> utente = modelUtente.doRetrieveByName(chiave);
+
             if (utente != null) {
-                request.getSession().setAttribute("ricercato", utente);
-                response.sendRedirect(response.encodeRedirectURL("userinfo.jsp?email=" + utente.getEmail()));
-            } else
-                response.sendRedirect(response.encodeRedirectURL("index.jsp"));
-
-
-        } catch (SQLException throwables) {
+                request.getSession().setAttribute("result", utente);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("results.jsp");
+                requestDispatcher.forward(request, response);
+            }
+        } catch (SQLException | ServletException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }

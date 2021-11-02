@@ -57,7 +57,7 @@
             <td>
                 <form action="">
                     <label for="bloccare"> Bloccare? </label>
-                    <input type="checkbox" id="bloccare" name="bloccare" value="<%otherUtente.isBloccato();%>">
+                    <input type="checkbox" id="bloccare" name="bloccare" value="<%=otherUtente.isBloccato()%>">
                     <input type="submit" value="Submit" onchange="modificaInformazioni(this.value, 'bloccato', '${pageContext.request.contextPath}')">
                 </form>
             </td>
@@ -66,8 +66,17 @@
             <td>
                 <form action="">
                     <label  for="deceduto"> Deceduto? </label>
-                    <input type="checkbox" id="deceduto" name="deceduto" value="<%otherUtente.isDeceduto();%>">
+                    <input type="checkbox" id="deceduto" name="deceduto" value="<%=otherUtente.isDeceduto()%>">
                     <input type="submit" value="Submit" onchange="modificaInformazioni(this.value, 'deceduto', '${pageContext.request.contextPath}')">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="">
+                    <label  for="supervisor"> Supervisore? </label>
+                    <input type="checkbox" id="supervisor" name="deceduto" value="<%=otherUtente.isSupervisor()%>">
+                    <input type="submit" value="Submit" onchange="modificaInformazioni(this.value, 'supervisore', '${pageContext.request.contextPath}')">
                 </form>
             </td>
         </tr>
@@ -81,6 +90,3 @@
 
 </body>
 </html>
-
-
-

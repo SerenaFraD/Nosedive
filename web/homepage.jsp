@@ -14,17 +14,17 @@
     <meta name="author" content="Serena D'Urso">
 </head>
 
-<body  onload="mostraPost('<%utente.getPunteggio();%>', true, '${pageContext.request.contextPath}')">
+<body  onload="mostraPost('<%=utente.getPunteggio()%>', true, '${pageContext.request.contextPath}')">
 <%@ include file="navigation.jsp" %>
 
 <section id="standard">
     <div id="publish">
-        <form action="publish" method="POST" name="publish">
+        <form action="${pageContext.request.contextPath}/postPublish" method="POST" name="publish">
             <textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
             <input type="file" id="image" name="files[]"
                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>
-            <input class="publish" type="submit" onclick="mostraPost('<%utente.getPunteggio();%>', true, '${pageContext.request.contextPath}')" disabled>
+            <input class="publish" type="submit" onclick="mostraPost('<%=utente.getPunteggio()%>', true, '${pageContext.request.contextPath}')" disabled>
         </form>
     </div>
 

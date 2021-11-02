@@ -42,42 +42,5 @@ public class InformazioniUtente extends HttpServlet {
         }
 
         response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/userinfo.jsp"));
-
     }
 }
-
-     /*
-         if (action.equals("updateInfoUtente") && otherProfile == null && myProfile.isSupervisor()) {
-                boolean sesso = Boolean.parseBoolean(request.getParameter("sesso"));
-                boolean deceduto = Boolean.parseBoolean(request.getParameter("deceduto"));
-
-                bean = new UtenteBean();
-                bean.setId_utente(myProfile.getId_utente());
-                bean.setSesso(sesso);
-                bean.setDeceduto(deceduto);
-
-                model.doUpdateAdmin(bean);
-                request.setAttribute("message", "Informazioni di " + myProfile.getNome() + " aggiornate");
-            } else if (action.equals("retriveInfoUtente")) {
-                Blob image = (Blob) request.getSession().getAttribute("image");
-
-                bean = new UtenteBean();
-                bean = model.doRetrieveByKey(myProfile.getId_utente());
-
-                request.setAttribute("lavoro", lavoroModel.doRetrieveByKey(bean.getId_lavoro()));
-                request.setAttribute("relazione", relazioneModel.doRetrieveByKey(bean.getId_relazione()));
-            }
-        }
-    } catch(SQLException |
-    NumberFormatException e)
-
-    {
-        request.setAttribute("error", e.getMessage());
-    }
-
-        request.setAttribute("informazioni",bean);
-
-    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/userinfo.jsp");
-        dispatcher.forward(request,response);
-
-      */

@@ -26,7 +26,7 @@ public class CategoriaServlet extends HttpServlet {
         List<ProdottoBean> result = null;
 
         try {
-            result = (categoria == "tutti") ? (List<ProdottoBean>) model.doRetrieveAll() : model.doRetrieveByKey(categoria);
+            result = (categoria == "tutti") ? model.doRetrieveAll() : model.doRetrieveByKey(categoria);
         } catch (SQLException e) {
             e.printStackTrace();
         }

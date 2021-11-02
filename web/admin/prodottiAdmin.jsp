@@ -16,7 +16,7 @@
 
 <section id="standard">
     <p>Aggiungi un nuovo prodotto</p>
-    <form>
+    <form action="${pageContext.servletContext.contextPath}/aggiungiProdotto" method="post">
         <table>
             <tr>
                 <td>Nome prodotto</td>
@@ -54,6 +54,9 @@
             <tr>
                 <td>Punteggio minimo</td>
                 <td><input type="number" name="punteggio" value="1000" placeholder="1000" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit"></td>
             </tr>
         </table>
     </form>

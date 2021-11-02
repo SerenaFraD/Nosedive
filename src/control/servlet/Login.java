@@ -18,8 +18,8 @@ import java.sql.SQLException;
 public class Login extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher;
         HttpSession session = request.getSession();
-        String action = request.getParameter("action");
         UtenteDao modelUtente = new UtenteDao();
         UtenteBean saved;
         String email, password;
@@ -34,19 +34,18 @@ public class Login extends HttpServlet {
                 saved = modelUtente.doRetrieveByEmail(email);
                 if (saved == null || !saved.getPassword().equals(password)) {
                     request.setAttribute("messaggio", "Utente non trovato");
-                    response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/message.jsp"));
+                    requestDispatcher = this.getServletContext().getRequestDispatcher( "/message.jsp");
                 } else {
-
                     session.setMaxInactiveInterval(60 * 60);
                     session.setAttribute("utente", saved);
 
-                    RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/homepage.jsp");
-                    requestDispatcher.forward(request, response);
+                    requestDispatcher = request.getServletContext().getRequestDispatcher("/homepage.jsp");
                 }
             } catch (SQLException e) {
                 request.setAttribute("messaggio", "Errore");
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/error.jsp"));
+                requestDispatcher = request.getServletContext().getRequestDispatcher("/error.jsp");
             }
+            requestDispatcher.forward(request, response);
 
         } catch (NullPointerException e) {
             System.out.println("sono qui aaaa");
