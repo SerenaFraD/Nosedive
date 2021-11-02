@@ -22,12 +22,12 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
     private int punteggio;
     private int id_relazione;
     private int id_lavoro;
-    private Blob propic;
+    private String propic;
     private boolean sesso;
     private boolean deceduto;
     private boolean bloccato;
 
-    public UtenteBean(int id_utente, String email, String nome, String password, Boolean sup, String compleanno, int punteggio, int id_relazione, int id_lavoro, Blob propic, boolean sesso, boolean deceduto, boolean bloccato) {
+    public UtenteBean(int id_utente, String email, String nome, String password, Boolean sup, String compleanno, int punteggio, int id_relazione, int id_lavoro, String propic, boolean sesso, boolean deceduto, boolean bloccato) {
         this.id_utente = id_utente;
         this.email = email;
         this.nome = nome;
@@ -133,11 +133,11 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
         this.id_lavoro = id_lavoro;
     }
 
-    public Blob getPropic() {
+    public String getPropic() {
         return propic;
     }
 
-    public void setPropic(Blob propic) {
+    public void setPropic(String propic) {
         this.propic = propic;
     }
 

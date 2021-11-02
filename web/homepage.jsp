@@ -1,6 +1,8 @@
+<%
+    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+%>
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
     <title>Profilo</title>
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
@@ -12,7 +14,7 @@
     <meta name="author" content="Serena D'Urso">
 </head>
 
-<body>
+<body  onload="mostraPost('<%utente.getPunteggio();%>', true, '${pageContext.request.contextPath}')">
 <%@ include file="navigation.jsp" %>
 
 <section id="standard">
@@ -22,13 +24,17 @@
             <input type="file" id="image" name="files[]"
                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>
-            <input class="publish" type="submit" disabled>
+            <input class="publish" type="submit" onclick="mostraPost('<%utente.getPunteggio();%>', true, '${pageContext.request.contextPath}')" disabled>
         </form>
     </div>
 
     <hr>
 
     <div id="post">
+        <script>
+
+        </script>
+        <!--
         <img src="img/userIcon.png">
         <div>
             <p class="nome">Nome Utente</p>
@@ -60,13 +66,14 @@
                 <input class="publishComment" type="submit" disabled>
             </form>
         </div>
+        -->
     </div>
 </section>
 
 <script src="${pageContext.servletContext.contextPath}/js/showCommentArea.js"></script>
-<script src="${pageContext.servletContext.contextPath}//starAnimation.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/starAnimation.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/abilitateButton.js"></script>
-
+<script src="${pageContext.servletContext.contextPath}/js/mostraPost.js"></script>
 </body>
 
 </html>

@@ -7,31 +7,6 @@ DROP USER IF EXISTS 'nosedive'@'localhost';
 CREATE USER 'nosedive'@'localhost' IDENTIFIED BY 'root';
 GRANT ALL ON Nosedive.* TO 'nosedive'@'localhost';
 
-CREATE TABLE Utente
-(
-    id_utente    INT          NOT NULL AUTO_INCREMENT,
-    email        VARCHAR(25)  NOT NULL,
-    nome         VARCHAR(25)  NOT NULL,
-    pwd          VARCHAR(255) NOT NULL,
-    sup          BOOL         NOT NULL DEFAULT FALSE,
-    compleanno   VARCHAR(10)  NOT NULL,
-    punteggio    INT          NOT NULL DEFAULT '1000',
-    id_relazione INT                   DEFAULT NULL,
-    id_lavoro    INT                   DEFAULT NULL,
-    propic       MEDIUMBLOB,
-    sesso        BOOL         NOT NULL DEFAULT FALSE, -- false = maschio
-    deceduto     BOOL         NOT NULL DEFAULT FALSE, -- false = utente in vita
-    bloccato     BOOL         NOT NULL DEFAULT FALSE, -- false = non bloccato
-
-    PRIMARY KEY (id_utente),
-    FOREIGN KEY (id_relazione) REFERENCES Relazione (id_relazione)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (id_lavoro) REFERENCES Lavoro (id_lavoro)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 CREATE TABLE Relazione
 (
     id_relazione INT          NOT NULL AUTO_INCREMENT,
@@ -50,12 +25,51 @@ CREATE TABLE Lavoro
     PRIMARY KEY (id_lavoro)
 );
 
+CREATE TABLE Utente
+(
+    id_utente    INT          NOT NULL AUTO_INCREMENT,
+    email        VARCHAR(25)  NOT NULL,
+    nome         VARCHAR(25)  NOT NULL,
+    pwd          VARCHAR(255) NOT NULL,
+    sup          BOOL         NOT NULL DEFAULT FALSE,
+    compleanno   VARCHAR(10)  NOT NULL,
+    punteggio    INT          NOT NULL DEFAULT '1000',
+    id_relazione INT                   DEFAULT NULL,
+    id_lavoro    INT                   DEFAULT NULL,
+    propic       VARCHAR(255) DEFAULT NULL,
+    sesso        BOOL         NOT NULL DEFAULT FALSE, -- false = maschio
+    deceduto     BOOL         NOT NULL DEFAULT FALSE, -- false = utente in vita
+    bloccato     BOOL         NOT NULL DEFAULT FALSE, -- false = non bloccato
+
+
+    PRIMARY KEY (id_utente),
+    FOREIGN KEY (id_relazione) REFERENCES Relazione (id_relazione)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_lavoro) REFERENCES Lavoro (id_lavoro)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Carta
+(
+    id_carta     INT NOT NULL AUTO_INCREMENT,
+    id_utente    INT NOT NULL,
+    codice_carta VARCHAR(16) DEFAULT NULL,
+    cvv          VARCHAR(4) DEFAULT NULL,
+    scadenza    VARCHAR(5) DEFAULT NULL,
+
+    PRIMARY KEY (id_carta),
+    FOREIGN KEY (id_utente) REFERENCES Utente(id_utente)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 CREATE TABLE Azione
 (
     id_azione INT          NOT NULL AUTO_INCREMENT,
     nome      VARCHAR(255) NOT NULL,
     punteggio INT          NOT NULL,
-
     PRIMARY KEY (id_azione)
 );
 
@@ -153,27 +167,33 @@ CREATE TABLE Carrello
     id_utente   INT     NOT NULL,
     abilitato   BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (id_carrello),
-    FOREIGN KEY (id_utente)
-        REFERENCES Utente (id_utente)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (id_prodotto)
-        REFERENCES Prodotto (id_prodotto)
-        ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (id_utente) REFERENCES Utente (id_utente)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_prodotto) REFERENCES Prodotto (id_prodotto)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE Ordine
 (
     id_ordine   INT  NOT NULL AUTO_INCREMENT,
     id_carrello INT  NOT NULL,
+    id_carta INT NOT NULL,
     data        DATE NOT NULL,
 
     PRIMARY KEY (id_ordine),
     FOREIGN KEY (id_carrello) REFERENCES Carrello (id_carrello)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_carta) REFERENCES Carta (id_carta)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 -- Inserimento Utenti
 INSERT INTO Utente(email, nome, pwd, sup, compleanno, punteggio, id_relazione, id_lavoro, propic, sesso, deceduto)
-VALUES ('risi@gmail.com', 'Prof. Michele Risi', Michele99, 0,NULL, 2000, 1, 1, NULL, 0, 0);
+VALUES ('risi@gmail.com', 'Prof. Michele Risi', Michele99, 0, NULL, 2000, 1, 1, NULL, 0, 0);
 INSERT INTO Utente(email, nome, pwd, sup, compleanno, punteggio, id_relazione, id_lavoro, propic, sesso, deceduto)
 VALUES ('serena@gmail.com', 'Serena', Serena99, 1, NULL, 2000, 2, 3, NULL, 1, 0);
 INSERT INTO Utente(email, nome, pwd, sup, compleanno, punteggio, id_relazione, id_lavoro, propic, sesso, deceduto)
@@ -251,7 +271,7 @@ VALUES (2, '2021-07-20 11:58', NULL, 'Ulisse dorme sul letto.');
 INSERT INTO Post(id_utente, timestamp, postpic, testo)
 VALUES (3, '2021-07-19 01:26', NULL, 'Non riesco a dormire.');
 INSERT INTO Post(id_utente, timestamp, postpic, testo)
-VALUES (4, '2021-07-19 01:26', NULL, 'Odio Nosedive.');
+VALUES (4, '2021-07-19 01:26', NULL, 'Amo Nosedive.');
 
 -- Inserimento Commenti
 INSERT INTO Commento(id_commentatore, id_post, id_utente, timestamp, testo)
@@ -302,3 +322,11 @@ INSERT INTO Carrello(id_prodotto, id_utente, abilitato)
 VALUES (1, 2, 0);
 INSERT INTO Carrello(id_prodotto, id_utente, abilitato)
 VALUES (2, 2, 1);
+
+-- Carta
+INSERT INTO Carta(id_utente, codice_carta, cvv, scadenza)
+VALUES (1, 1231456789456, 598, 04/23);
+INSERT INTO Carta(id_utente, codice_carta, cvv, scadenza)
+VALUES (2, 1231456789465, 589, 12/24);
+INSERT INTO Carta(id_utente, codice_carta, cvv, scadenza)
+VALUES (3, 1231456789546, 523, 09/25);

@@ -3,7 +3,7 @@ function mostraProdotti(categoria, contextPath) {
     console.log(categoria)
     $.ajax({
         type: 'POST',
-        url: contextPath + '/Categoria',
+        url: contextPath + '/categoria',
         data: {
             categoria: categoria
         },
@@ -76,5 +76,5 @@ function nuovaRiga(contextPath, data) { //dati json
         row.appendChild(col)
 
     })
-    document.getElementById('showProd').appendChild(row)
+    document.getElementById('mostraProdotti').appendChild(row)
 }

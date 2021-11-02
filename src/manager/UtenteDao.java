@@ -35,7 +35,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
             ps.setInt(6, bean.getPunteggio());
             ps.setInt(7, bean.getId_relazione());
             ps.setInt(8, bean.getId_lavoro());
-            ps.setBlob(9, bean.getPropic());
+            ps.setString(9, bean.getPropic());
             ps.setBoolean(10, bean.isSesso());
             ps.setBoolean(11, bean.isDeceduto());
 
@@ -102,7 +102,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
             ps.setInt(6, bean.getPunteggio());
             ps.setInt(7, bean.getId_relazione());
             ps.setInt(8, bean.getId_lavoro());
-            ps.setBlob(9, bean.getPropic());
+            ps.setString(9, bean.getPropic());
             ps.setBoolean(10, bean.isSesso());
             ps.setBoolean(11, bean.isDeceduto());
 
@@ -131,7 +131,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
 
             ps.setInt(1, bean.getId_relazione());
             ps.setInt(2, bean.getId_lavoro());
-            ps.setBlob(3, bean.getPropic());
+            ps.setString(3, bean.getPropic());
             ps.setInt(4, bean.getId_utente());
 
             int result = ps.executeUpdate();
@@ -270,7 +270,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 bean.setPunteggio(rs.getInt("punteggio"));
                 bean.setId_relazione(rs.getInt("id_relazione"));
                 bean.setId_lavoro(rs.getInt("id_lavoro"));
-                bean.setPropic(rs.getBlob("propic"));
+                bean.setPropic(rs.getString("propic"));
                 bean.setSesso(rs.getBoolean("sesso"));
                 bean.setDeceduto(rs.getBoolean("deceduto"));
             }
@@ -379,7 +379,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 bean.setPunteggio(rs.getInt("punteggio"));
                 bean.setId_relazione(rs.getInt("id_relazione"));
                 bean.setId_lavoro(rs.getInt("id_lavoro"));
-                bean.setPropic(rs.getBlob("propic"));
+                bean.setPropic(rs.getString("propic"));
                 bean.setSesso(rs.getBoolean("sesso"));
                 bean.setDeceduto(rs.getBoolean("deceduto"));
 

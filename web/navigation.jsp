@@ -16,8 +16,13 @@
             <a href="index.jsp"><img class="navBar" src="img/logoSmall.png" alt="logo piccolo"></a>
         </li>
         <li>
-            <a href="homepage.jsp">
+            <a href="${pageContext.request.contextPath}/homepage.jsp">
                 <h3>Home</h3>
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}/prodotti.jsp">
+                <h3>Shop</h3>
             </a>
         </li>
     </ul>
@@ -38,6 +43,9 @@
         <li><a href="${pageContext.request.contextPath}/userprofile.jsp">
             <h3>Profilo</h3>
         </a></li>
+        <li><a href="${pageContext.request.contextPath}/ordini.jsp">
+            <h3>Ordine</h3>
+        </a></li>
     </ul>
 
 
@@ -48,7 +56,7 @@
         </li>
     </ul>
     <%
-        } //parentesi if admin
+        } //parentesi if supervisor
     } else {
     %>
     <ul class="navBar">

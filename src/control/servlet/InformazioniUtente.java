@@ -35,7 +35,7 @@ public class InformazioniUtente extends HttpServlet {
                 if (action.equals("updateInfoUtente") && otherProfile == null) {
                     String lavoro = request.getParameter("lavoro");
                     String relazione = request.getParameter("relazione");
-                    Blob image = (Blob) request.getSession().getAttribute("image");
+                    String image = (String) request.getSession().getAttribute("image");
 
                     bean = new UtenteBean();
                     bean.setId_utente(myProfile.getId_utente());

@@ -21,7 +21,6 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         UtenteDao modelUtente = new UtenteDao();
-        InformazioniUtenteDao modelInfo = new InformazioniUtenteDao();
         UtenteBean saved;
         String email, password;
 
@@ -40,10 +39,6 @@ public class Login extends HttpServlet {
 
                     session.setMaxInactiveInterval(60 * 60);
                     session.setAttribute("utente", saved);
-
-
-
-
 
                     RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/homepage.jsp");
                     requestDispatcher.forward(request, response);

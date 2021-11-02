@@ -1,8 +1,12 @@
-<%@ page import="model.UtenteBean" %>
+<%@ page import="model.UtenteBean"%>
+
 <!DOCTYPE html>
 <html lang="it">
 <%
     UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+    UtenteBean otherUtente = (UtenteBean) session.getAttribute("otherUtente");
+    boolean follows = (boolean) session.getAttribute("follows");
+    int userIdPost = (otherUtente != null)? utente.getId_utente() : otherUtente.getId_utente();
 %>
 <head>
     <meta charset="utf-8">
@@ -15,26 +19,40 @@
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
     <link href="css/profile.css" rel="stylesheet">
 </head>
-<body>
+
+<body onload="mostraPost('<%=userIdPost%>', false, '${pageContext.request.contextPath}')">
 <%@ include file="navigation.jsp" %>
 <section id="standard">
     <img id="propic" src="img/userIcon.png">
     <div class="information">
-        <p class="nome"><%utente.getNome()%></p>
-        <p class="categoria">Categoria utente</p>
+        <p class="nome"><%if(otherUtente == null) utente.getNome(); else otherUtente.getNome();%></p>
+
+        <%if(otherUtente != null) {%>
+        <p class="categoria"><%otherUtente.getPunteggio();%></p>
+        <%}%>
+
         <p class="bloccato">
-            <%if(utente.isDeceduto())%>
+            <%if(otherUtente == null) utente.isBloccato(); else otherUtente.isBloccato();%>
             Deceduto
-            <% if(utente.isBloccato())%>
+            <%if(otherUtente == null) utente.isDeceduto(); else otherUtente.isDeceduto();%>
             Bloccato
         </p>
+
+        <% if(otherUtente != null) { %>
+        <form action="<%if(follows) {%> follow <%} else {%> unfollow <%}%>" method="get">
+            <button>
+                <%if(follows) {%> Follow <%} else {%> Unfollow <%}%>"
+            </button>
+        </form>
+        <%}%>
     </div>
 
     <hr>
+    <% if(otherUtente != null) { %>
     <div id="publish">
-        <form action="publish" method="POST" name="publish">
-            <textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
-            <input type="file" id="image" name="files[]"
+        <form action="postPublish" method="POST" name="publish">
+            <textarea name="testo" id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
+            <input type="file" id="image" name="files"
                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>
             <input class="publish" type="submit" disabled>
@@ -42,10 +60,15 @@
     </div>
 
     <hr>
+    <%}%>
 
     <div id="post">
+        <script>
+
+        </script>
+        <!--
         <div>
-            <p class="nome">DataPostEccheccazzo</p>
+            <p class="nome">DataPost</p>
         </div>
 
         <p class="text">
@@ -73,12 +96,15 @@
                 <input class="publishComment" type="submit" disabled>
             </form>
         </div>
+        -->
     </div>
+
 </section>
 
 <script src="${pageContext.servletContext.contextPath}/js/showCommentArea.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/starAnimation.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/abilitateButton.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/mostraPost.js"></script>
 </body>
 
 </html>

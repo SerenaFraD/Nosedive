@@ -1,7 +1,6 @@
 package manager;
 
 import control.servlet.DriverManagerConnectionPool;
-import model.Categoria;
 import model.PostBean;
 
 import java.sql.Connection;
@@ -74,12 +73,83 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         Connection con = null;
         ResultSet rs;
         PostBean bean = null;
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE =?";
+        String selectQuery = "SELECT * from " + TABLE_NAME + " where id_post = ?";
 
         try {
             con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
-            ps.setString(1, String.valueOf(keys));
+            ps.setInt(1, keys);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                bean = new PostBean();
+                bean.setId_post(rs.getInt("id_post"));
+                bean.setId_utente(rs.getInt("id_utente"));
+                bean.setTimestamp(rs.getString("timestamp"));
+                bean.setPostpic(rs.getString("postpic"));
+                bean.setTesto(rs.getString("testo"));
+            }
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+
+        return bean;
+    }
+
+    public PostBean doRetrieveProfile(Integer keys) throws SQLException {
+        PreparedStatement ps = null;
+        Connection con = null;
+        ResultSet rs;
+        PostBean bean = null;
+        String selectQuery = "SELECT * from " + TABLE_NAME + " where id_utente = ?";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(selectQuery);
+            ps.setInt(1, keys);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                bean = new PostBean();
+                bean.setId_post(rs.getInt("id_post"));
+                bean.setId_utente(rs.getInt("id_utente"));
+                bean.setTimestamp(rs.getString("timestamp"));
+                bean.setPostpic(rs.getString("postpic"));
+                bean.setTesto(rs.getString("testo"));
+            }
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                pool.releaseConnection(con);
+            }
+        }
+
+        return bean;
+    }
+
+    public PostBean doRetrieveHomepage(Integer keys) throws SQLException {
+        PreparedStatement ps = null;
+        Connection con = null;
+        ResultSet rs;
+        PostBean bean = null;
+        int min = (int) (keys - (keys * 0.20));
+        int max = (int) (keys + (keys * 0.30));
+        String selectQuery = "SELECT testo, timestamp from post where id_utente in(select id_utente from utente where punteggio BETWEEN ? and ?)";
+
+        try {
+            con = pool.getConnection();
+            ps = con.prepareStatement(selectQuery);
+            ps.setInt(1, min);
+            ps.setInt(2, max);
 
             rs = ps.executeQuery();
 
