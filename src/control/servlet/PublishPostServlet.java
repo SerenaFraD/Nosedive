@@ -3,7 +3,6 @@ package control.servlet;
 import manager.PostDao;
 import model.PostBean;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/postPublish")
-public class PublishServlet extends HttpServlet {
+public class PublishPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String text = request.getParameter("testo");
         String img = request.getParameter("files");
@@ -30,6 +29,6 @@ public class PublishServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //todo: dispacher
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/homepage.jsp"));
     }
 }

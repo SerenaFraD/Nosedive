@@ -51,20 +51,6 @@ CREATE TABLE Utente
         ON DELETE CASCADE
 );
 
-CREATE TABLE Carta
-(
-    id_carta     INT NOT NULL AUTO_INCREMENT,
-    id_utente    INT NOT NULL,
-    codice_carta VARCHAR(16) DEFAULT NULL,
-    cvv          VARCHAR(4) DEFAULT NULL,
-    scadenza    VARCHAR(5) DEFAULT NULL,
-
-    PRIMARY KEY (id_carta),
-    FOREIGN KEY (id_utente) REFERENCES Utente(id_utente)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 CREATE TABLE Azione
 (
     id_azione INT          NOT NULL AUTO_INCREMENT,
@@ -323,10 +309,3 @@ VALUES (1, 2, 0);
 INSERT INTO Carrello(id_prodotto, id_utente, abilitato)
 VALUES (2, 2, 1);
 
--- Carta
-INSERT INTO Carta(id_utente, codice_carta, cvv, scadenza)
-VALUES (1, 1231456789456, 598, 04/23);
-INSERT INTO Carta(id_utente, codice_carta, cvv, scadenza)
-VALUES (2, 1231456789465, 589, 12/24);
-INSERT INTO Carta(id_utente, codice_carta, cvv, scadenza)
-VALUES (3, 1231456789546, 523, 09/25);

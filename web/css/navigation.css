@@ -29,12 +29,12 @@ ul.navBar li {
     display: inline-block;
 }
 
+.sarchBar {
+    margin-top: 10px;
+}
+
 img.navBar {
     height: 20px;
 }
-/*
-.navbar-custom{
-    background-color: #6e585d;
 
-}
- */
+

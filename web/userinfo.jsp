@@ -61,13 +61,15 @@
                 if (otherUtente == null) {
             %>
             <td>
-                <select name="lavoro" id="lavoro" onchange="modificaInformazioni()">
-                    <option value=" ">Lavoro</option>
-                    <option value="impiegato">Impiegato</option>
-                    <option value="studente">Studente</option>
-                    <option value="insegnante">Insegnante</option>
-                    <option value="operaio">Operaio</option>
-                </select>
+                <form action="">
+                    <select name="lavoro" id="lavoro" onchange="modificaInformazioni(this.value, 'lavoro', '${pageContext.request.contextPath}')">
+                        <option value=" ">Lavoro</option>
+                        <option value="impiegato">Impiegato</option>
+                        <option value="studente">Studente</option>
+                        <option value="insegnante">Insegnante</option>
+                        <option value="operaio">Operaio</option>
+                    </select>
+                </form>
             </td>
             <%}%>
         </tr>
@@ -79,12 +81,14 @@
                 if (otherUtente == null) {
             %>
             <td>
-                <select name="relazione" id="relazione" onchange="modificaInformazioni()">
+                <form action="">
+                <select name="relazione" id="relazione" onchange="modificaInformazioni(this.value, 'relazione', '${pageContext.request.contextPath}')">
                     <option value="">Relazione</option>
                     <option value="sposato">Sposato</option>
                     <option value="fidanzato">Fidanzato</option>
                     <option value="single">Single</option>
                 </select>
+                </form>
             </td>
             <%}%>
         </tr>

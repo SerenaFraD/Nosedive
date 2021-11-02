@@ -17,6 +17,7 @@ public class PostBean implements Serializable {
         id_post = -1;
         id_utente = -1;
         timestamp = "";
+		postpic = null;
         testo = "";
     }
     

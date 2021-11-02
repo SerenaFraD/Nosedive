@@ -123,7 +123,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         return bean;
     }
 
-    public Lavoro doRetrieveByKey(Integer keys) throws SQLException {
+    public Relazione doRetrieveByKey(Integer keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;

@@ -1,9 +1,10 @@
-function modificaInformazioni(informazione, contextPath) {
+function modificaInformazioni(informazione, categoria, contextPath) {
     $.ajax({
         type: 'POST',
-        url: contextPath + '/Informazioni',
+        url: contextPath + '/informazioniUtente',
         data: {
-            informazione: informazione
+            informazione: informazione,
+            tabella: categoria
         },
         success: function (data) {
             console.log(data)

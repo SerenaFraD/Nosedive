@@ -1,92 +1,86 @@
-//todo H - porcodue - diventerà pagina gestione utenti
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../navigation.jsp" %>
+<%@ page import="model.UtenteBean" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    String lavoro = (String) request.getSession().getAttribute("lavoro");
+    String relazione = (String) request.getSession().getAttribute("relazione");
+    UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("altroUtente");
+%>
 <html>
 <head>
-    <title>Admin</title>
-    <link rel="stylesheet" href="../css/StyleAdmin.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Info utente">
+    <meta name="author" content="Serena D'Urso">
+
+    <title>Informazioni utente</title>
+
+    <link rel="icon" type="image/x-icon" href="../img/logoSmall.png"/>
+    <link href="../css/infoUtente.css" rel="stylesheet">
 </head>
-
 <body>
-<%@ include file= "../navigation.jsp" %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-        <h2>Inserimento Prodotti</h2>
-        <form action="${pageContext.request.contextPath}/AdminServlet" method="POST" onsubmit="console.log('ciao')">
-            <select name="categoria" id="selectCategoria" >
-                <option value="Carrozzeria" id="optionCarrozzeria" selected="selected">Carrozzeria</option>
-                <option value="Pneumatici" id="optionPneumatici">Pneumatici</option>
-                <option value="Meccanica" id="optionMeccanica">Meccanica</option>
-            </select><br>
-
-            <label>Nome:</label><br>
-            <input name="name" type="text" maxlength="20" placeholder="Inserisci nome" required><br>
-
-            <label>Codice:</label><br>
-            <input name="codProd" type="text" maxlength="5" placeholder="Inserisci codice" required><br>
-
-            <label>Link img:</label><br>
-            <input name="img" type="text" maxlength="200" placeholder="Inserisci link img" required><br>
-
-            <label>Descrizione:</label><br>
-            <textarea name="description" maxlength="100" rows="3" placeholder="Inserisci la descrizione" required></textarea><br>
-
-            <label>Prezzo:</label><br>
-            <input name="price" type="number" min="0" value="0" required><br>
-
-            <label>Marca:</label><br>
-            <input name="brand" type="text" maxlength="20" placeholder="Inserisci Marca" required><br>
-
-            <label>Disponibilitá:</label><br>
-            <input name="availability" type="text" maxlength="1" placeholder="Inserisci Disponibilitá (y o n)" required><br>
-
-            <label>Offerta:</label><br>
-            <input name="offer" type="text" maxlength="1" placeholder="Inserisci Offerta (y o n)" required><br>
-
-            <label>Quantitá:</label><br>
-            <input name="quantity" type="number" min="1" value="1" ><br>
-
-            <div class="aggiuntivi" id="meccanica">
-            <label>Impiego:</label><br>
-            <input name="use" type="text" maxlength="20" placeholder="Candela" ><br>
-            </div>
-
-            <div class="aggiuntivi" id="pneumatici">
-            <label>Misure:</label><br>
-            <input name="measure" type="text" maxlength="9" placeholder="150/70R16"><br>
-
-            <label>Stagione:</label><br>
-            <input name="season" type="text" maxlength="20" placeholder="Invernali"><br>
-            </div>
-
-            <div class="aggiuntivi" id="carrozzeria">
-            <label>Materiale:</label><br>
-            <input name="material" type="text" maxlength="20" placeholder="Carbonio"><br>
-            </div>
-            <input name="action" value="insert" hidden>
-
-            <button type="Submit">Invia</button>
-            <input type="reset" value="Reset">
-        </form>
-    </div>
-
-    <div class="col-sm">
-        <h2 style="color:orangered;">Eliminazione Prodotti</h2>
-        <form action="${pageContext.request.contextPath}/AdminServlet" method="POST">
-            <fieldset>
-                <label>Codice:</label><br>
-                <input name="codProdEl" type="text" maxlength="5" placeholder="Cxxxx" required><br>
-
-                <input type="submit" name="action" value="Delete">
-            </fieldset>
-        </form>
-
-    </div>
-</div>
-</div>
+<section id="standard">
+    <p>Informazioni utente</p>
+    <table>
+        <tr>
+            <td>Nome</td>
+            <td><%=otherUtente.getNome()%>
+            </td>
+        </tr>
+        <tr>
+            <td>Punteggio</td>
+            <td><%=otherUtente.getPunteggio()%>
+            </td>
+        </tr>
+        <tr>
+            <td>E-mail</td>
+            <td><%=otherUtente.getEmail()%>
+            </td>
+        </tr>
+        <tr>
+            <td>Data di nascita</td>
+            <td><%=otherUtente.getCompleanno()%>
+            </td>
+        </tr>
+        <tr>
+            <td>Lavoro</td>
+            <td><%=lavoro%>
+            </td>
+        </tr>
+        <tr>
+            <td>Relazione</td>
+            <td><%=relazione%>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="">
+                    <label for="bloccare"> Bloccare? </label>
+                    <input type="checkbox" id="bloccare" name="bloccare" value="<%otherUtente.isBloccato();%>">
+                    <input type="submit" value="Submit" onchange="modificaInformazioni(this.value, 'bloccato', '${pageContext.request.contextPath}')">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="">
+                    <label  for="deceduto"> Deceduto? </label>
+                    <input type="checkbox" id="deceduto" name="deceduto" value="<%otherUtente.isDeceduto();%>">
+                    <input type="submit" value="Submit" onchange="modificaInformazioni(this.value, 'deceduto', '${pageContext.request.contextPath}')">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Sesso</td>
+            <td><%=relazione%>
+            </td>
+        </tr>
+    </table>
+</section>
 
 </body>
 </html>
 
-<script src="${pageContext.servletContext.contextPath}/js/Admin.js"></script>
+
+

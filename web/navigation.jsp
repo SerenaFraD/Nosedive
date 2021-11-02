@@ -31,8 +31,8 @@
     <ul class="navBar">
         <li>
             <form action="SearchServlet" method="get">
-                <input type="search" placeholder="Search" aria-label="Search" name="chiave">
-                <button type="submit">Search</button>
+                <input name="searchBar" type="search" placeholder="Search" aria-label="Search" name="chiave">
+                <button name="searchBar" type="submit">Search</button>
             </form>
         </li>
         <li><img class="navBar" src="img/starIcon.svg" alt="stella"></li>
