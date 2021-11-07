@@ -1,4 +1,4 @@
-<%@ include file="../navigation.jsp" %>
+<%@ include file="navigation.jsp" %>
 <%@ page import="model.UtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
@@ -15,8 +15,8 @@
 
     <title>Informazioni utente</title>
 
-    <link rel="icon" type="image/x-icon" href="../img/logoSmall.png"/>
-    <link href="../css/infoUtente.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
+    <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
 
@@ -78,11 +78,6 @@
                     <input type="checkbox" id="supervisor" name="deceduto" value="<%=otherUtente.isSupervisor()%>">
                     <input type="submit" value="Submit" onchange="modificaInformazioni(this.value, 'supervisore', '${pageContext.request.contextPath}')">
                 </form>
-            </td>
-        </tr>
-        <tr>
-            <td>Sesso</td>
-            <td><%=relazione%>
             </td>
         </tr>
     </table>

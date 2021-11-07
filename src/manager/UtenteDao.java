@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import control.servlet.DriverManagerConnectionPool;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.UtenteBean;
@@ -291,7 +291,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         Connection con = null;
         ResultSet rs;
         UtenteBean bean;
-        List<UtenteBean> list = null;
+        List<UtenteBean> list = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=? ";
 
         try {

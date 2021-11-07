@@ -34,13 +34,12 @@ CREATE TABLE Utente
     sup          BOOL         NOT NULL DEFAULT FALSE,
     compleanno   VARCHAR(10)  NOT NULL,
     punteggio    INT          NOT NULL DEFAULT '1000',
-    id_relazione INT                   DEFAULT NULL,
-    id_lavoro    INT                   DEFAULT NULL,
+    id_relazione INT,
+    id_lavoro    INT,
     propic       VARCHAR(255) DEFAULT NULL,
     sesso        BOOL         NOT NULL DEFAULT FALSE, -- false = maschio
     deceduto     BOOL         NOT NULL DEFAULT FALSE, -- false = utente in vita
     bloccato     BOOL         NOT NULL DEFAULT FALSE, -- false = non bloccato
-
 
     PRIMARY KEY (id_utente),
     FOREIGN KEY (id_relazione) REFERENCES Relazione (id_relazione)

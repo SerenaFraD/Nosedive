@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
-    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+    UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
 %>
 <html>
 <head>
@@ -20,11 +20,6 @@
                 <h3>Home</h3>
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}/prodotti.jsp">
-                <h3>Shop</h3>
-            </a>
-        </li>
     </ul>
 
     <%if (utente != null) { %>
@@ -40,18 +35,18 @@
             <h3><%=utente.getPunteggio()%></h3>
         </li>
         <li><img class="navBar" src="img/userIcon.png" alt="utente"></li>
-        <li><a href="${pageContext.request.contextPath}/userprofile.jsp">
+        <li><a href="${pageContext.request.contextPath}/userprofile.jsp?id_utente=<%=utente.getId_utente()%>">
             <h3>Profilo</h3>
         </a></li>
         <li><a href="${pageContext.request.contextPath}/cart.jsp"><h3>Carrello</h3></a></li>
-        <li><h3 onclick="logout()">Esci</h3></li>
+        <li><a href="${pageContext.request.contextPath}/prodotti.jsp"><h3>Shop</h3></a></li>
+        <li><a href="#" onclick="logout()">Esci</a></li>
     </ul>
-
 
     <% if (utente.isSupervisor()) {%>
     <ul class="navBar">
         <li>
-            <a href="${pageContext.request.contextPath}/admin/prodottiAdmin.jsp">Add Prodotto</a>
+            <a href="${pageContext.request.contextPath}/prodottiAdmin.jsp">Add Prodotto</a>
         </li>
     </ul>
     <%

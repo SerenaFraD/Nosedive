@@ -30,8 +30,16 @@ public class InformazioniUtente extends HttpServlet {
         try {
             if (tabella == "relazione") {
                 bean.setId_relazione(relazioneModel.doRetrieveByKey(informazione).getId_relazione());
+                bean.setPunteggio(relazioneModel.doRetrieveByKey(informazione).getPunteggio());
             } else if (tabella == "lavoro") {
                 bean.setId_lavoro(lavoroModel.doRetrieveByKey(informazione).getId_lavoro());
+                bean.setPunteggio(lavoroModel.doRetrieveByKey(informazione).getPunteggio());
+            } else if(tabella == "supervisore") {
+                bean.setSupervisor(Boolean.parseBoolean(informazione));
+            } else if(tabella == "deceduto") {
+                bean.setDeceduto(Boolean.parseBoolean(informazione));
+            } else if(tabella == "bloccato") {
+                bean.setBloccato(Boolean.parseBoolean(informazione));
             } else {
                 bean.setPropic(informazione);
             }

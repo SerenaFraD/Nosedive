@@ -20,7 +20,7 @@
         <tr>
             <td><%=element.getNome()%></td>
             <td><%=element.getPunteggio()%></td>
-            <td><button onclick="window.location.href='<%=response.encodeURL("recuperaUtente?idUtente=" + element.getId_utente())%>'">Profilo</button></td>
+            <td><button onclick="window.location.href='<%=response.encodeURL("recuperaUtente?otherUtente=" + element.getId_utente())%>'">Profilo</button></td>
         </tr>
         <%}%>
     </table>

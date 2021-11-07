@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ include file="navigation.jsp" %>
 <html>
 <head>
     <title>Registrato! | Nosedive</title>
@@ -12,10 +12,10 @@
 </head>
 
 <body>
-<%@ include file="navigation.jsp" %>
+
 
 <div class="cont">
-    <p id="message"><%=request.getAttribute("message")%></p>
+    <p id="message"><%=request.getAttribute("messaggio")%></p>
 
     <div id="tasto">
         <a class="bottone" href="${pageContext.request.contextPath}/login.jsp" role="button">Accedi</a>

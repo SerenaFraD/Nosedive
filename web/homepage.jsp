@@ -1,6 +1,4 @@
-<%
-    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-%>
+<%@ include file="navigation.jsp" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,8 +13,6 @@
 </head>
 
 <body  onload="mostraPost('<%=utente.getPunteggio()%>', true, '${pageContext.request.contextPath}')">
-<%@ include file="navigation.jsp" %>
-
 <section id="standard">
     <div id="publish">
         <form action="${pageContext.request.contextPath}/postPublish" method="POST" name="publish">

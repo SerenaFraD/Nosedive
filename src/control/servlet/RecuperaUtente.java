@@ -20,10 +20,14 @@ public class RecuperaUtente extends HttpServlet {
         super();
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteDao utenteDao = new UtenteDao();
         UtenteBean bean;
-        int id_utente = Integer.parseInt(request.getParameter("idUtente"));
+        int id_utente = Integer.parseInt(request.getParameter("otherUtente"));
 
         try {
             bean = utenteDao.doRetrieveByKey(id_utente);

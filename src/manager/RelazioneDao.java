@@ -127,7 +127,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        Lavoro bean = null;
+        Relazione bean = null;
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_relazione=?";
 
         try {
@@ -138,8 +138,8 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                bean = new Lavoro();
-                bean.setId_lavoro(rs.getInt("id_lavoro"));
+                bean = new Relazione();
+                bean.setId_relazione(rs.getInt("id_lavoro"));
                 bean.setPunteggio(rs.getInt("punteggio"));
                 bean.setNome(rs.getString("nome"));
             }

@@ -1,4 +1,4 @@
-<%@ include file="../navigation.jsp" %>
+<%@ include file="navigation.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -9,8 +9,8 @@
 
     <title>Aggiungi prodotto</title>
 
-    <link rel="icon" type="image/x-icon" href="../img/logoSmall.png"/>
-    <link href="../css/infoUtente.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
+    <link href="css/infoUtente.css" rel="stylesheet">
 </head>
 <body>
 
@@ -20,21 +20,21 @@
         <table>
             <tr>
                 <td>Nome prodotto</td>
-                <td><input type="text" name="nome" value="Senza nome" placeholder="Nome prodotto" required></td>
+                <td><input type="text" name="nome" placeholder="Nome prodotto" required></td>
             </tr>
             <tr>
                 <td>Descrizione prodotto</td>
-                <td><input type="text" name="descrizione" value="Senza descrizione"
+                <td><input type="text" name="descrizione"
                            placeholder="Descrizione prodotto" required></td>
             </tr>
             <tr>
                 <td>Costo</td>
-                <td><input type="text" name="costo" value="0.0" placeholder="euro" required></td>
+                <td><input type="text" name="costo" placeholder="euro" required></td>
             </tr>
             <tr>
                 <td>Foto prodotto</td>
                 <td>
-                    <input type="file" id="image" name="file"
+                    <input id="image" type="file" maxlength="200" placeholder="Inserisci link img"
                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onchange="validaFoto()"/>
                     <label for="image">Select file</label>
                 </td>

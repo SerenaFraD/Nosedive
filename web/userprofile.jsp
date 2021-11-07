@@ -1,23 +1,22 @@
 <%@ page import="model.UtenteBean"%>
+<%@ include file="navigation.jsp" %>
 <%
-    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-    UtenteBean otherUtente = (UtenteBean) session.getAttribute("otherUtente");
-    boolean follows = (boolean) session.getAttribute("follows");
-    int userIdPost, punteggio = 0;
+    String other = request.getParameter("otherUtente");
+    UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("otherUtente");
+    int userIdPost, punteggio;
     String filename, nome;
 
-    if(otherUtente == null) {
-        filename = utente.getPropic();
+    if(other == null) {
         userIdPost = utente.getId_utente();
         nome = utente.getNome();
+        punteggio = utente.getPunteggio();
     }  else {
-        filename = otherUtente.getPropic();
         userIdPost = otherUtente.getId_utente();
         nome = otherUtente.getNome();
         punteggio = otherUtente.getPunteggio();
     }
 %>
-<%@ include file="navigation.jsp" %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -35,7 +34,7 @@
 <body onload="mostraPost('<%=userIdPost%>', false, '${pageContext.request.contextPath}')">
 
 <section id="standard">
-    <img id="propic" src="img/<%=filename%>" alt="Imagine profilo">
+    <img id="propic" src="img/userIcon.png" alt="Imagine profilo">
     <div class="information">
         <p class="nome"><%=nome%></p>
 
@@ -49,9 +48,9 @@
         </p>
 
         <% if(otherUtente != null) { %>
-        <form action="<%if(follows) {%> follow <%} else {%> unfollow <%}%>" method="get">
+        <form action="${pageContext.servletContext.contextPath}/follow" method="post">
             <button>
-                <%if(follows) {%> Follow <%} else {%> Unfollow <%}%>"
+                <%if(otherUtente != null) {%> Follow <%}%>
             </button>
         </form>
         <%}%>

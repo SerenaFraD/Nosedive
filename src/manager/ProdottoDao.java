@@ -28,7 +28,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
 
             ps.setString(1, bean.getNome());
             ps.setString(2, bean.getDescrizione());
-            ps.setBlob(3, bean.getImg());
+            ps.setString(3, bean.getImg());
             ps.setDouble(4, bean.getCosto());
             ps.setInt(5, bean.getCategoria());
             ps.setInt(6, bean.getPunteggio_min());
@@ -60,7 +60,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
 
             ps.setString(1, bean.getNome());
             ps.setString(2, bean.getDescrizione());
-            ps.setBlob(3, bean.getImg());
+            ps.setString(3, bean.getImg());
             ps.setDouble(4, bean.getCosto());
             ps.setInt(5, bean.getCategoria());
             ps.setInt(6, bean.getPunteggio_min());
@@ -103,7 +103,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 bean.setId_prodotto(rs.getInt("id_prodotto"));
                 bean.setNome(rs.getString("nome"));
                 bean.setDescrizione(rs.getString("descrizione"));
-                bean.setImg(rs.getBlob("img"));
+                bean.setImg(rs.getString("img"));
                 bean.setCosto(rs.getDouble("costo"));
                 bean.setCategoria(rs.getInt("id_categoria"));
                 bean.setPunteggio_min(rs.getInt("punteggio_minimo"));
@@ -142,7 +142,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 bean.setId_prodotto(rs.getInt("id_prodotto"));
                 bean.setNome(rs.getString("nome"));
                 bean.setDescrizione(rs.getString("descrizione"));
-                bean.setImg(rs.getBlob("img"));
+                bean.setImg(rs.getString("img"));
                 bean.setCosto(rs.getDouble("costo"));
                 bean.setCategoria(rs.getInt("id_categoria"));
                 bean.setPunteggio_min(rs.getInt("punteggio_minimo"));
@@ -182,7 +182,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 bean.setId_prodotto(rs.getInt("id_prodotto"));
                 bean.setNome(rs.getString("nome"));
                 bean.setDescrizione(rs.getString("descrizione"));
-                bean.setImg(rs.getBlob("img"));
+                bean.setImg(rs.getString("img"));
                 bean.setCosto(rs.getDouble("costo"));
                 bean.setCategoria(rs.getInt("id_categoria"));
                 bean.setPunteggio_min(rs.getInt("punteggio_minimo"));

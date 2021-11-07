@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaDao implements ModelDao<Categoria, Integer>  {
+public class CategoriaDao implements ModelDao<Categoria, Integer> {
     private static final String TABLE_NAME = "Lavoro";
     private static final DriverManagerConnectionPool pool = null;
 
@@ -92,7 +92,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer>  {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        Categoria bean = null;
+        Categoria bean = new Categoria();
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
@@ -103,7 +103,6 @@ public class CategoriaDao implements ModelDao<Categoria, Integer>  {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                bean = new Categoria();
                 bean.setId_categoria(rs.getInt("id_categoria"));
                 bean.setDescrizione(rs.getString("descrizione"));
                 bean.setNome(rs.getString("nome"));

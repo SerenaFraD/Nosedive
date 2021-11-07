@@ -44,7 +44,9 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
     }
 
     public UtenteBean() {
-        id_utente = id_relazione = id_lavoro =-1;
+        id_utente = -1;
+        id_relazione = 3;
+        id_lavoro = 2;
         nome = email = password = compleanno =  "";
         punteggio = 1000;
         propic = null;
@@ -114,7 +116,7 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
     }
 
     public void setPunteggio(int punteggio) {
-        this.punteggio = punteggio;
+        this.punteggio += punteggio;
     }
 
     public int getId_relazione() {

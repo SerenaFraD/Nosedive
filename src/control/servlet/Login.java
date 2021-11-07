@@ -34,12 +34,12 @@ public class Login extends HttpServlet {
                 saved = modelUtente.doRetrieveByEmail(email);
                 if (saved == null || !saved.getPassword().equals(password)) {
                     request.setAttribute("messaggio", "Utente non trovato");
-                    requestDispatcher = this.getServletContext().getRequestDispatcher( "/message.jsp");
+                    requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
                 } else {
                     session.setMaxInactiveInterval(60 * 60);
-                    session.setAttribute("utente", saved);
-
-                    requestDispatcher = request.getServletContext().getRequestDispatcher("/homepage.jsp");
+                    request.getSession().setAttribute("utente", saved);
+                    requestDispatcher = this.getServletContext().getRequestDispatcher("/homepage.jsp");
+                    requestDispatcher.forward(request, response);
                 }
             } catch (SQLException e) {
                 request.setAttribute("messaggio", "Errore");
@@ -50,5 +50,6 @@ public class Login extends HttpServlet {
         } catch (NullPointerException e) {
             System.out.println("sono qui aaaa");
         }
+
     }
 }

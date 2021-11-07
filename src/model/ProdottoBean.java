@@ -10,7 +10,7 @@ public class ProdottoBean implements Serializable {
     private int id_prodotto;
     private String nome;
     private String descrizione;
-    private Blob img;
+    private String img;
     private double costo;
     private int categoria;
     private int punteggio_min;
@@ -49,11 +49,11 @@ public class ProdottoBean implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public Blob getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(Blob img) {
+    public void setImg(String img) {
         this.img = img;
     }
 

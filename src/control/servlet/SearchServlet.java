@@ -13,11 +13,12 @@ import java.util.List;
 
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
-    UtenteDao modelUtente = new UtenteDao();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String chiave = request.getParameter("chiave");
+        UtenteDao modelUtente = new UtenteDao();
 
         try {
             List<UtenteBean> utente = modelUtente.doRetrieveByName(chiave);

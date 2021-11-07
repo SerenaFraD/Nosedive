@@ -1,9 +1,9 @@
 <%@ page import="model.UtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="navigation.jsp" %>
 <%
     String lavoro = (String) request.getSession().getAttribute("lavoro");
     String relazione = (String) request.getSession().getAttribute("relazione");
-    UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
     UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("altroUtente");
 %>
 <html>

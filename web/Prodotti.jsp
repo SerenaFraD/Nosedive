@@ -1,6 +1,7 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="model.ProdottoBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="navigation.jsp" %>
 <%
     Collection<?> products = (Collection<?>) request.getAttribute("products");
     ProdottoBean product = (ProdottoBean) request.getAttribute("Prodotto");
@@ -20,7 +21,7 @@
 </head>
 
 <body>
-<%@ include file="navigation.jsp" %>
+
 
 <h1>Negozio</h1>
     <%if(categoria == null){%>

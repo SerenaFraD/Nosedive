@@ -27,7 +27,7 @@ public class Register extends HttpServlet {
         if (session.getAttribute("utente") != null) {
             //non dovrei mai trovarmi in questa situazione
             request.setAttribute("messaggio", "Sei già autenticato. Per creare un nuovo account devi prima fare logout.");
-            requestDispatcher = request.getRequestDispatcher(request.getContextPath() + "/message.jsp");
+            requestDispatcher = this.getServletContext().getRequestDispatcher( "/message.jsp");
             requestDispatcher.forward(request, response);
         } else {
             String nome = request.getParameter("nome");
@@ -49,23 +49,24 @@ public class Register extends HttpServlet {
                         requestDispatcher = this.getServletContext().getRequestDispatcher("/error.jsp");
                         requestDispatcher.forward(request, response);
                     }
-
-                    utente = new UtenteBean();
-                    utente.setEmail(email);
-                    utente.setNome(nome);
-                    utente.setSupervisor(false);
-                    utente.setPassword(pwd);
-                    utente.setCompleanno(bd);
-
-                    utenteDao.doSave(utente);
-
-                    request.getSession().setAttribute("utente", utente);
-                    request.setAttribute("messaggio", "Registrazione effettuata con successo.");
-                    requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
-                    requestDispatcher.forward(request, response);
                 } catch (SQLException e) {
-                    System.out.println("Errore nella query");
+                    System.out.println("doRetrieve");
                 }
+
+                utente = new UtenteBean();
+                utente.setEmail(email);
+                utente.setNome(nome);
+                utente.setPassword(pwd);
+
+                try {
+                    utenteDao.doSave(utente);
+                } catch (SQLException e) {
+                    System.out.println("doSave");
+                }
+
+                request.setAttribute("messaggio", "Registrazione effettuata con successo.");
+                requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
     }
