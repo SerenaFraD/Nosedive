@@ -26,7 +26,11 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-    line-height: 1;
+    line-height: 1.2em;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 ol, ul {
@@ -46,4 +50,8 @@ q:before, q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+a, a:hover {
+    text-decoration: none; 
 }

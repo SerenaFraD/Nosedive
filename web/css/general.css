@@ -1,52 +1,50 @@
+@import url(reset.css);
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&display=swap');
+
 
 :root {
+    --fontSpecial: 'Satisfy', cursive;
+    --secondario1: #a88a91;
+    --colorBackground: #EDD3D8;
+    --ombra: #786BC1;
+    --navBackground: #E8CED3;
+    --titolo: 'Exo 2', sans-serif;
+
+
     --primale1: #753750;
     --primale2: #b36d89;
-    --primale3: #e4d7b7;
-    --secondario1: #6e585d;
-    --secondario2: #9b889b;
+    --primale3: #E8CED3;
+    --secondario2: #9b879b;
     --secondario3: #c7c0d1;
     --informativo1: #b0665b;
     --informativo2: #ffe5dd;
-    --errore1: #214a80;
-    --errore2: #00c9bd;
     --successo1: #ffcfcb;
     --successo2: #566077;
-    --titolo: 'Open Sans', sans-serif;
     --testo: 'Montserrat', sans-serif;
     --titolo-size: 40px;
     --testo-size: 20px;
     --defaultBG: url("../img/backgroundDefault.jpg");
-    --gradientBG: linear-gradient(135deg,#f4e9e9,#ebc8bf);
+    
     --borders: 3px solid var(--primale1);
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: var(--gradientBG);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    line-height: 1.2em;
-}
-
 h1, h2, h3, h4, h5, h6 {
-    margin: 0;
     font-family: var(--titolo);
     color: var(--primale2);
 }
 
-p{
-    margin: 0;
+h3 {
+    color: var(--primale3);
+}
+
+p {
     font-family: var(--testo);
     word-wrap: normal;
 }
 
 label {
-    margin: 0;
     font-family: var(--testo);
     word-wrap: normal;
     border: 3px solid var(--primale1);
@@ -66,20 +64,12 @@ section {
     background-color: var(--secondario1);
 }
 
-ul {
-    margin: 0;
-    padding: 0;
-}
-
 a {
-    text-decoration: none;
     color: var(--primale1);
 }
 
-a:hover{
+a:hover {
     color:hsla(0,0%,100%,.9);
-    text-shadow: rgba(0,0,0,.2) 0 0 10px;
-    text-decoration: none;
     transition: color .5s,text-shadow .5s;
 }
 
@@ -133,14 +123,4 @@ hr {
 
 input[type=file] {
     display: none;
-}
-
-section#standard {
-    border-radius: 7px;
-    width: 60%;
-}
-
-section#small {
-    border-radius: 7px;
-    width: 30%;
 }
