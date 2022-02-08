@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/postPublish")
-public class PublishPostServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class AddPostServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String text = request.getParameter("testo");
         String img = request.getParameter("files");
         PostBean post = new PostBean();

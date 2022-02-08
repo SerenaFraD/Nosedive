@@ -16,7 +16,7 @@ import java.sql.SQLException;
 @WebServlet("/aggiungiProdotto")
 public class AddProdottoServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nome = request.getParameter("nome");
         String descrizione = request.getParameter("descrizione");
         double costo = Double.parseDouble(request.getParameter("costo"));

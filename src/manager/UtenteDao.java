@@ -14,7 +14,6 @@ import model.Bean;
 
 public class UtenteDao implements ModelDao<UtenteBean, Integer> {
     private static final String TABLE_NAME = "Utente";
-    private static final DriverManagerConnectionPool pool = null;
 
     @Override
     public synchronized void doSave(UtenteBean bean) throws SQLException {
@@ -24,7 +23,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (email, nome, pwd, sup, compleanno, punteggio, id_relazione, id_lavoro, propic, sesso, deceduto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, bean.getEmail());
@@ -48,7 +47,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -60,7 +59,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (email, nome, pwd, sup) VALUES (?, ?, SHA1(?), ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(insertQuery);
             UtenteBean utenteBean = (UtenteBean) bean;
 
@@ -78,7 +77,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -91,7 +90,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET email=?, nome=?, pwd=?, sup=?, compleanno=?, punteggio=?, id_relazione=?, id_lavoro=?, propic=?, sesso=?, deceduto=? WHERE id_utente=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setString(1, bean.getEmail());
@@ -115,7 +114,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -126,7 +125,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET id_relazione=?, id_lavoro=?, propic=? WHERE id_utente=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setInt(1, bean.getId_relazione());
@@ -143,7 +142,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -154,7 +153,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET deceduto=?  WHERE id_utente=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setBoolean(1, bean.isSesso());
@@ -169,7 +168,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -180,7 +179,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET bloccato=?  WHERE id_utente=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setBoolean(1, bean.isSesso());
@@ -195,7 +194,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -206,7 +205,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET punteggio=? WHERE id_utente=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setBoolean(1, bean.isSesso());
@@ -221,13 +220,13 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
 
     @Override
-    public synchronized void doDelete(UtenteBean bean) throws SQLException {
+    public synchronized void doDelete(UtenteBean bean) {
         int id_utente = bean.getId_utente();
 
         try (Connection con = DriverManagerConnectionPool.getConnection()) {
@@ -252,7 +251,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_utente=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             ps.setInt(1, keys);
@@ -279,7 +278,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -295,7 +294,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=? ";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             ps.setString(1, nome);
@@ -324,7 +323,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -339,7 +338,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE email=? ";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             ps.setString(1, email);
@@ -359,7 +358,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -375,7 +374,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -395,6 +394,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 bean.setSesso(rs.getBoolean("sesso"));
                 bean.setDeceduto(rs.getBoolean("deceduto"));
 
+                assert list != null;
                 list.add(bean);
             }
         } finally {
@@ -402,7 +402,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -417,7 +417,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
         String selectQuery = "SELECT count(*) FROM " + TABLE_NAME + " WHERE sup='false'";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -429,7 +429,7 @@ public class UtenteDao implements ModelDao<UtenteBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 

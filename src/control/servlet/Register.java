@@ -34,19 +34,19 @@ public class Register extends HttpServlet {
             String email = request.getParameter("email");
             String pwd = request.getParameter("pwd");
             String pwdConf = request.getParameter("pwdConf");
-            String bd = request.getParameter("eta");
+            String eta = request.getParameter("eta");
 
             Validator validator = new Validator(email, nome, pwd, pwdConf);
             if (validator.wrongInput()) {
                 message = validator.nameMSG + validator.emailMSG + validator.pwdMSG + validator.matchMSG;
                 request.setAttribute("messaggio", message);
-                requestDispatcher = this.getServletContext().getRequestDispatcher("/error.jsp");
+                requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
                 requestDispatcher.forward(request, response);
             } else {
                 try {
                     if (utenteDao.doRetrieveByEmail(email) != null) {
                         request.setAttribute("messaggio", "Email già presente, provare una nuova mail");
-                        requestDispatcher = this.getServletContext().getRequestDispatcher("/error.jsp");
+                        requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
                         requestDispatcher.forward(request, response);
                     }
                 } catch (SQLException e) {

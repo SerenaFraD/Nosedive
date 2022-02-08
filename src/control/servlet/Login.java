@@ -20,20 +20,21 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
         HttpSession session = request.getSession();
-        UtenteDao modelUtente = new UtenteDao();
+        UtenteDao daoUtente = new UtenteDao();
         UtenteBean saved;
         String email, password;
-
-        System.out.println("sono qui hey");
 
         try {
             email = request.getParameter("email");
             password = request.getParameter("pwd");
 
             try {
-                saved = modelUtente.doRetrieveByEmail(email);
-                if (saved == null || !saved.getPassword().equals(password)) {
+                saved = daoUtente.doRetrieveByEmail(email);
+                if (saved == null) {
                     request.setAttribute("messaggio", "Utente non trovato");
+                    requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
+                } else if(!saved.getPassword().equals(password)) {
+                    request.setAttribute("messaggio", "Password errata");
                     requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
                 } else {
                     session.setMaxInactiveInterval(60 * 60);
@@ -43,12 +44,12 @@ public class Login extends HttpServlet {
                 }
             } catch (SQLException e) {
                 request.setAttribute("messaggio", "Errore");
-                requestDispatcher = request.getServletContext().getRequestDispatcher("/error.jsp");
+                requestDispatcher = request.getServletContext().getRequestDispatcher("/message.jsp");
             }
             requestDispatcher.forward(request, response);
 
         } catch (NullPointerException e) {
-            System.out.println("sono qui aaaa");
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/404.jsp"));
         }
 
     }

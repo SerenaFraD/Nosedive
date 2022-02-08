@@ -35,7 +35,7 @@ public class Azione extends Bean implements Serializable {
 
     @Override
     public List<String> getKey() {
-        ArrayList<String> keys = new ArrayList<String>();
+        ArrayList<String> keys = new ArrayList<>();
         keys.add(nome);
         return keys;
     }

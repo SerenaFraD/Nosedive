@@ -1,19 +1,19 @@
-var borderOk = '2px solid #080';
-var borderNo = '2px solid #f00';
-var passwordOk = false;
-var nomeOk = false;
-var emailOk = false;
+const borderOk = '2px solid #080';
+const borderNo = '2px solid #f00';
+let passwordOk = false;
+let nomeOk = false;
+let emailOk = false;
 
 function validaPassword() {
-    var inputpw = document.forms['registration']['pwd'];
-    var inputpwconf = document.forms['registration']['pwdConf'];
-    var password = inputpw.value;
+    const inputpw = document.forms['registration']['pwd'];
+    const inputpwconf = document.forms['registration']['pwdConf'];
+    const password = inputpw.value;
 
-    if (password.length >= 8 && password.toUpperCase() != password
-        && password.toLowerCase() != password && /[0-9]/.test(password)) {
+    if (password.length >= 8 && password.toUpperCase() !== password
+        && password.toLowerCase() !== password && /[0-9]/.test(password)) {
         inputpw.style.border = borderOk;
 
-        if (password == inputpwconf.value) {
+        if (password === inputpwconf.value) {
             inputpwconf.style.border = borderOk;
             passwordOk = true;
         } else {
@@ -30,21 +30,17 @@ function validaPassword() {
 }
 
 function validaPasswordLogin() {
-    var inputpw = document.forms['login']['pwd'];
-    var password = inputpw.value;
+    const inputpw = document.forms['login']['pwd'];
+    const password = inputpw.value;
 
-    if (password.length >= 8 && password.toUpperCase() != password
-        && password.toLowerCase() != password && /[0-9]/.test(password)) {
-        passwordOk = true;
-    } else {
-        passwordOk = false;
-    }
+    passwordOk = password.length >= 8 && password.toUpperCase() !== password
+        && password.toLowerCase() !== password && /[0-9]/.test(password);
 
     cambiaStatoLogme();
 }
 
 function validaNome() {
-    var inputNome = document.forms['registration']['nome'];
+    const inputNome = document.forms['registration']['nome'];
 
     if (inputNome.value.trim().length > 0
         && inputNome.value.match(/^[ a-zA-Z\u00C0-\u00ff]+$/)) {
@@ -59,8 +55,8 @@ function validaNome() {
 }
 
 function validaEmail() {
-    var input = document.forms['registration']['email'];
-    if (input.value.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w+)+$/)) {
+    const input = document.forms['registration']['email'];
+    if (input.value.match(/^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w+)+$/)) {
         input.style.border = borderOk;
         emailOk = true;
     } else {
@@ -72,12 +68,8 @@ function validaEmail() {
 }
 
 function validaEmailLogin() {
-    var input = document.forms['login']['email'];
-    if (input.value.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w+)+$/)) {
-        emailOk = true;
-    } else {
-        emailOk = false;
-    }
+    const input = document.forms['login']['email'];
+    emailOk = !!input.value.match(/^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w+)+$/);
 
     cambiaStatoLogme();
 }
@@ -103,17 +95,17 @@ function cambiaStatoLogme() {
 }
 
 function validaFoto() {
-    var formData = new FormData();
-    var file = document.getElementById("image").files[0];
+    const formData = new FormData();
+    const file = document.getElementById("image").files[0];
     formData.append("Filedata", file);
-    var t = file.type.split('/').pop().toLowerCase();
-    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+    const t = file.type.split('/').pop().toLowerCase();
+    if (t !== "jpeg" && t !== "jpg" && t !== "png" && t !== "bmp" && t !== "gif") {
         alert('Inserire una foto valida');
         document.getElementById("img").value = '';
         return false;
     }
 
-    var fsize = (file.size / 1024 / 1024).toFixed(2);
+    const fsize = (file.size / 1024 / 1024).toFixed(2);
     if (fsize > 2) {
         alert('Dimensione massima 2MB');
         document.getElementById(id).value = '';

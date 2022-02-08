@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
     private static final String TABLE_NAME = "Prodotto";
-    private static final DriverManagerConnectionPool pool = null;
 
     @Override
     public void doSave(ProdottoBean bean) throws SQLException {
@@ -42,7 +41,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -55,7 +54,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET nome=?, descrizione=?, img=?, costo=?, id_categoria=?, punteggio_minimo=? WHERE id_prodotto=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setString(1, bean.getNome());
@@ -75,12 +74,16 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
     }
 
+    /*
+    IN: key e' l'id della categoria
+    OUT: prodotto con chiave key
+     */
     @Override
     public ProdottoBean doRetrieveByKey(Integer keys) throws SQLException {
         PreparedStatement ps = null;
@@ -90,7 +93,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
         String retriveQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(retriveQuery);
 
             ps.setInt(1, keys);
@@ -113,14 +116,17 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
         return bean;
     }
 
-    //Ricerca per categoria
+    /*
+    IN: key nome della categoria
+    OUT: lista di prodotto di una categoria
+     */
     public List<ProdottoBean> doRetrieveByKey(String keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
@@ -130,7 +136,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE categoria=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, keys);
 
@@ -154,7 +160,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -171,7 +177,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -194,7 +200,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -202,7 +208,7 @@ public class ProdottoDao implements ModelDao<ProdottoBean, Integer> {
     }
 
     @Override
-    public void doDelete(ProdottoBean bean) throws SQLException {
+    public void doDelete(ProdottoBean bean) {
         try (Connection con = DriverManagerConnectionPool.getConnection()) {
             String sql = "DELETE FROM " + TABLE_NAME + " WHERE id_prodotto=?";
             PreparedStatement ps = con.prepareStatement(sql);

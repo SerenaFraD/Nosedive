@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class PostDao implements ModelDao<PostBean, Integer> {
 
     private static final String TABLE_NAME = "Post";
-    private static final DriverManagerConnectionPool pool = null;
 
     @Override
     //Permette di condividere i post
@@ -22,7 +21,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         String selectQuery = "INSERT INTO " + TABLE_NAME + "(id_utente, id_post, timestamp, testo) VALUES (?, ?, ?, ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, bean.getId_utente());
             ps.setInt(2, bean.getId_post());
@@ -36,26 +35,25 @@ public class PostDao implements ModelDao<PostBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
 
     @Override
     //Future feature
-    public void doUpdate(PostBean bean) throws SQLException {
+    public void doUpdate(PostBean bean) {
     }
 
     @Override
-    //todo L
-    //Da rivedere per i punteggi
-    public void doDelete(PostBean bean) throws SQLException {
+    // todo future:Diminuire il punteggio se elimino un post? No, uso il metodo di UtenteDao
+    public void doDelete(PostBean bean) {
         Connection con;
         PreparedStatement ps;
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE id_post=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(deleteQuery);
             ps.setInt(1, bean.getId_post());
 
@@ -76,7 +74,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         String selectQuery = "SELECT * from " + TABLE_NAME + " where id_post = ?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, keys);
 
@@ -95,7 +93,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -110,7 +108,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         String selectQuery = "SELECT * from " + TABLE_NAME + " where id_utente = ?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, keys);
 
@@ -129,7 +127,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -146,7 +144,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         String selectQuery = "SELECT testo, timestamp from post where id_utente in(select id_utente from utente where punteggio BETWEEN ? and ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, min);
             ps.setInt(2, max);
@@ -166,7 +164,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -182,7 +180,7 @@ public class PostDao implements ModelDao<PostBean, Integer> {
         ArrayList<PostBean> listapost = new ArrayList<>();
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -202,11 +200,10 @@ public class PostDao implements ModelDao<PostBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
         return listapost;
     }
-
 }

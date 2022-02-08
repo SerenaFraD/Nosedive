@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Blob;
+import java.util.List;
 
-public class ProdottoBean implements Serializable {
+public class ProdottoBean extends Bean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -105,5 +105,20 @@ public class ProdottoBean implements Serializable {
     @Override
     public int hashCode() {
         return 0;
+    }
+
+    @Override
+    public List<String> getKey() {
+        return null;
+    }
+
+    @Override
+    public int compareKey(Bean otherBean) {
+        return 0;
+    }
+
+    @Override
+    public String getBeanName() {
+        return null;
     }
 }

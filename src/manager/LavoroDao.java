@@ -21,7 +21,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (nome, punteggio) VALUES (?, ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, bean.getNome());
@@ -36,7 +36,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -48,7 +48,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET punteggio=? WHERE nome=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setInt(1, bean.getPunteggio());
@@ -63,20 +63,20 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
 
     @Override
-    public void doDelete(Lavoro bean) throws SQLException {
+    public void doDelete(Lavoro bean) {
         Connection con;
         PreparedStatement ps;
         String nomeLavoro = bean.getNome();
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(deleteQuery);
             ps.setString(1, nomeLavoro);
 
@@ -97,7 +97,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, keys);
 
@@ -114,7 +114,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -129,7 +129,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_lavoro=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, String.valueOf(keys));
 
@@ -146,7 +146,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -160,10 +160,10 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
         ResultSet rs;
         Lavoro bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
-        ArrayList<Lavoro> listaAzioni = new ArrayList<Lavoro>();
+        ArrayList<Lavoro> listaAzioni = new ArrayList<>();
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -181,7 +181,7 @@ public class LavoroDao implements ModelDao<Lavoro, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
         return listaAzioni;

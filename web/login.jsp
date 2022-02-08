@@ -10,15 +10,20 @@
     <meta name="author" content="Serena D'Urso">
 </head>
 <body>
-<%@ include file="navigation.jsp" %>
+<%@ include file="elements/Navigation.jsp" %>
 
 <section id="login">
     <img src="img/logoSmall.png" alt="Logo small Nosedive">
 
     <div class="form">
+<%--suppress HtmlUnknownTarget --%>
         <form action="${pageContext.servletContext.contextPath}/login" method="POST">
-            <input type="text" name="email" value="" placeholder="Email" oninput="validaEmailLogin()" autofocus>
-            <input type="password" name="pwd" value="" placeholder="Password" oninput="validaPasswordLogin()">
+            <label>
+                <input type="text" name="email" value="" placeholder="Email" oninput="validaEmailLogin()" autofocus>
+            </label>
+            <label>
+                <input type="password" name="pwd" value="" placeholder="Password" oninput="validaPasswordLogin()">
+            </label>
             <output name="result" for="result"></output>
             <button type="submit" name="button">Login</button>
         </form>

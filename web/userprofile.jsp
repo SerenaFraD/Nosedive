@@ -1,5 +1,4 @@
-<%@ page import="model.UtenteBean"%>
-<%@ include file="navigation.jsp" %>
+<%@ include file="elements/Navigation.jsp" %>
 <%
     String other = request.getParameter("otherUtente");
     UtenteBean otherUtente = (UtenteBean) request.getSession().getAttribute("otherUtente");
@@ -16,21 +15,7 @@
         punteggio = otherUtente.getPunteggio();
     }
 %>
-
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Profilo utente">
-    <meta name="author" content="Serena D'Urso">
-
-    <title>Profilo</title>
-
-    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
-    <link href="css/profile.css" rel="stylesheet">
-</head>
-
+<html>
 <body onload="mostraPost('<%=userIdPost%>', false, '${pageContext.request.contextPath}')">
 
 <section id="standard">
@@ -50,7 +35,7 @@
         <% if(otherUtente != null) { %>
         <form action="${pageContext.servletContext.contextPath}/follow" method="post">
             <button>
-                <%if(otherUtente != null) {%> Follow <%}%>
+                <%%> Follow <%%>
             </button>
         </form>
         <%}%>
@@ -60,7 +45,7 @@
     <% if(otherUtente == null) { %>
     <div id="publish">
         <form action="${pageContext.servletContext.contextPath}/postPublish" method="POST" name="publish">
-            <textarea name="testo" id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
+            <label for="text"></label><textarea name="testo" id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
             <input type="file" id="image" name="files"
                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>

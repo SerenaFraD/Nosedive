@@ -1,9 +1,7 @@
 package control.servlet;
 
 import manager.CommentoDao;
-import manager.PostDao;
 import model.CommentoBean;
-import model.PostBean;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +11,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/postCommento")
-public class PublishCommentServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class AddCommentServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         String testo = request.getParameter("testo");
         int id_post = Integer.parseInt(request.getParameter("id_post"));
         int id_utente = (int) request.getSession().getAttribute("id_utente");

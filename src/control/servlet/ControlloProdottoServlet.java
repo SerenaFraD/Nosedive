@@ -18,8 +18,7 @@ public class ControlloProdottoServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    static ProdottoDao model = new ProdottoDao();
-
+    static final ProdottoDao model = new ProdottoDao();
 
     public ControlloProdottoServlet() {
         super();
@@ -31,7 +30,6 @@ public class ControlloProdottoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        @SuppressWarnings("unchecked")
         CarrelloBean cart = (CarrelloBean) request.getSession().getAttribute("carrello");
         if (cart == null) {
             cart = new CarrelloBean();
@@ -44,61 +42,75 @@ public class ControlloProdottoServlet extends HttpServlet {
 
         try {
             if (action != null) {
-                if (action.equals("dettagli")) {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    request.removeAttribute("prodotto");
-                    request.setAttribute("prodotto", model.doRetrieveByKey(id));
-                } else if (action.equals("aggiungiCarrello")) {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    ProdottoBean bean = model.doRetrieveByKey(id);
-
-                    cart.addItem(bean);
-                    request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto al carrello");
-
-                } else if (action.equals("svuotaCarrello")) {
-                    cart.deleteAllItems();
-                    request.setAttribute("message", "Carrello svuotato");
-
-                } else if (action.equals("eliminaCarrello")) {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    ProdottoBean bean = model.doRetrieveByKey(id);
-
-                    cart.deleteItem(bean);
-                    request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato dal carrello");
-
-                } else if (action.equals("inserisci")) {
-                    String nome = request.getParameter("nome");
-                    String descrizione = request.getParameter("descrizione");
-                    int costo = Integer.parseInt(request.getParameter("costo"));
-
-                    ProdottoBean bean = new ProdottoBean();
-                    bean.setNome(nome);
-                    bean.setDescrizione(descrizione);
-                    bean.setCosto(costo);
-
-                    model.doSave(bean);
-                    request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto");
-                } else if (action.equals("elimina")) {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    ProdottoBean bean = model.doRetrieveByKey(id);
-                    if (bean != null) {
-                        model.doDelete(bean);
-                        request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato");
+                switch (action) {
+                    case "dettagli": {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        request.removeAttribute("prodotto");
+                        request.setAttribute("prodotto", model.doRetrieveByKey(id));
+                        break;
                     }
-                } else if (action.equals("aggiorna")) {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    String nome = request.getParameter("nome");
-                    String descrizione = request.getParameter("descrizione");
-                    int costo = Integer.parseInt(request.getParameter("costo"));
+                    case "aggiungiCarrello": {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        ProdottoBean bean = model.doRetrieveByKey(id);
 
-                    ProdottoBean bean = new ProdottoBean();
-                    bean.setId_prodotto(id);
-                    bean.setNome(nome);
-                    bean.setDescrizione(descrizione);
-                    bean.setCosto(costo);
+                        cart.addItem(bean);
+                        request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto al carrello");
 
-                    model.doUpdate(bean);
-                    request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiornato");
+                        break;
+                    }
+                    case "svuotaCarrello":
+                        cart.deleteAllItems();
+                        request.setAttribute("message", "Carrello svuotato");
+
+                        break;
+                    case "eliminaCarrello": {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        ProdottoBean bean = model.doRetrieveByKey(id);
+
+                        cart.deleteItem(bean);
+                        request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato dal carrello");
+
+                        break;
+                    }
+                    case "inserisci": {
+                        String nome = request.getParameter("nome");
+                        String descrizione = request.getParameter("descrizione");
+                        int costo = Integer.parseInt(request.getParameter("costo"));
+
+                        ProdottoBean bean = new ProdottoBean();
+                        bean.setNome(nome);
+                        bean.setDescrizione(descrizione);
+                        bean.setCosto(costo);
+
+                        model.doSave(bean);
+                        request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto");
+                        break;
+                    }
+                    case "elimina": {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        ProdottoBean bean = model.doRetrieveByKey(id);
+                        if (bean != null) {
+                            model.doDelete(bean);
+                            request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato");
+                        }
+                        break;
+                    }
+                    case "aggiorna": {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        String nome = request.getParameter("nome");
+                        String descrizione = request.getParameter("descrizione");
+                        int costo = Integer.parseInt(request.getParameter("costo"));
+
+                        ProdottoBean bean = new ProdottoBean();
+                        bean.setId_prodotto(id);
+                        bean.setNome(nome);
+                        bean.setDescrizione(descrizione);
+                        bean.setCosto(costo);
+
+                        model.doUpdate(bean);
+                        request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiornato");
+                        break;
+                    }
                 }
             }
         } catch (NumberFormatException | SQLException e) {

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -18,7 +17,7 @@ import com.google.gson.Gson;
 @WebServlet("/categoria")
 public class CategoriaServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String categoria = request.getParameter("categoria");
         Gson gson = new Gson(); //posso convertire da java a json
         ProdottoDao model = new ProdottoDao();
@@ -26,7 +25,7 @@ public class CategoriaServlet extends HttpServlet {
         List<ProdottoBean> result = null;
 
         try {
-            result = (categoria == "tutti") ? model.doRetrieveAll() : model.doRetrieveByKey(categoria);
+            result = (categoria.equals("tutti")) ? model.doRetrieveAll() : model.doRetrieveByKey(categoria);
         } catch (SQLException e) {
             e.printStackTrace();
         }

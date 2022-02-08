@@ -1,5 +1,5 @@
-<%@ include file="navigation.jsp" %>
-<%@ page import="model.UtenteBean" %>
+<jsp:include page="elements/Navigation.jsp"/>
+<%@ page import ="model.UtenteBean"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String lavoro = (String) request.getSession().getAttribute("lavoro");

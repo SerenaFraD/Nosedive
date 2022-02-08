@@ -1,4 +1,7 @@
+// noinspection JSDeprecatedSymbols
+
 function abilitateButton() {
+    // noinspection JSDeprecatedSymbols
     target = event.target;
     path = target.offsetParent;
     b = path.getElementsByClassName('publish');

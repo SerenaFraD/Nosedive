@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.time.LocalDateTime;
 
 public class CommentoBean implements Serializable {
 
@@ -90,12 +89,9 @@ public class CommentoBean implements Serializable {
 		} else if (!testo.equals(other.testo))
 			return false;
 		if (timestamp == null) {
-			if (other.timestamp != null)
-				return false;
-		} else if (!timestamp.equals(other.timestamp))
-			return false;
-		return true;
-	}
+            return other.timestamp == null;
+		} else return timestamp.equals(other.timestamp);
+    }
 
 	@Override
 	public String toString() {

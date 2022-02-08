@@ -1,22 +1,10 @@
-<%@ include file="navigation.jsp" %>
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <title>Profilo</title>
-    <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
-    <link href="css/profile.css" rel="stylesheet">
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Profilo utente">
-    <meta name="author" content="Serena D'Urso">
-</head>
-
-<body  onload="mostraPost('<%=utente.getPunteggio()%>', true, '${pageContext.request.contextPath}')">
+<%--suppress HtmlUnknownTarget --%>
+<%@ include file="elements/Navigation.jsp" %>
+<body onload="mostraPost('<%=utente.getPunteggio()%>', true, '${pageContext.request.contextPath}')">
 <section id="standard">
     <div id="publish">
         <form action="${pageContext.request.contextPath}/postPublish" method="POST" name="publish">
-            <textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
+            <label for="text"></label><textarea id="text" placeholder="Your message here" oninput="abilitateButton(event.target)"></textarea>
             <input type="file" id="image" name="files[]"
                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
             <label for="image">Select file</label>
@@ -30,7 +18,16 @@
         <script>
 
         </script>
-        <!--
+        
+    </div>
+</section>
+
+</body>
+<html>
+</html>
+
+
+<!--
         <img src="img/userIcon.png">
         <div>
             <p class="nome">Nome Utente</p>
@@ -63,13 +60,3 @@
             </form>
         </div>
         -->
-    </div>
-</section>
-
-<script src="${pageContext.servletContext.contextPath}/js/showCommentArea.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/starAnimation.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/abilitateButton.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/mostraPost.js"></script>
-</body>
-
-</html>

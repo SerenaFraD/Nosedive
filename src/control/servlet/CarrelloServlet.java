@@ -1,3 +1,4 @@
+//todo modifica anche questa, molto sus
 package control.servlet;
 
 import model.CarrelloBean;
@@ -17,19 +18,18 @@ import java.sql.SQLException;
 public class CarrelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static ProdottoDao model = new ProdottoDao();
+    static final ProdottoDao model = new ProdottoDao();
 
     public CarrelloServlet() {
         super();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        @SuppressWarnings("unchecked")
         HttpSession session = request.getSession();
         CarrelloBean carrello = (CarrelloBean) request.getSession().getAttribute("carrello");
         if (carrello == null) {
@@ -43,21 +43,27 @@ public class CarrelloServlet extends HttpServlet {
 
         try {
             if (action != null) {
-                if (action.equals("addCart")) {
-                    //Maybe errors here ----> 3 day later, I was right
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    ProdottoBean bean = model.doRetrieveByKey(id);
-                    carrello.addItem(bean);
-                    request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto al carrello");
-                } else if (action.equals("clearCart")) {
-                    carrello.deleteAllItems();
-                    request.setAttribute("message", "Cart cleaned");
-                } else if (action.equals("deleteCart")) {
-                    //Maybe errors here ----> 3 day later, I was right
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    ProdottoBean bean = model.doRetrieveByKey(id);
-                    carrello.deleteItem(bean);
-                    request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato dal carrello");
+                switch (action) {
+                    case "addCart": {
+                        //Maybe errors here ----> 3 day later, I was right
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        ProdottoBean bean = model.doRetrieveByKey(id);
+                        carrello.addItem(bean);
+                        request.setAttribute("message", "Prodotto " + bean.getNome() + " aggiunto al carrello");
+                        break;
+                    }
+                    case "clearCart":
+                        carrello.deleteAllItems();
+                        request.setAttribute("message", "Cart cleaned");
+                        break;
+                    case "deleteCart": {
+                        //Maybe errors here ----> 3 day later, I was right
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        ProdottoBean bean = model.doRetrieveByKey(id);
+                        carrello.deleteItem(bean);
+                        request.setAttribute("message", "Prodotto " + bean.getNome() + " eliminato dal carrello");
+                        break;
+                    }
                 }
             }
         } catch (NumberFormatException | SQLException e) {
@@ -67,8 +73,8 @@ public class CarrelloServlet extends HttpServlet {
 
         session.setAttribute("cart", carrello);
 
-        /*RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cart.jsp");
+        /*RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cart.jsp");
         requestDispatcher.forward(request, response);*/
-        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Cart.jsp"));
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/cart.jsp"));
     }
 }

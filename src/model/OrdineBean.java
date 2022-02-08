@@ -1,9 +1,10 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
-public class OrdineBean {
+public class OrdineBean extends Bean {
 
     int id_ordine;
     int id_carrello;
@@ -54,5 +55,20 @@ public class OrdineBean {
         if (!(o instanceof OrdineBean)) return false;
         OrdineBean that = (OrdineBean) o;
         return getId_ordine() == that.getId_ordine() && getId_carrello() == that.getId_carrello() && Objects.equals(getData(), that.getData());
+    }
+
+    @Override
+    public List<String> getKey() {
+        return null;
+    }
+
+    @Override
+    public int compareKey(Bean otherBean) {
+        return 0;
+    }
+
+    @Override
+    public String getBeanName() {
+        return null;
     }
 }

@@ -3,38 +3,163 @@
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     position: fixed;
+    flex-wrap: nowrap;
     top: 0;
     left: 0;
     right: 0;
     height: 50px;
-    background-color: var(--successo1);
+    background-color: var(--secondario1);
 }
 
-ul.navBar li {
-    margin: 0px 10px;
+ul.navBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    height: 50px;
 }
 
-ul.navBar:first-of-type {
-    margin-left: 20px;
+.navBar img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50% 50%;
 }
 
-ul.navBar:last-of-type {
-    margin-right: 20px;
+ul.navBar:nth-child(1) {
+    width: 70%;
+    float: left;
+
 }
 
-ul.navBar li {
+.navBar li {
     display: inline-block;
+    margin: 0 10px;
+    vertical-align: middle;
 }
 
-.sarchBar {
-    margin-top: 10px;
+.navBar li > * {
+    display: inline;
+    vertical-align: middle;  
 }
 
-img.navBar {
+.navBar input[type="search"] {
+    margin: 15px auto;
+    width: 350px;
+    height: 35px;
+    border: 2px solid var(--ombra);
+    vertical-align: middle;
+    background-color: var(--colorBackground);
+}
+
+.navBar button {
+    vertical-align: middle;
+    border-radius: 50% 50%;
+    border: 0;
+    background: transparent;
+}
+
+.navBar button:hover, .navBar img:hover {
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+.navBar button img {
+    width: 20px;
     height: 20px;
 }
 
+@media only screen and (min-width: 800px) {
+    .hidden h3 {
+        display: none;
+    }
 
+    .hidden li:first-of-type {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 799px) {
+    ul.navBar:first-of-type { 
+        margin-left: 0;
+    }
+
+    .hidden img {
+        display: none;
+    }
+
+    nav {
+        justify-content: flex-start;
+    }
+
+    .navBar input[type="search"] {
+        width: 150px;  
+    }
+
+    .hidden li:first-of-type {
+        width: 150px;
+        background-color: transparent;
+    }
+
+    ul.hidden {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 0px;
+        height: 50px;
+        right: 0px;
+    }
+
+    .hidden li:first-of-type img{
+        display: block;
+        height: 40px;
+        float: right;
+    }
+
+    .hidden h3 {
+        display: block;
+        float: right;
+        height: 40px;
+    }
+
+    .hidden li {
+        background-color: var(--secondario1);
+        width: 150px;
+        padding: 10px 10px 0 0;
+        visibility: hidden;
+    }
+
+    .hidden li:hover {
+        box-shadow: var(--ombra) 0 -4px 5px inset;
+        display: block;
+    }
+
+    .hidden li:first-of-type {
+        visibility: visible;
+    }
+
+    .hidden li:first-of-type:hover {
+        box-shadow: none; 
+    }
+
+    .hidden li:first-of-type img:hover {
+        background-color: transparent;
+    }
+
+
+}
+
+@media only screen and (max-width: 970px) {
+    .navBar input[type="search"] {
+        width: 100px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .navBar input[type="search"] {
+        width: 50px;
+    }
+}

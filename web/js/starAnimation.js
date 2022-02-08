@@ -19,7 +19,7 @@ function checkAlreadyAnimated(t) {
 
     target.style.backgroundColor = 'transparent';
     if(next != null) {
-        if(next.style.backgroundColor == 'yellow') {  
+        if(next.style.backgroundColor === 'yellow') {
 
             while (next != null) {
                 next.style.backgroundColor = 'transparent';

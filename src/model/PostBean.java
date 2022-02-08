@@ -1,16 +1,16 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Blob;
+import java.util.List;
 
-public class PostBean implements Serializable {
+public class PostBean extends Bean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     Integer id_post;
     Integer id_utente;
     String timestamp;
-    String postpic; // conviene usare tipo String per le foto, in modo da salvare url e caricarlo lato frontend https://source.unsplash.com/random/
+    String postpic; // ora stringa, ma da modificare in oggetto per caricare foto, cha cazz ie stu carica le foto nella cartella, ma per favore. Sfigato!
     String testo;
 
     public PostBean() {
@@ -67,7 +67,6 @@ public class PostBean implements Serializable {
 				+ postpic + ", testo=" + testo + "]";
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,12 +97,22 @@ public class PostBean implements Serializable {
 		} else if (!testo.equals(other.testo))
 			return false;
 		if (timestamp == null) {
-			if (other.timestamp != null)
-				return false;
-		} else if (!timestamp.equals(other.timestamp))
-			return false;
-		return true;
+            return other.timestamp == null;
+		} else return timestamp.equals(other.timestamp);
+    }
+
+	@Override
+	public List<String> getKey() {
+		return null;
 	}
 
-   
+	@Override
+	public int compareKey(Bean otherBean) {
+		return 0;
+	}
+
+	@Override
+	public String getBeanName() {
+		return null;
+	}
 }

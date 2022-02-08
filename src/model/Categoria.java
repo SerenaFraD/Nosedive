@@ -1,10 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Categoria implements Serializable {
+public class Categoria extends Bean implements Serializable {
     private int id_categoria;
     private String nome;
     private String descrizione;
@@ -31,5 +30,20 @@ public class Categoria implements Serializable {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    @Override
+    public List<String> getKey() {
+        return null;
+    }
+
+    @Override
+    public int compareKey(Bean otherBean) {
+        return 0;
+    }
+
+    @Override
+    public String getBeanName() {
+        return null;
     }
 }

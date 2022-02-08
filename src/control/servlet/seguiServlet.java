@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/follow")
-public class seguiServlet extends HttpServlet {
+public class SeguiServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
         UtenteBean other = (UtenteBean) request.getSession().getAttribute("otherUtente");
         FollowDao followDao = new FollowDao();

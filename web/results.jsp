@@ -1,9 +1,8 @@
+<%--suppress ALL --%>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ include file="navigation.jsp" %>
-<%
-    List<UtenteBean> list = (List<UtenteBean>) request.getSession().getAttribute("result");
-%>
+<%@ include file="elements/Navigation.jsp" %>
+<% List<UtenteBean> list = (List<UtenteBean>) request.getSession().getAttribute("result");%>
 <html>
 <head>
     <title>Risultato ricerca</title>
@@ -11,10 +10,10 @@
 <body>
 <section id="standard">
     <p>Risultato ricerca:</p>
-    <%if(list.isEmpty()) {%>
+    <%%>if(list.isEmpty()) {
     <p>La tua ricerca non ha trovato risultato :(</p>
 
-    <%} else {%>
+    } else {
     <table>
         <%for(UtenteBean element: list) {%>
         <tr>
@@ -24,7 +23,7 @@
         </tr>
         <%}%>
     </table>
-    <%}%>
+    }<%%>
 </section>
 </body>
 </html>

@@ -13,10 +13,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 @WebServlet("/postShow")
 public class PostServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int utente = Integer.parseInt(request.getParameter("utente"));
         boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
         Gson gson = new Gson(); //posso convertire da java a json

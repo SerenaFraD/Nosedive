@@ -1,5 +1,5 @@
 <!--
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 -->
 <!DOCTYPE html>
 <html lang="it">
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<%@ include file="navigation.jsp" %>
+<%@ include file="elements/Navigation.jsp" %>
 <section id="registration">
 
     <div id="invite">

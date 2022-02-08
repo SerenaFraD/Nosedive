@@ -21,7 +21,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (id_carrello, data) VALUES (?, ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, String.valueOf(ordine.getId_carrello()));
@@ -36,7 +36,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
@@ -50,7 +50,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -69,7 +69,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
@@ -84,7 +84,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET id_carrello=?, data=? WHERE id_ordine=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setString(1, String.valueOf(bean.getId_carrello()));
@@ -100,13 +100,13 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
 
     @Override
-    public void doDelete(OrdineBean bean) throws SQLException {
+    public void doDelete(OrdineBean bean) {
         try (Connection con = DriverManagerConnectionPool.getConnection()) {
             String sql = "DELETE FROM " + TABLE_NAME + " WHERE id_ordine=?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
         String retriveQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_ordine=?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(retriveQuery);
 
             ps.setString(1, String.valueOf(keys));
@@ -148,7 +148,7 @@ public class OrdineDao implements ModelDao<OrdineBean, Integer>   {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 

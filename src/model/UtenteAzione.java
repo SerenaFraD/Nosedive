@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
-@SuppressWarnings("serial")
-public class UtenteAzione implements Serializable {
+public class UtenteAzione extends Bean implements Serializable {
 	Integer id_utente;
 	Integer id_azione;
 	
@@ -43,17 +43,28 @@ public class UtenteAzione implements Serializable {
 		} else if (!id_azione.equals(other.id_azione))
 			return false;
 		if (id_utente == null) {
-			if (other.id_utente != null)
-				return false;
-		} else if (!id_utente.equals(other.id_utente))
-			return false;
-		return true;
-	}
+            return other.id_utente == null;
+		} else return id_utente.equals(other.id_utente);
+    }
 
 	@Override
 	public String toString() {
 		return "UtenteAzione [id_utente=" + id_utente + ", id_azione=" + id_azione + "]";
 	}
-	
-	
+
+
+	@Override
+	public List<String> getKey() {
+		return null;
+	}
+
+	@Override
+	public int compareKey(Bean otherBean) {
+		return 0;
+	}
+
+	@Override
+	public String getBeanName() {
+		return null;
+	}
 }

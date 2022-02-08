@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
     private String email;
     private String nome;
     private String password;
-    private Boolean sup; //se un utente � anche supervisore
+    private Boolean sup; //se un utente e' anche supervisore
     private String compleanno;
     private int punteggio;
     private int id_relazione;
@@ -81,7 +80,7 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
         return this.password;
     }
 
-    //ritorna true se l'utente � un admin, false altrimenti
+    //ritorna true se l'utente e' un admin, false altrimenti
     public Boolean isSupervisor() {
         return sup;
     }
@@ -207,7 +206,7 @@ public class UtenteBean extends Bean implements Serializable, Cloneable {
 
     @Override
     public List<String> getKey() {
-        ArrayList<String> keys = new ArrayList<String>();
+        ArrayList<String> keys = new ArrayList<>();
         keys.add(email);
         return keys;
     }

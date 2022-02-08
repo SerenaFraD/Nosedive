@@ -1,10 +1,6 @@
-<%@ page import="model.UtenteBean" %>
-<%@ page import="model.ProdottoBean" %>
-<%@ page import="control.servlet.CarrelloServlet" %>
-<%@ page import="java.util.List" %>
 <%@ page import="model.CarrelloBean" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-
+<%@ page import="model.ProdottoBean" %>
+<%@ page import="java.util.List" %>
 <%
     String error = (String) request.getAttribute("error");
 
@@ -27,12 +23,11 @@
     <title>Carrello | Nosedive</title>
     <link rel="stylesheet" href="css/carrello.css"/>
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
-    <script type="text/javascript" src="js/carrello.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.js"></script>
+    
 </head>
 
 <body>
-<%@ include file="navigation.jsp" %>
+<%@ include file="elements/Navigation.jsp" %>
 <h2>Carrello</h2>
 
 <%
@@ -76,21 +71,16 @@
     } else {
     %>
     <tr>
-        <td colspan="12" align="center">Il tuo carrello è vuoto</td>
+        <td colspan="12" >Il tuo carrello è vuoto</td>
     </tr>
-
-    <%
-        }
-    %>
+    <%}%>
 
 </table>
 <div id="bottoni">
     <button onclick="window.location.href='${pageContext.request.contextPath}/prodotti'"
             class="btn btn-secondary btn-sm">Continua lo Shopping
     </button>
-    <%
-        if (prodCarrello.size() > 0) {
-    %>
+    <% if (prodCarrello.size() > 0) {%>
 
     <button onclick="window.location.href='<%=response.encodeURL("CartServlet?action=clearCart")%>'"
             class="btn btn-secondary btn-sm">Clear

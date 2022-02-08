@@ -52,7 +52,7 @@ function nuovaRiga(contextPath, data) { //dati json
         costo.className = 'card-text'   // todo modificare pls
         costo.innerText = '€' + element['costo']
         costo.setAttribute('align', 'center')
-        var link = "CartServlet?action=addCart&id=" + element['codiceProd']
+        const link = "CartServlet?action=addCart&id=" + element['codiceProd'];
 
         let pMin = document.createElement('P')
         pMin.className = 'card-text'   // todo modificare pls

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class UserOperationAdmin<action> extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    static UtenteDao model = new UtenteDao();
+    static final UtenteDao model = new UtenteDao();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

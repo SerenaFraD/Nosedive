@@ -61,8 +61,7 @@ label {
 
 section {
     display: block;
-    margin: 0 auto;
-    margin-top: 150px;
+    margin: 150px auto 0;
     padding: 30px;
     background-color: var(--secondario1);
 }

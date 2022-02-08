@@ -1,8 +1,9 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="model.ProdottoBean" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="navigation.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="elements/Navigation.jsp" %>
 <%
+    //todo aiuto
     Collection<?> products = (Collection<?>) request.getAttribute("products");
     ProdottoBean product = (ProdottoBean) request.getAttribute("Prodotto");
     String categoria = request.getParameter("categoria");
@@ -24,23 +25,25 @@
 
 
 <h1>Negozio</h1>
-    <%if(categoria == null){%>
+    <%%>if(categoria == null){
 <body onload="mostraProdotti('tutti', '${pageContext.request.contextPath}')">
-    <%}
+}
 
-else { %>
+else {
 <body onload="mostraProdotti('<%=categoria%>', '${pageContext.request.contextPath}')">
-    <% } %>
+}<% %>
 
 <body onload="mostraProdotti()">
 <form id="formProd" action="">
-    <select name="categoria" onchange="mostraProdotti(this.value,'${pageContext.request.contextPath}')">
-        <option value="#">Seleziona una categoria:</option>
-        <option value="tutti">Tutti</option>
-        <option value="internet">Internet</option>
-        <option value="affitti">Affitti</option>
-        <option value="educazione">Educazione</option>
-    </select>
+    <label>
+        <select name="categoria" onchange="mostraProdotti(this.value,'${pageContext.request.contextPath}')">
+            <option value="#">Seleziona una categoria:</option>
+            <option value="tutti">Tutti</option>
+            <option value="internet">Internet</option>
+            <option value="affitti">Affitti</option>
+            <option value="educazione">Educazione</option>
+        </select>
+    </label>
 </form>
 
 

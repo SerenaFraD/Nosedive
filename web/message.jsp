@@ -1,26 +1,26 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="navigation.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<jsp:include page="elements/Navigation.jsp"/>
+<%String message = (String) request.getAttribute("messaggio");%>
 <html>
 <head>
-    <title>Registrato! | Nosedive</title>
-    <link rel="stylesheet" href="css/error.css"/>
+    <title>Nosedive</title>
+    <link rel="stylesheet" href="css/message.css"/>
     <link rel="icon" type="image/x-icon" href="img/logoSmall.png"/>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Serena D'Urso">
 </head>
 
 <body>
 
-
-<div class="cont">
-    <p id="message"><%=request.getAttribute("messaggio")%></p>
-
-    <div id="tasto">
+<section id="small">
+    <p id="message"><%=message%></p>
+    <button>
         <a class="bottone" href="${pageContext.request.contextPath}/login.jsp" role="button">Accedi</a>
-    </div>
-</div>
+    </button>
+</section>
+
+
 
 </body>
 </html>

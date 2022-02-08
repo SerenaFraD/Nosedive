@@ -1,6 +1,6 @@
 <%@ page import="model.UtenteBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="navigation.jsp" %>
+<%@ include file="elements/Navigation.jsp" %>
 <%
     String lavoro = (String) request.getSession().getAttribute("lavoro");
     String relazione = (String) request.getSession().getAttribute("relazione");
@@ -61,7 +61,7 @@
             %>
             <td>
                 <form action="">
-                    <select name="lavoro" id="lavoro" onchange="modificaInformazioni(this.value, 'lavoro', '${pageContext.request.contextPath}')">
+                    <label for="lavoro"></label><select name="lavoro" id="lavoro" onchange="modificaInformazioni(this.value, 'lavoro', '${pageContext.request.contextPath}')">
                         <option value=" ">Lavoro</option>
                         <option value="impiegato">Impiegato</option>
                         <option value="studente">Studente</option>
@@ -81,7 +81,7 @@
             %>
             <td>
                 <form action="">
-                <select name="relazione" id="relazione" onchange="modificaInformazioni(this.value, 'relazione', '${pageContext.request.contextPath}')">
+                    <label for="relazione"></label><select name="relazione" id="relazione" onchange="modificaInformazioni(this.value, 'relazione', '${pageContext.request.contextPath}')">
                     <option value="">Relazione</option>
                     <option value="sposato">Sposato</option>
                     <option value="fidanzato">Fidanzato</option>

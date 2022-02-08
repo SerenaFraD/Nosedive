@@ -1,7 +1,7 @@
 function logout(contextPath) {
     console.log(logout)
     $.ajax({
-        type: 'post',
+        type: 'get',
         url: contextPath + '/logout',
         data: {
             //utente: utente,

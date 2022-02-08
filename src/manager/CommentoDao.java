@@ -2,7 +2,6 @@ package manager;
 
 import control.servlet.DriverManagerConnectionPool;
 import model.CommentoBean;
-import model.PostBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +12,8 @@ import java.util.List;
 
 public class CommentoDao implements ModelDao<CommentoBean, Integer> {
     private static final String TABLE_NAME = "Commento";
-    private static final DriverManagerConnectionPool pool = null;
 
+    // Permette di salvare il post
     @Override
     public void doSave(CommentoBean bean) throws SQLException {
         PreparedStatement ps = null;
@@ -23,7 +22,7 @@ public class CommentoDao implements ModelDao<CommentoBean, Integer> {
                 "(id_post, id_utente, timestamp, testo) VALUES (?, ?, ?, ?)";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, bean.getId_post());
             ps.setInt(2, bean.getId_utente());
@@ -37,23 +36,23 @@ public class CommentoDao implements ModelDao<CommentoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
     }
 
     //todo future
     @Override
-    public void doUpdate(CommentoBean bean) throws SQLException {
+    public void doUpdate(CommentoBean bean) {
 
     }
 
     //todo future
     @Override
-    public void doDelete(CommentoBean bean) throws SQLException {
-
+    public void doDelete(CommentoBean bean) {
     }
 
+    // Ricerca semplice di un commento
     @Override
     public CommentoBean doRetrieveByKey(Integer keys) throws SQLException {
         PreparedStatement ps = null;
@@ -63,7 +62,7 @@ public class CommentoDao implements ModelDao<CommentoBean, Integer> {
         String selectQuery = "SELECT * from " + TABLE_NAME + " where id_commento = ?";
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, keys);
 
@@ -82,25 +81,26 @@ public class CommentoDao implements ModelDao<CommentoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
         return bean;
     }
 
-    //Cerca i commenti di un post
+    // Cerca i commenti di un post
     public ArrayList<CommentoBean> doRetrieveByPost(Integer keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        CommentoBean bean = null;
+        CommentoBean bean;
         String selectQuery = "SELECT * from " + TABLE_NAME + " where id_post = ?";
         ArrayList<CommentoBean> listapost = new ArrayList<>();
 
         try {
-            con = pool.getConnection();
+            con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(selectQuery);
+            ps.setInt(1, keys);
 
             rs = ps.executeQuery();
 
@@ -119,16 +119,16 @@ public class CommentoDao implements ModelDao<CommentoBean, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                pool.releaseConnection(con);
+                DriverManagerConnectionPool.releaseConnection(con);
             }
         }
 
         return listapost;
     }
 
-    //todo ???
+    // Non mi serve prendere tutti i commenti del sito
     @Override
-    public List<CommentoBean> doRetrieveAll() throws SQLException {
+    public List<CommentoBean> doRetrieveAll() {
         return null;
     }
 }

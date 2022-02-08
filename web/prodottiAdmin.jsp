@@ -1,4 +1,4 @@
-<%@ include file="navigation.jsp" %>
+<%@ include file="elements/Navigation.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -20,16 +20,22 @@
         <table>
             <tr>
                 <td>Nome prodotto</td>
-                <td><input type="text" name="nome" placeholder="Nome prodotto" required></td>
+                <td><label>
+                    <input type="text" name="nome" placeholder="Nome prodotto" required>
+                </label></td>
             </tr>
             <tr>
                 <td>Descrizione prodotto</td>
-                <td><input type="text" name="descrizione"
-                           placeholder="Descrizione prodotto" required></td>
+                <td><label>
+                    <input type="text" name="descrizione"
+                               placeholder="Descrizione prodotto" required>
+                </label></td>
             </tr>
             <tr>
                 <td>Costo</td>
-                <td><input type="text" name="costo" placeholder="euro" required></td>
+                <td><label>
+                    <input type="text" name="costo" placeholder="euro" required>
+                </label></td>
             </tr>
             <tr>
                 <td>Foto prodotto</td>
@@ -42,7 +48,7 @@
             <tr>
                 <td>Categoria</td>
                 <td>
-                    <select name="categoria" id="categoria">
+                    <label for="categoria"></label><select name="categoria" id="categoria">
                         <option value="auto">Automobili</option>
                         <option value="affitto">Affitto</option>
                         <option value="internet">Internet</option>
@@ -53,7 +59,9 @@
             </tr>
             <tr>
                 <td>Punteggio minimo</td>
-                <td><input type="number" name="punteggio" value="1000" placeholder="1000" required></td>
+                <td><label>
+                    <input type="number" name="punteggio" value="1000" placeholder="1000" required>
+                </label></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Submit"></td>
