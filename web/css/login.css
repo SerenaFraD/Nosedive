@@ -1,6 +1,10 @@
 @import url('general.css');
 
-section#login {
+body {
+    background-color: var(--colorBackground);
+}
+
+#login {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -9,21 +13,21 @@ section#login {
     gap: 25px 0;
     padding: 55px;
     height: fit-content;
-    width: fit-content;
+    width: 30%;
     margin-top: 200px;
     border: var(--borders);
     border-radius: 8px;
     color: var(--primale3);
 }
 
-section#login img {
+#login img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
     margin-top: -112px;
 }
 
-section#login div.form {
+#login .form {
     display: flex;
     flex-direction: column !important;
     justify-content: center;
@@ -34,11 +38,19 @@ section#login div.form {
     width: 400px;
 }
 
-div.form input {
+.form label {
+    background-color: transparent;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.form input {
     margin-bottom: 15px;
 }
 
-div.form input, div.form button {
+.form input, .form button {
     display: block;
 }
 
@@ -54,4 +66,26 @@ a.other {
     display: block;
     margin: 0 auto;
     text-align: center;
+}
+
+#login b, #login a {
+    font-family: var(--testo);
+}
+
+@media screen and (max-width: 1044px) {
+    #login {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #login {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #login {
+        width: 70%;
+    }
 }

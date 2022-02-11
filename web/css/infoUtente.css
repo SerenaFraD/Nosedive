@@ -1,16 +1,39 @@
 @import url(general.css);
 
+.info {
+    width: 50%;
+}
+
+.admin {
+    width: 40%;
+}
+
+.info p {
+    text-align: center;
+    font-size: var(--titolo-size);
+    font-family: var(--titolo);
+    color: var(--primale3);
+    margin-bottom: 20px;
+    line-height: 40px;
+}
+
+.info p, .info h3 {
+    font-weight: bold;
+    color: var(--primale1);
+}
+
 table {
-    margin: 40px auto;
+    margin: 35px auto;
     font-family: var(--testo);
     border-collapse: separate;
     border-spacing: 25px 15px;
     color: var(--primale3);
+    width: 90%;
 }
 
 td {
     width: 33%;
-    
+    vertical-align: middle;
 }
 
 td:first-child {
@@ -22,6 +45,20 @@ td:nth-child(2) {
     text-align: center;
 }
 
+td.nome {
+    font-family: var(--testo);
+    text-transform: none;
+}
+
+td.punteggio {
+    text-align: left;
+}
+
+td button {
+    display: block;
+    width: 80%;
+}
+
 label {
     display: block;
     width: inherit;
@@ -31,12 +68,99 @@ label, select {
     width: 100%;
     box-sizing: border-box;
     text-align: center;
-    text-align-last: center;
 }
 
-p {
-    text-align: center;
-    font-size: var(--titolo-size);
-    font-family: var(--titolo);
-    color: var(--primale3);
+.info label {
+    display: block;
+    background-color: transparent;
+    border: none;
+    float: left;
+    font-family: var(--testo);
+    font-size: 20px;
+    padding: 0;
+    text-align: left;
+    font-weight: 550;
 }
+
+#foto {
+    background-color: var(--colorBackground);
+    border: 2px solid var(--ombra);
+    color: gray;
+    font-size: 15px;
+    padding: 3px 7px;
+}
+
+.info input {
+    width: 100%;
+} 
+
+.admin input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.admin input[type="checkbox"]:checked {
+    accent-color: var(--primale1);
+}
+
+.admin input[type="submit"] {
+    width: 65%;
+}
+
+.info input[type="submit"]:last-of-type {
+    display: block;
+    width: 40%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1220px){
+    .info {
+        width: 60%;
+    }
+    
+    table {
+        width: 100%;
+    }    
+}
+
+@media screen and (max-width: 720px){
+    .info {
+        width: 70%;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width: 650px){
+    .info {
+        width: 80%;
+        padding: 5px;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+    .info {
+        width: 90%;
+        padding: 0px;
+        padding-top: 20px;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    select {
+        padding-left: 3px;
+    }    
+}
+
+

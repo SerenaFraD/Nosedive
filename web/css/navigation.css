@@ -50,9 +50,11 @@ ul.navBar:nth-child(1) {
     margin: 15px auto;
     width: 350px;
     height: 35px;
-    border: 2px solid var(--ombra);
     vertical-align: middle;
+    /*
     background-color: var(--colorBackground);
+    border: 2px solid var(--ombra);
+    */
 }
 
 .navBar button {

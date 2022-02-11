@@ -1,21 +1,24 @@
 @import "general.css";
 
 body {
-    background-size: 100%;
     background: radial-gradient(circle, rgba(255, 169, 115, 1) 10%, rgba(255, 225, 249, 1) 100%) no-repeat fixed center;
     color: var(--primale3);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-section#registration {
+section#registration {   
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    margin-top: 200px;
     padding: 55px;
     width: fit-content;
     filter: none;
+    margin-bottom: 100px;
 }
 
 /*Div che scompare*/
@@ -29,6 +32,14 @@ section#registration {
 
 #invite > p {
     text-align: center;
+}
+
+#invite h2 {
+    text-align: center;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--primale1);
+    margin-top: 10px;
 }
 
 #invite button {
@@ -52,6 +63,28 @@ section#registration {
 
 input.center {
     width: 91%;
+}
+
+#register label {
+    display: block;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+#register label.sesso {
+    display: inline-block;
+    background-color: var(--colorBackground);
+    border: 2px solid var(--ombra);
+    font-weight: lighter;
+    width: 50%;
+    height: 20px;
+    padding-top: 3px;
+    text-align: center;
+}
+
+#register input.sesso {
+    margin-top: 15px;
 }
 
 #register button {

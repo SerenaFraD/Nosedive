@@ -9,11 +9,12 @@
     --secondario1: #a88a91;
     --colorBackground: #EDD3D8;
     --ombra: #786BC1;
-    --navBackground: #E8CED3;
     --titolo: 'Exo 2', sans-serif;
-
-
+    --testo: 'Montserrat', sans-serif;
     --primale1: #753750;
+
+
+    
     --primale2: #b36d89;
     --primale3: #E8CED3;
     --secondario2: #9b879b;
@@ -22,12 +23,17 @@
     --informativo2: #ffe5dd;
     --successo1: #ffcfcb;
     --successo2: #566077;
-    --testo: 'Montserrat', sans-serif;
-    --titolo-size: 40px;
-    --testo-size: 20px;
     --defaultBG: url("../img/backgroundDefault.jpg");
     
+    --titolo-size: 40px;
+    --testo-size: 20px;
+    
+    
     --borders: 3px solid var(--primale1);
+}
+
+body {
+    background-color: var(--colorBackground);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,6 +68,8 @@ section {
     margin: 150px auto 0;
     padding: 30px;
     background-color: var(--secondario1);
+    width: 80%;
+    border-radius: 4px;
 }
 
 a {
@@ -123,4 +131,9 @@ hr {
 
 input[type=file] {
     display: none;
+}
+
+input [type="search"], input[type=submit], select, textarea, button, label, input {
+    background-color: var(--colorBackground);
+    border: 2px solid var(--ombra);
 }

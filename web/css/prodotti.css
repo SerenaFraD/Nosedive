@@ -1,10 +1,86 @@
-#formProd{
-    margin-left: 43%;
+@import url(general.css);
+
+#prodotti {
+    padding-top: 60px;
+    width: 60%;
+    height: fit-content;
+    margin-bottom: 100px;;
 }
 
-#message{
+.mt {
+    margin-top: 30px;
     text-align: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    font-size: 30px;
+    color: var(--primale3);
 }
 
+#prodotti h3 {
+    display: block;
+    font-size: 45px;
+    font-weight: bold;
+    color: var(--primale1);
+    text-align: center;
+}
+
+#prodotti select {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 40px;
+    align-content: flex-start;
+}
+
+.product {
+    border: solid 1px var(--primale3);
+    width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+    background-color: var(--primale3);
+}
+
+.product img {
+    width: 250px;
+    height: 200px;
+    border-bottom: solid 1px var(--primale3);
+}
+
+.product h1 {
+    margin: 0 3%;
+    font-weight: bold;
+    font-size: 25px;
+    color: var(--primale1);
+    margin-bottom: 10px;
+}
+
+.product p {
+    margin: 0 3%;
+    font-size: 20px;
+    color: var(--successo2);
+}
+
+.product button {
+    border: none;
+}
+
+.product button  img  {
+    margin: 0 3%;
+    margin-top: 15px;
+    width: 25px;
+    height: 25px;
+}
+
+#bottoni {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}

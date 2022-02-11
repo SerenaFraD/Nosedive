@@ -1,63 +1,61 @@
 @import url(general.css);
 
 body {
-    padding-top: 70px;
+    background-color: var(--colorBackground); 
 }
 
-img#propic {
+.propic {
     display: block;
-    margin-top: -100px;
     border-radius: 50% 50%; 
-    width: 140px;
-    height: 140px;
-    background-color: #ebc8bf; 
+    background-color: var(--primale3);    
 }
-
-/*informazioni utente*/
 
 .information {
     display: block;
-    margin-left: 140px;
-    margin-top: -70px;
     width: fit-content;
 }
 
 p.nome {
-    margin: 30px 0 0 10px;
     font-size: 50px;
     letter-spacing: 1px;
-    text-align:center;
+    text-align: center;
     line-height: 0.8em;
 }
 
-p.categoria {
+p.attributi, p.categoria {
     margin-top: 5px;
     margin-left: 10px;
-    font-size: 25px;
     font-style: italic;
+}
+
+p.categoria {
+    font-size: 25px;
     font-weight: 300;
 }
 
-p.bloccato {
+p.attributi {
     display: none;
-    margin-top: 5px;
-    margin-left: 10px;
-    font-style: italic;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/*sezione publicazione post*/
-#publish {
+.profilo button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 4px;
+    width: 60%;
+}
+
+.publish {
     width: 100%;
     margin: 0 auto;
 }
 
-#publish textarea {
+.publish textarea {
     display: block;
     margin: 0 auto;
-    border: 3px solid var(--primale1);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     width: 98%;
@@ -65,122 +63,437 @@ p.bloccato {
     resize: none;
 }
 
-#publish label {
+.publish label {
     display: inline-block;
     position: relative;
-    top: -0.08em;
     border-top-width: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    text-align: center;
 }
 
-#publish input[type=submit] {
+.publish input[type=submit] {
     position: relative;
     top: -1px;
     float: right;
-    margin-right: -3px;
-    border: 3px solid var(--primale1);
     border-top-width: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     height: 36px;
 }
 
-div#post {
+.post {
     display: block;
-    height: fit-content;
     margin: 30px auto 0;
     border: 3px solid var(--primale1);
     border-radius: 8px;
     padding: 15px;
     background-color: var(--primale3);
+    overflow: auto;
+    height: auto;
 }
 
-div#post img {
+.post img {
     width: 70px;
     height: 70px;
     border-radius: 50% 50%; 
-    background-color: #ebc8bf; 
+    background-color: #ebc8bf;
+    margin-left: 20px;
 }
 
-div#post div {
-    margin-top: -80px;
-    margin-left: 70px;
-    padding: 10px;
-    width: fit-content;
-}
-
-div#post p.nome {
-    margin: 0 0 0 10px;
+.post p.nome {
+    display: block;
+    width:fit-content;
+    margin-left: 100px;
+    margin-top: -60px;
     font-size: 25px;
 }
 
-div#post p.categoria {
+.post p.categoria, .post p.data {
+    display: block;
     font-size: 15px;
+    text-align: left;
+    width:fit-content;
+    margin-left: 100px;
 }
 
-div#post p.bloccato {
+.post p.bloccato {
     display: none;
     margin-top: -2px;
     font-size: 10px;
 }
 
-div#post p.text {
+.post p.text {
     display: block;
     margin: 10px 20px 20px;
     font-size: 17px;
     text-align: justify;
 }
 
-div#post button {
+.post button {
     margin: 0;
     float: right;
 }
 
-#post #commento textarea {
+.commento textarea {
     display: block;
     margin: 0 auto;
-    border: 3px solid var(--primale1);
+    margin-top: 30px;;
     border-bottom-right-radius: 0;
-    width: 97%;
-    height: 30px;
+    background-color: white;
+    width: 96%;
+    height: 70px;
     resize: none;
 }
 
-#post div#commento input[type=submit] {
+.commento input[type=submit] {
     display: block;
     top: -1px;
     float: right;
-    margin-right: 3px;
-    border: 3px solid var(--primale1);
     border-top-width: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    height: 36px;
+    height: 30px;
 }
 
-/* Stelle */
-div#post div.stars {
+.post .stars {
     display: inline-block;
     margin: 0;
+    margin-left: 18px;
     padding: 0;
     vertical-align: middle;
 }
 
-div#post div.stars img {
+.post .stars img {
     width: 30px;
     height: 30px;
     float: left
 }
 
-
-/*
-@media(min-width:768px) {
-    
+button.showCommentButton {
+    margin-right: 18px;
+    width: 10%;
 }
 
-@media(max-width:768px) {
 
+@media only screen and (max-width: 1470px) and (min-width: 1320px) {
+    .profilo  {
+        margin-top: 200px;
+    }
+
+    .propic {
+        margin-top: -100px;
+        width: 140px;
+        height: 140px;    
+    }
+
+    .information {
+        margin-left: 170px;
+        margin-top: -30px;
+    }
+
+    p.nome {
+        font-size: 50px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 3px;
+        width: 8%;
+    }
+
+    .publish input[type=submit] {
+        width: 10%;
+        margin-right: 3px;
+    }
+
+    .post {
+        height: 350px;
+    }
+
+    button.showCommentButton {
+        width: 10%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: 13px;
+        width: 10%;
+    }
 
 }
-*/
+
+@media only screen and (max-width: 1319px) and (min-width: 1251px) {
+    .profilo  {
+        margin-top: 160px;
+    }
+
+    .propic {
+        margin-top: -100px;
+        width: 140px;
+        height: 140px;    
+    }
+
+    .information {
+        margin-left: 170px;
+        margin-top: -30px;
+    }
+
+    p.nome {
+        font-size: 50px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 1px;
+        width: 8%;
+    }
+
+    .publish input[type=submit] {
+        width: 10%;
+        margin-right: 1px;
+    }
+
+    .post {
+        height: 350px;
+    }
+
+    button.showCommentButton {
+        width: 10%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: 11px;
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 1250px) and (min-width: 1051px) {
+    .profilo  {
+        margin-top: 160px;
+    }
+
+    .propic {
+        margin-top: -100px;
+        width: 140px;
+        height: 140px;    
+    }
+
+    .information {
+        margin-left: 170px;
+        margin-top: -30px;
+    }
+
+    p.nome {
+        font-size: 50px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 1px;
+        width: 8%;
+    }
+
+    .publish input[type=submit] {
+        width: 10%;
+        margin-right: 1px;
+    }
+
+    .post {
+        height: 350px;
+    }
+
+    button.showCommentButton {
+        width: 15%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: 11px;
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 1050px) and (min-width: 801px) {
+    .profilo  {
+        margin-top: 160px;
+    }
+
+    .propic {
+        margin-top: -100px;
+        width: 140px;
+        height: 140px;    
+    }
+
+    .information {
+        margin-left: 170px;
+        margin-top: -30px;
+    }
+
+    p.nome {
+        font-size: 50px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 0px;
+        width: 8%;
+    }
+
+    .publish input[type=submit] {
+        width: 10%;
+        margin-right: -1px;
+    }
+
+    .post {
+        height: 350px;
+    }
+
+    button.showCommentButton {
+        width: 15%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: 7px;
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 900px) and (min-width: 801px) {
+    .profilo  {
+        margin-top: 160px;
+    }
+
+    .propic {
+        margin-top: -100px;
+        width: 140px;
+        height: 140px;    
+    }
+
+    .information {
+        margin-left: 170px;
+        margin-top: -30px;
+    }
+
+    p.nome {
+        font-size: 50px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 0px;
+        width: 10%;
+    }
+
+    .publish input[type=submit] {
+        width: 10%;
+        margin-right: -5px;
+    }
+
+    .post {
+        height: 350px;
+    }
+
+    button.showCommentButton {
+        width: 17%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: 4px;
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .profilo  {
+        margin-top: 100px;
+    }
+
+    .propic {
+        margin-top: -70px;
+        width: 100px;
+        height: 100px;    
+    }
+
+    .information {
+        margin-left: 120px;
+        margin-top: -30px;
+    }
+
+    p.nome {
+        font-size: 40px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 0px;
+        width: 15%;
+    }
+
+    .publish input[type=submit] {
+        width: 15%;
+        margin-right: -5px;
+    }
+
+    button.showCommentButton {
+        width: 30%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: 3px;
+        width: 15%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .profilo  {
+        margin-top: 120px;
+    }
+
+    .propic {
+        margin-top: -60px;
+        width: 60px;
+        height: 60px;    
+    }
+
+    .information {
+        margin-left: 100px;
+        margin-top: -10px;
+    }
+
+    p.nome {
+        font-size: 40px;
+    }
+
+    .publish label {
+        top: -0.06em;
+        left: 0;
+        width: 15%;
+    }
+
+    .publish input[type=submit] {
+        width: 15%;
+        margin-right: -10px;
+    }
+
+    .post {
+        height: auto;
+        min-height: 100% !important;
+    }
+
+    button.showCommentButton {
+        width: 30%;
+    }
+
+    .commento input[type=submit] {
+        margin-right: -4px;
+        width: 15%;
+    }
+
+    .post .stars img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .post .stars {
+        margin-left: -10px;
+    }
+}
