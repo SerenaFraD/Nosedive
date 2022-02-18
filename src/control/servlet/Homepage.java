@@ -10,34 +10,37 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-//todo, da eliminare cosaa??? Rispondimi serena del passato
-@WebServlet(name = "Homepage", value = "/Homepage")
+//todo da eliminare
+@WebServlet(name = "Homepage", value = "/homepage")
 public class Homepage extends HttpServlet {
 
-    private final PostDao model = new PostDao();
+    private PostDao model = new PostDao();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ArrayList<PostBean> listapost;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        ArrayList<PostBean> listapost = new ArrayList<PostBean>();
         try {
             listapost = model.doRetrieveAll();
-            listapost.forEach(System.out::println);
+            listapost.forEach(postBean -> System.out.println(postBean));
             request.getSession().setAttribute("listapost", listapost);
-            response.sendRedirect(response.encodeRedirectURL("homepage.jsp"));
+            response.sendRedirect(response.encodeRedirectURL("/webapp/homepage.jsp"));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getAttribute("action").equals("post")) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            String textarea = request.getParameter("textarea");
-            PostBean pb = new PostBean();
+        if(request.getAttribute("action").equals("post")) {
+
+            String textarea=request.getParameter("textarea");
+            PostBean pb= new PostBean();
             pb.setTesto(textarea);
-            pb.setId_utente(((UtenteBean) request.getSession().getAttribute("utente")).getId_utente());
+            pb.setId_utente(((UtenteBean)request.getSession().getAttribute("utente")).getId_utente());
             try {
                 model.doSave(pb);
             } catch (SQLException throwables) {

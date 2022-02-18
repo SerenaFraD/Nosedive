@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.sql.Blob;
 
-public class ProdottoBean extends Bean implements Serializable {
+public class ProdottoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,6 +14,7 @@ public class ProdottoBean extends Bean implements Serializable {
     private double costo;
     private int categoria;
     private int punteggio_min;
+    private int quantita;
 
     public ProdottoBean() {
         id_prodotto = 0;
@@ -23,6 +24,14 @@ public class ProdottoBean extends Bean implements Serializable {
         costo = 0;
         categoria = 0;
         punteggio_min = 0;
+    }
+
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
+    }
+
+    public int getQuantita() {
+        return this.quantita;
     }
 
     public int getId_prodotto() {
@@ -105,20 +114,5 @@ public class ProdottoBean extends Bean implements Serializable {
     @Override
     public int hashCode() {
         return 0;
-    }
-
-    @Override
-    public List<String> getKey() {
-        return null;
-    }
-
-    @Override
-    public int compareKey(Bean otherBean) {
-        return 0;
-    }
-
-    @Override
-    public String getBeanName() {
-        return null;
     }
 }

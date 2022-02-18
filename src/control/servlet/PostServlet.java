@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
 @WebServlet("/postShow")
 public class PostServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("sono qui");
         int utente = Integer.parseInt(request.getParameter("utente"));
         boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
         Gson gson = new Gson(); //posso convertire da java a json
@@ -34,7 +34,6 @@ public class PostServlet extends HttpServlet {
         }
 
         resultJson = gson.toJson(result);
-
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(resultJson);

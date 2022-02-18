@@ -298,7 +298,7 @@ VALUES ('educazione', 'Istruzione');
 INSERT INTO Prodotto(nome, descrizione, costo, id_categoria, punteggio_minimo)
 VALUES ('Corso di Laurea in Informatica', 'Corso di Laurea in Informatica', 3000.0, 5, 2000);
 INSERT INTO Prodotto(nome, descrizione, costo, id_categoria, punteggio_minimo)
-VALUES ('Acquisto di immobile', 'Acquisto di immobile di lusso', 1000000.0, 5, 5000);
+VALUES ('Acquisto di immobile', 'Acquisto di immobile di lusso', 1000000.0, 2, 5000);
 
 -- Carrello    
 INSERT INTO Carrello(id_prodotto, id_utente, abilitato)

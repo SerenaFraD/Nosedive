@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Lavoro extends Bean {
+public class Lavoro {
 
     private int id_lavoro;
     private String nome;
@@ -30,20 +32,5 @@ public class Lavoro extends Bean {
 
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
-    }
-
-    @Override
-    public List<String> getKey() {
-        return null;
-    }
-
-    @Override
-    public int compareKey(Bean otherBean) {
-        return 0;
-    }
-
-    @Override
-    public String getBeanName() {
-        return null;
     }
 }

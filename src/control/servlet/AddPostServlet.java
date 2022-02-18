@@ -29,6 +29,6 @@ public class AddPostServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/homepage.jsp"));
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/webapp/homepage.jsp"));
     }
 }

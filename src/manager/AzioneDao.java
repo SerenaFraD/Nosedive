@@ -13,7 +13,7 @@ import java.util.List;
 public class AzioneDao implements ModelDao<Azione, String> {
 
     private static final String TABLE_NAME = "Azione";
-    // private static final DriverManagerConnectionPool pool = null;
+    private static final DriverManagerConnectionPool pool = null;
 
     @Override
     public void doSave(Azione bean) throws SQLException {
@@ -23,7 +23,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (nome, punteggio) VALUES (?, ?)";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, bean.getNome());
@@ -38,7 +38,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
     }
@@ -50,7 +50,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET nome=?, punteggio=? WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setString(1, bean.getNome());
@@ -65,19 +65,19 @@ public class AzioneDao implements ModelDao<Azione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
     }
 
     @Override
-    public void doDelete(Azione bean) {
+    public void doDelete(Azione bean) throws SQLException {
         Connection con;
         PreparedStatement ps;
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(deleteQuery);
             ps.setString(1, bean.getNome());
 
@@ -98,7 +98,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, keys);
 
@@ -115,7 +115,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
 
@@ -132,7 +132,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
         ArrayList<Azione> listaAzioni = new ArrayList<>();
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -150,7 +150,7 @@ public class AzioneDao implements ModelDao<Azione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
         return listaAzioni;

@@ -12,12 +12,13 @@ import java.io.IOException;
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        RequestDispatcher requestDispatcher;
 
         session.invalidate();
-        request.setAttribute("messaggio", "Logout effettuato con successo");
-        RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/message.jsp");
+
+        requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/login.jsp");
         requestDispatcher.forward(request, response);
     }
 }

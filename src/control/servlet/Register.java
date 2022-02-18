@@ -7,10 +7,7 @@ import utils.Validator;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -24,49 +21,74 @@ public class Register extends HttpServlet {
         UtenteBean utente;
         String message;
 
+        Cookie myCookie = new Cookie("utenteLoggato", "true");
+        myCookie.setMaxAge(60 * 60);
+        myCookie.setPath("/");
+        myCookie.setHttpOnly(true); //accesso nei js
+        myCookie.setSecure(true);
+        response.addCookie(myCookie);
+
+        response.setContentType("text/jsp");
+
+        System.out.println("Sono in register");
+
+
         if (session.getAttribute("utente") != null) {
             //non dovrei mai trovarmi in questa situazione
             request.setAttribute("messaggio", "Sei già autenticato. Per creare un nuovo account devi prima fare logout.");
-            requestDispatcher = this.getServletContext().getRequestDispatcher( "/message.jsp");
+
+            requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/message.jsp");
             requestDispatcher.forward(request, response);
         } else {
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
+            System.out.println(email);
             String pwd = request.getParameter("pwd");
             String pwdConf = request.getParameter("pwdConf");
-            String eta = request.getParameter("eta");
+            String bd = request.getParameter("eta");
 
             Validator validator = new Validator(email, nome, pwd, pwdConf);
+
             if (validator.wrongInput()) {
-                message = validator.nameMSG + validator.emailMSG + validator.pwdMSG + validator.matchMSG;
-                request.setAttribute("messaggio", message);
-                requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
+                System.out.println("Errore validazione");
+                request.setAttribute("messaggio", "Errore nell'inserimento dei dati");
+                requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/message.jsp");
                 requestDispatcher.forward(request, response);
             } else {
                 try {
                     if (utenteDao.doRetrieveByEmail(email) != null) {
-                        request.setAttribute("messaggio", "Email già presente, provare una nuova mail");
-                        requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
+                        System.out.println("Email già presente, provare una nuova mail");
+                        session.setAttribute("messaggio", "Email già presente, provare una nuova mail");
+                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/webapp/message.jsp"));
+                        /*
+                        requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/message.jsp");
                         requestDispatcher.forward(request, response);
+                         */
+                    } else {
+                        utente = new UtenteBean();
+                        utente.setEmail(email);
+                        utente.setNome(nome);
+                        utente.setPassword(pwd);
+                        utente.setSupervisor(false);
+
+                        utenteDao.doSavePar(utente);
+
+                        System.out.println("Registrazione effettuata con successo.");
+                        session.setAttribute("messaggio", "Registrazione effettuata con successo.");
+                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/webapp/message.jsp"));
+
                     }
                 } catch (SQLException e) {
-                    System.out.println("doRetrieve");
+                    System.out.println(e);
+                    session.setAttribute("messaggio", "Qualcosa e' andato male");
+                    response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/webapp/message.jsp"));
                 }
 
-                utente = new UtenteBean();
-                utente.setEmail(email);
-                utente.setNome(nome);
-                utente.setPassword(pwd);
-
-                try {
-                    utenteDao.doSave(utente);
-                } catch (SQLException e) {
-                    System.out.println("doSave");
-                }
-
+                /*
                 request.setAttribute("messaggio", "Registrazione effettuata con successo.");
-                requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
+                requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/message.jsp");
                 requestDispatcher.forward(request, response);
+                 */
             }
         }
     }

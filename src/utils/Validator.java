@@ -1,10 +1,7 @@
 package utils;
 
 public class Validator {
-    public final String emailMSG;
-    public final String nameMSG;
-    public final String pwdMSG;
-    public final String matchMSG;
+    public String emailMSG, nameMSG, pwdMSG, matchMSG;
 
     public Validator(String email, String nome, String pwd, String pwdConf) {
         if (email.length() < 3) {

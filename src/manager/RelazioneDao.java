@@ -1,6 +1,7 @@
 package manager;
 
 import control.servlet.DriverManagerConnectionPool;
+import model.Lavoro;
 import model.Relazione;
 
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.util.List;
 public class RelazioneDao implements ModelDao<Relazione, String> {
 
     private static final String TABLE_NAME = "Relazione";
+    private static final DriverManagerConnectionPool pool = null;
 
     @Override
     public void doSave(Relazione bean) throws SQLException {
@@ -22,7 +24,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (nome, punteggio) VALUES (?, ?)";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, bean.getNome());
@@ -37,7 +39,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
     }
@@ -49,7 +51,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         String updateQuery = "UPDATE" + TABLE_NAME + "SET punteggio=? WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setInt(1, bean.getPunteggio());
@@ -64,19 +66,19 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
     }
 
     @Override
-    public void doDelete(Relazione bean) {
+    public void doDelete(Relazione bean) throws SQLException {
         Connection con;
         PreparedStatement ps;
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE id_relazione=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(deleteQuery);
             ps.setInt(1, bean.getId_relazione());
 
@@ -88,7 +90,6 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         }
     }
 
-    // key è l'id della relazione
     @Override
     public Relazione doRetrieveByKey(String keys) throws SQLException {
         PreparedStatement ps = null;
@@ -98,7 +99,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, keys);
 
@@ -115,14 +116,13 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
 
         return bean;
     }
 
-    // key e' il nome della relazione
     public Relazione doRetrieveByKey(Integer keys) throws SQLException {
         PreparedStatement ps = null;
         Connection con = null;
@@ -131,7 +131,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_relazione=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, keys);
 
@@ -148,7 +148,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
 
@@ -162,10 +162,10 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
         ResultSet rs;
         Relazione bean;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
-        ArrayList<Relazione> listaAzioni = new ArrayList<>();
+        ArrayList<Relazione> listaAzioni = new ArrayList<Relazione>();
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
             rs = ps.executeQuery();
 
@@ -182,7 +182,7 @@ public class RelazioneDao implements ModelDao<Relazione, String> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
         return listaAzioni;

@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/follow")
-public class SeguiServlet extends HttpServlet {
+@WebServlet("/seguiServlet")
+public class seguiServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
         UtenteBean other = (UtenteBean) request.getSession().getAttribute("otherUtente");
         FollowDao followDao = new FollowDao();
@@ -28,7 +28,7 @@ public class SeguiServlet extends HttpServlet {
                 request.getSession().setAttribute("follow", true);
             }
 
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/recuperaUtente?idUtente=" + other.getId_utente()));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/webapp/recuperaUtente?idUtente=" + other.getId_utente()));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

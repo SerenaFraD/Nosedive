@@ -20,7 +20,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
         HttpSession session = request.getSession();
-        UtenteDao daoUtente = new UtenteDao();
+        UtenteDao modelUtente = new UtenteDao();
         UtenteBean saved;
         String email, password;
 
@@ -29,27 +29,25 @@ public class Login extends HttpServlet {
             password = request.getParameter("pwd");
 
             try {
-                saved = daoUtente.doRetrieveByEmail(email);
-                if (saved == null) {
+                saved = modelUtente.doRetrieveByEmail(email);
+                if (saved == null || !saved.getPassword().equals(password)) {
+                    System.out.println("non trovato");
                     request.setAttribute("messaggio", "Utente non trovato");
-                    requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
-                } else if(!saved.getPassword().equals(password)) {
-                    request.setAttribute("messaggio", "Password errata");
-                    requestDispatcher = this.getServletContext().getRequestDispatcher("/message.jsp");
+                    requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/message.jsp");
                 } else {
+                    System.out.println(" trovato");
                     session.setMaxInactiveInterval(60 * 60);
                     request.getSession().setAttribute("utente", saved);
-                    requestDispatcher = this.getServletContext().getRequestDispatcher("/homepage.jsp");
+                    requestDispatcher = this.getServletContext().getRequestDispatcher("/webapp/homepage.jsp");
                     requestDispatcher.forward(request, response);
                 }
             } catch (SQLException e) {
+                System.out.println("Errore");
                 request.setAttribute("messaggio", "Errore");
-                requestDispatcher = request.getServletContext().getRequestDispatcher("/message.jsp");
+                requestDispatcher = request.getServletContext().getRequestDispatcher("/webapp/error.jsp");
             }
-            requestDispatcher.forward(request, response);
-
         } catch (NullPointerException e) {
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/404.jsp"));
+            System.out.println("sono qui aaaa");
         }
 
     }

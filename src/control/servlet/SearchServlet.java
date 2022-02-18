@@ -11,9 +11,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/SearchServlet")
+@WebServlet("/searchServlet")
 public class SearchServlet extends HttpServlet {
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -25,7 +24,7 @@ public class SearchServlet extends HttpServlet {
 
             if (utente != null) {
                 request.getSession().setAttribute("result", utente);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("results.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/webapp/results.jsp");
                 requestDispatcher.forward(request, response);
             }
         } catch (SQLException | ServletException throwables) {

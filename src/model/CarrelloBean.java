@@ -1,14 +1,12 @@
-//todo rifare tuttaa aiuto
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class CarrelloBean extends Bean {
-    final ArrayList<ProdottoBean> items;
+public class CarrelloBean {
+    ArrayList<ProdottoBean> items;
 
     public CarrelloBean() {
-        items = new ArrayList<>();
+        items = new ArrayList<ProdottoBean>();
     }
 
     public void addItem(ProdottoBean item) {
@@ -17,11 +15,18 @@ public class CarrelloBean extends Bean {
 
     public boolean alReadyIn(ProdottoBean item) {
         for(ProdottoBean it: items) {
-            if(it.getId_prodotto().equals(item.getId_prodotto())) {
+            if(it.getId_prodotto() == item.getId_prodotto()) {
                 return true;
             }
         }
         return false;
+    }
+
+    public void incrementItem(ProdottoBean bean){
+        for(ProdottoBean prod : items){
+            if(bean.getId_prodotto() == prod.getId_prodotto())
+                prod.setQuantita(prod.getQuantita()+1);
+        }
     }
 
     public void deleteItem(ProdottoBean item) {
@@ -50,20 +55,5 @@ public class CarrelloBean extends Bean {
             }
         }
         return false;
-    }
-
-    @Override
-    public List<String> getKey() {
-        return null;
-    }
-
-    @Override
-    public int compareKey(Bean otherBean) {
-        return 0;
-    }
-
-    @Override
-    public String getBeanName() {
-        return null;
     }
 }

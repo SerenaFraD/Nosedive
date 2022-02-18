@@ -23,27 +23,29 @@ public class SupFilter implements Filter {
         UtenteBean utenteBean = (UtenteBean) session.getAttribute("utente");
 
         String uri = request.getRequestURI();
-        if (uri.contains("/User/")) { //qualcuno tenta di accedere alle pagine utente
-            if (utenteBean != null)
-                chain.doFilter(req, resp); //se registrato vado avanti con i filtri
-            else
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp"); //se non é reg rimanda alla home
-        } else if (uri.contains("/Admin/")) { //qualcuno tenta di accedere alle pagine admin
-            if (utenteBean != null && (utenteBean.isSupervisor().equals(true))) chain.doFilter(req, resp);
-            else response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp");
-        } else if (uri.contains("/UserServlet")) {
-            if (utenteBean != null)
-                chain.doFilter(req, resp); //se registrato vado avanti con i filtri
-            else
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp"); //se non é reg rimanda alla home
-        } else if (uri.contains("/AdminServlet")) {
-            if (utenteBean != null && (utenteBean.isSupervisor().equals(true)))
-                chain.doFilter(req, resp); //se registrato vado avanti con i filtri
-            else
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp"); //se non é reg rimanda alla home
-        }
+        if (session != null) {
+            if (uri.contains("/User/")) { //qualcuno tenta di accedere alle pagine utente
+                if (utenteBean != null)
+                    chain.doFilter(req, resp); //se registrato vado avanti con i filtri
+                else
+                    response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp"); //se non é reg rimanda alla home
+            } else if (uri.contains("/Admin/")) { //qualcuno tenta di accedere alle pagine admin
+                if (utenteBean != null && (utenteBean.isSupervisor().equals(true))) chain.doFilter(req, resp);
+                else response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp");
+            } else if (uri.contains("/UserServlet")) {
+                if (utenteBean != null)
+                    chain.doFilter(req, resp); //se registrato vado avanti con i filtri
+                else
+                    response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp"); //se non é reg rimanda alla home
+            } else if (uri.contains("/AdminServlet")) {
+                if (utenteBean != null && (utenteBean.isSupervisor().equals(true)))
+                    chain.doFilter(req, resp); //se registrato vado avanti con i filtri
+                else
+                    response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp"); //se non é reg rimanda alla home
+            }
+        } else response.sendRedirect(response.encodeRedirectURL(request.getContextPath()) + "/index.jsp");
     }
 
-    public void init(FilterConfig config) {
+    public void init(FilterConfig config) throws ServletException {
     }
 }

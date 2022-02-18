@@ -12,6 +12,7 @@ import java.util.List;
 
 public class CategoriaDao implements ModelDao<Categoria, Integer> {
     private static final String TABLE_NAME = "Lavoro";
+    private static final DriverManagerConnectionPool pool = null;
 
     @Override
     public void doSave(Categoria bean) throws SQLException {
@@ -21,7 +22,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
         String insertQuery = "INSERT INTO " + TABLE_NAME + " (nome, descrizione) VALUES (?, ?)";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(insertQuery);
 
             ps.setString(1, bean.getNome());
@@ -36,7 +37,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
     }
@@ -48,7 +49,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
         String updateQuery = "UPDATE " + TABLE_NAME + " SET descrizione=? WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(updateQuery);
 
             ps.setString(1, bean.getDescrizione());
@@ -63,19 +64,19 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
     }
 
     @Override
-    public void doDelete(Categoria bean) {
+    public void doDelete(Categoria bean) throws SQLException {
         Connection con;
         PreparedStatement ps;
         String deleteQuery = "DELETE FROM " + TABLE_NAME + " WHERE id_categoria=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(deleteQuery);
             ps.setInt(1, bean.getId_categoria());
 
@@ -95,7 +96,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE nome=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, keys);
 
@@ -111,7 +112,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
 
@@ -127,7 +128,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE id_categoria=?";
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
             ps.setString(1, String.valueOf(keys));
 
@@ -144,7 +145,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
 
@@ -156,12 +157,12 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
         PreparedStatement ps = null;
         Connection con = null;
         ResultSet rs;
-        Categoria bean;
+        Categoria bean = null;
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
-        ArrayList<Categoria> listaAzioni = new ArrayList<>();
+        ArrayList<Categoria> listaAzioni = new ArrayList<Categoria>();
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = pool.getConnection();
             ps = con.prepareStatement(selectQuery);
 
             rs = ps.executeQuery();
@@ -179,7 +180,7 @@ public class CategoriaDao implements ModelDao<Categoria, Integer> {
                 if (ps != null)
                     ps.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(con);
+                pool.releaseConnection(con);
             }
         }
         return listaAzioni;

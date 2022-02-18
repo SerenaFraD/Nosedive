@@ -3,6 +3,8 @@ package manager;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.UtenteBean;
+
 public interface ModelDao<T, S> {
     /*public void doSavePar(Bean bean) throws SQLException;*/
 
@@ -10,7 +12,7 @@ public interface ModelDao<T, S> {
 
     void doUpdate(T bean) throws SQLException;
 
-    void doDelete(T bean);
+    void doDelete(T bean) throws SQLException;
 
     T doRetrieveByKey(S keys) throws SQLException;
 

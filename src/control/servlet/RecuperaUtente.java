@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -27,11 +28,17 @@ public class RecuperaUtente extends HttpServlet {
         UtenteDao utenteDao = new UtenteDao();
         UtenteBean bean;
         int id_utente = Integer.parseInt(request.getParameter("otherUtente"));
+        boolean sup = Boolean.parseBoolean(request.getParameter("sup"));
+        RequestDispatcher requestDispatcher;
 
         try {
             bean = utenteDao.doRetrieveByKey(id_utente);
             request.getSession().setAttribute("otherUtente", bean);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userprofile.jsp");
+            if(sup) {
+                requestDispatcher = request.getRequestDispatcher("/webapp/utenteAdmin.jsp");
+            } else {
+                requestDispatcher = request.getRequestDispatcher("/webapp/userprofile.jsp");
+            }
             requestDispatcher.forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -34,7 +34,7 @@ public class Relazione extends Bean implements Serializable {
     }
 
     public List<String> getKey() {
-        ArrayList<String> keys = new ArrayList<>();
+        ArrayList<String> keys = new ArrayList<String>();
         keys.add(nome);
         return keys;
     }

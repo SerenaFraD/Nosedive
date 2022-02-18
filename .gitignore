@@ -1,5 +1,5 @@
 
-.idea/sqldialects.xml
-web/Nosedive.iml
+.idea/
+webapp/Nosedive.iml
 pom.xml
 /out/
